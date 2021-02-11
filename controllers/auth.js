@@ -3,42 +3,20 @@ import generateToken from '../middleware/generateToken.js'
 import OTP from '../models/otp.js'
 import rn from 'random-number'
 import nodemailer from 'nodemailer';
-import sgTransport from 'nodemailer-sendgrid-transport'
-import sgmail from '@sendgrid/mail';
+import nodemailerSendgrid from 'nodemailer-sendgrid'
 
 
-
-// const mailer_auth = {
-//     user: "apikey", 
-//     pass: "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",
-//   };
-//   const transport = nodemailer.createTransport({
-//     // host: "smtp.sendgrid.net",
-//     // port: 25,
-//     // secure: false,
-//     service: "SendGrid",
-//     // requireTLS: false,
-//     auth: mailer_auth,
-//   });
-
-
-const mailer_auth = {
-    user: "first-api", 
-    pass: "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", 
-  };
-
-  const transport = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 25,
-    secure: false,
-    service: "SendGrid",
-    requireTLS: false,
-    auth: mailer_auth,
-  });
 
 
 
 export const otpController=async(req,res)=>{
+
+    const api_key=process.env.SENDGRID_API;
+    const transport = nodemailer.createTransport(
+        nodemailerSendgrid({
+            apiKey:api_key
+        })
+    );
     
     const {email}=req.body;
     try {
@@ -54,20 +32,14 @@ export const otpController=async(req,res)=>{
           }
          var otpNumber= rn(options) ;
          console.log("sending OTP: " + otpNumber + " to " + req.body.email);
-         const mailOptions = {
-          from: "ssoumyaprakash05@gmail.com",
-          to: req.body.email,
-          subject: "OTP from College Project",
-          text: "Your OTP for Registration is " + otpNumber,
-         };
-
-         transport.sendMail(mailOptions, (err, info) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.warn("checking", info);
-            }
-          });
+       
+        transport.sendMail({
+            from: 'ssoumyaprakash05@gmail.com',
+            to: `<${req.body.email}>`,
+            subject: 'OTP from college-project for registration ',
+            html: `<h1>${otpNumber}</h1>`
+        }).then(()=>console.log("email sent"))
+        .catch((err)=>console.log(err));
 
          const otp=new OTP({otp:otpNumber});
          await otp.save();
