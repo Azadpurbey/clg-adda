@@ -1,39 +1,38 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Material from './components/Material';
-import ProfilePage from './components/ProfilePage';
-import Login from './components/Login';
-import Home from './components/Home';
-import Alumini from './components/Alumini';
-import RegistrationForm from './components/RegistrationForm';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Material from './components/Material'
+import ProfilePage from './components/ProfilePage'
+import Signin from './components/SigninPage'
+import Home from './components/Home'
+import Alumini from './components/AluminiPage'
+import Signup from './components/SignupPage'
 
 const App = () => {
   return (
-<Router>
-      <div className="App">
+    <Router>
+      <div className='App'>
         <Switch>
           <Route path='/Material'>
-            <Material/>
+            <Material />
           </Route>
 
           <Route path='/profile'>
-            <ProfilePage/>
+            <ProfilePage />
           </Route>
 
-          <Route path='/login'>
-            <Login/>
+          <Route path='/signin'>
+            <Signin />
           </Route>
           <Route path='/signUp'>
-            <RegistrationForm/>
+            <Signup />
           </Route>
           <Route path='/alumini'>
-            <Alumini/>
+            <Alumini />
           </Route>
           <Route path='/'>
-            <Home/>
+            <Home />
           </Route>
         </Switch>
-
       </div>
     </Router>
   )
