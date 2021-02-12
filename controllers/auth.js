@@ -36,7 +36,7 @@ export const otpController=async(req,res)=>{
             subject: 'OTP from college-project for registration ',
             html: `<h1>${otpNumber}</h1>`
         }).then(()=>console.log("email sent"))
-        .catch((err)=>console.log(err));
+        .catch((err)=>console.log("email not sent"));
 
          const otp=new OTP({otp:otpNumber});
          await otp.save();

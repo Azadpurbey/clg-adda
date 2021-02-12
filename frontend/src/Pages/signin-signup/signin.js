@@ -18,6 +18,7 @@ const Signin = () => {
         <p className='lead'>
           <i className='fas fa-user' /> Sign Into Your Account
         </p>
+        
         <form className='form' onSubmit={onSubmit}>
           <div className='form-group'>
             <input
@@ -42,7 +43,7 @@ const Signin = () => {
           <input type='submit' className='btn btn-primary' value='signin' />
         </form>
         <p className='my-1 '>
-          Don't have an account?{' '}
+          Don't have an account?
           <Link to='/signup-email' className='text-primary'>
             Sign Up
           </Link>
