@@ -2,111 +2,168 @@ import User from '../models/user.js'
 import generateToken from '../middleware/generateToken.js'
 import OTP from '../models/otp.js'
 import rn from 'random-number'
-import nodemailer from 'nodemailer'
-//import sgTransport from 'nodemailer-sendgrid-transport'
-//import sgmail from '@sendgrid/mail'
+import nodemailer from 'nodemailer';
+import nodemailerSendgrid from 'nodemailer-sendgrid'
 
-// // const mailer_auth = {
-// //     user: "apikey",
-// //     pass: "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",
-// //   };
-// //   const transport = nodemailer.createTransport({
-// //     // host: "smtp.sendgrid.net",
-// //     // port: 25,
-// //     // secure: false,
-// //     service: "SendGrid",
-// //     // requireTLS: false,
-// //     auth: mailer_auth,
-// //   });
 
-// const mailer_auth = {
-//   user: 'first-api',
-//   pass: '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',
-// }
+export const otpController=async(req,res)=>{
 
-// const transport = nodemailer.createTransport({
-//   host: 'smtp.sendgrid.net',
-//   port: 25,
-//   secure: false,
-//   service: 'SendGrid',
-//   requireTLS: false,
-//   auth: mailer_auth,
-// })
+    const api_key=process.env.SENDGRID_API;
+    const transport = nodemailer.createTransport(
+        nodemailerSendgrid({
+            apiKey:api_key
+        })
+    );
+    
+    const {email}=req.body;
+    try {
+        const user=await User.findOne({email});
+        if(user)
+        {
+          return  res.json({error:"already exist"});
+        }
+        var options = {
+            min:  100000
+          , max:  999999
+          , integer: true
+          }
+         var otpNumber= rn(options) ;
+         console.log("sending OTP: " + otpNumber + " to " + req.body.email);
+       
+        transport.sendMail({
+            from: 'ssoumyaprakash05@gmail.com',
+            to: `<${req.body.email}>`,
+            subject: 'OTP from college-project for registration ',
+            html: `<h1>${otpNumber}</h1>`
+        }).then(()=>console.log("email sent"))
+        .catch((err)=>console.log(err));
 
-// export const otpController = async (req, res) => {
-//   const { email } = req.body
-//   try {
-//     const user = await User.findOne({ email })
-//     if (user) {
-//       return res.json({ error: 'already exist' })
-//     }
-//     var options = {
-//       min: 100000,
-//       max: 999999,
-//       integer: true,
-//     }
-//     var otpNumber = rn(options)
-//     console.log('sending OTP: ' + otpNumber + ' to ' + req.body.email)
-//     const mailOptions = {
-//       from: 'ssoumyaprakash05@gmail.com',
-//       to: req.body.email,
-//       subject: 'OTP from College Project',
-//       text: 'Your OTP for Registration is ' + otpNumber,
-//     }
+         const otp=new OTP({otp:otpNumber});
+         await otp.save();
+         res.json({otp});
 
-//     transport.sendMail(mailOptions, (err, info) => {
-//       if (err) {
-//         console.log(err)
-//       } else {
-//         console.warn('checking', info)
-//       }
-//     })
-
-//     const otp = new OTP({ otp: otpNumber })
-//     await otp.save()
-//     res.json({ otp })
-//   } catch (err) {
-//     return res.json({ error: err })
-//   }
-// }
-
-export const signup = async (req, res) => {
-  try {
-    const { name, email, password, otp, branch, admission } = req.body
-    // console.log(name,email);
-    var user = await User.findOne({ email })
-    if (user) {
-      return res.json({ error: 'already exist' })
-    }
-    var otpExist = await OTP.findOne({ otp })
-    if (!otpExist) {
-      return res.json({ error: 'incorrect otp' })
+    } catch (err) {
+        return res.json({error:err});     
     }
 
-    user = new User({ name, email, password, branch, admission })
-
-    const newUser = await user.save()
-
-    res.json({ newUser, token: generateToken(newUser._id) })
-  } catch (err) {
-    return res.json({ error: err })
-  }
 }
 
-export const signin = async (req, res) => {
-  try {
-    const { email, password } = req.body
-    const user = await User.findOne({ email })
+export const signup=async(req,res)=>{
+  
+    try {
+        const {name,email,password,otp,branch,admission}=req.body;
+        // console.log(name,email);
+        var user = await User.findOne({email});
+        if(user)
+        {
+          return  res.json({error:"already exist"});
+        }
+        var otpExist=await OTP.findOne({otp});
+        if(!otpExist)
+        {
+            return res.json({error:"incorrect otp"});
+        }
 
-    if (user && (await user.matchPassword(password))) {
-      res.json({
-        user,
-        token: generateToken(user._id),
-      })
-    } else {
-      res.status(422).json({ error: 'invalid email or password' })
+        user=new User({name,email,password,branch,admission});
+         
+         const newUser=await user.save();
+         user.password=undefined
+         res.json({newUser,token:generateToken(newUser._id)});
+         
+    } catch (err) {
+        return res.json({error:err});
+    }   
+
+}
+
+export const signin=async(req,res)=>{
+    try {
+        const {email,password}=req.body;
+        const user= await User.findOne({email})
+        // console.log(user);
+        
+        if(user && (await user.matchPassword(password))){
+            user.password=undefined
+            res.json({
+                user,
+                token:generateToken(user._id)
+            })
+        }else{
+            
+            res.status(422).json({error:"invalid email or password"});
+           
+        }
+    } catch (err) {
+        res.status(422).json({error:err});
     }
-  } catch (err) {
-    res.status(422).json({ error: err })
-  }
+}
+
+
+export const forgotOtp=async(req,res)=>{
+
+    const api_key=process.env.SENDGRID_API;
+    const transport = nodemailer.createTransport(
+        nodemailerSendgrid({
+            apiKey:api_key
+        })
+    );
+   
+    try {
+        const {email}=req.body;
+        const user =await User.findOne({email});
+        if(user)
+        {
+            var options = {
+                min:  100000
+              , max:  999999
+              , integer: true
+              }
+             var otpNumber= rn(options) ;
+             console.log("sending OTP: " + otpNumber + " to " + req.body.email);
+           
+            transport.sendMail({
+                from: 'ssoumyaprakash05@gmail.com',
+                to: `<${req.body.email}>`,
+                subject: 'OTP from college-project for registration ',
+                html: `<h1>${otpNumber}</h1>`
+            }).then(()=>console.log("email sent"))
+            .catch((err)=>console.log(err));
+    
+             const otp=new OTP({otp:otpNumber});
+             await otp.save();
+             res.json({otp});
+        }
+        else{
+            res.status(422).json({error:"email not exist"});
+        }
+    } catch (err) {
+        res.status(422).json({error:err});
+    }
+   
+    
+}
+
+export const forgotPassword=async(req,res)=>{
+    const {email,password}=req.body;
+    try {
+        
+        const user=await User.findOne({email});
+        const otp=await OTP.findOne({otp:req.body.otp});
+
+        if(!user || !otp)
+        {
+            return res.json({error:"incorrect OTP"});
+        }
+
+        user.password=password;
+        await user.save();
+        user.password=undefined
+        res.json({
+            user,
+            token:generateToken(user._id)
+        })
+
+    } catch (err) {
+        res.status(422).json({error:err});
+    }
 }
