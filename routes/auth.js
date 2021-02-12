@@ -13,4 +13,4 @@ router.post('/forgot/otp',forgotOtp);
 router.put('/forgot/password',forgotPassword)
 // router.get('/',authToken,(req,res)=>res.send(req.user._id));
 
-export default router;
+
