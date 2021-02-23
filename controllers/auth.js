@@ -20,7 +20,7 @@ export const otpController=async(req,res)=>{
         const user=await User.findOne({email});
         if(user)
         {
-          return  res.json({error:"already exist"});
+          return  res.status(401).json({error:"already exist"});
         }
         var options = {
             min:  100000
@@ -56,7 +56,7 @@ export const signup=async(req,res)=>{
         var user = await User.findOne({email});
         if(user)
         {
-          return  res.json({error:"already exist"});
+          return  res.status(401).json({error:"already exist"});
         }
         var otpExist=await OTP.findOne({otp});
         if(!otpExist)
@@ -68,7 +68,7 @@ export const signup=async(req,res)=>{
          
          const newUser=await user.save();
          user.password=undefined
-         res.json({newUser,token:generateToken(newUser._id)});
+         res.json({user:newUser,token:generateToken(newUser._id)});
          
     } catch (err) {
         return res.json({error:err});

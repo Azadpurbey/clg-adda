@@ -1,7 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import '../css/Navbar.css'
+import {useSelector,useDispatch} from 'react-redux'
+import {logout} from '../actions/auth'
+
 const Navbar = () => {
+
+  const {userInfo}=useSelector(state=>state.userLogin)
+  const dispatch=useDispatch();
+  const logoutHandler=(e)=>{
+    e.preventDefault();
+    console.log("logout")
+    dispatch(logout());
+  }
+ 
+
   return (
     <div className='header'>
       <Link to='/material'>
@@ -14,12 +27,12 @@ const Navbar = () => {
       <Link to='/profile'>
         <li>ProfilePage</li>
       </Link>
-      <Link to='/signin'>
+    {!userInfo ? <> <Link to='/signin'>
         <li>Signin</li>
-      </Link>
-      <Link to='/signup'>
+      </Link> 
+     <Link to='/signup'>
         <li>Signup</li>
-      </Link>
+      </Link> </> :<Link><li onClick={logoutHandler} >Logout</li></Link> }
     </div>
   )
 }

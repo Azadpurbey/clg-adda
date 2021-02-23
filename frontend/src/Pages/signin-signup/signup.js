@@ -1,6 +1,8 @@
-import React, { Fragment, useState } from 'react'
-import { Link, Redirect, Route } from 'react-router-dom'
+import React, { Fragment, useEffect, useState } from 'react'
+import { Link, Redirect, Route,useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import {useSelector,useDispatch} from 'react-redux'
+import {emailOtp,register} from '../../actions/auth'
 
 const SignupEmail = () => {
   const [email, setEmail] = useState('')
@@ -10,19 +12,37 @@ const SignupEmail = () => {
   const [password2, setPassword2] = useState('')
   const [branch, setBranch] = useState(null)
   const [admission, setAdmission] = useState(null)
-  const [isEmail, setIsEmail] = useState('')
-  const [isOtp, setIsOtp] = useState('')
+  const [correctPassword,setCorrectPassword]=useState(false);
+  // const [isEmail, setIsEmail] = useState('')
+  const history=useHistory();
 
-  const onSubmit = (e) => {
+  const dispatch=useDispatch();
+  const {success:isEmail,loading:isEmailLoading,error:errorOtp}=useSelector(state=>state.emailOtpUser)
+  const {loading:loadingRegister,userRegister,errorRegister}=useSelector(state=>state.userRegister);
+
+  const OnSubmit = (e) => {
     e.preventDefault()
-    console.log('sigunupup')
+    // console.log({name,otp,email,password,branch,admission})
+    if(password===password2)
+    {
+      dispatch(register({name,otp,email,password,branch,admission}));
+    }
+    else{
+          setCorrectPassword(true);
+    }
   }
-  const emailHandler = () => {
-    setIsEmail('1')
+  const emailHandler = (e) => {
+      e.preventDefault()
+      dispatch(emailOtp(email));
   }
-  const otpHandler = () => {
-    setIsOtp('1')
-  }
+
+  useEffect(()=>{
+     if(userRegister)
+     {
+       history.push('/');
+     }
+  },[history,userRegister])
+
   return (
     <div className='container'>
       <Link to='/home' className='btn btn-dark'>
@@ -33,9 +53,13 @@ const SignupEmail = () => {
         <p className='lead'>
           <i className='fas fa-user' /> Create Your Account
         </p>
-        <form className='form' onsubmit={onSubmit}>
-          {!isEmail && !isOtp && (
-            <>
+        {(isEmailLoading || loadingRegister) && <h3>Loading......</h3> }
+        {errorOtp && <h3>{errorOtp}</h3>}
+        {errorRegister && <h3>{errorRegister}</h3>}
+        {correctPassword && <h3>Please enter correct password</h3>}
+
+        {!isEmail   && 
+            <form className='form' onSubmit={emailHandler}>
               <p className='my-1'>Enter your email address</p>
               <div className='form-group'>
                 <input
@@ -46,18 +70,12 @@ const SignupEmail = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <Button
-                type='button'
-                className='btn btn-block'
-                onClick={emailHandler}
-              >
-                Send OTP
-              </Button>
-            </>
-          )}
+              <input type='submit' className='btn btn-primary' value='Send OTP' />
+              
+              </form>
+          }
 
-          {isEmail && !isOtp && (
-            <>
+      {isEmail&& !isEmailLoading && <form className='form' onSubmit={OnSubmit}>
               <p className='my-1'>
                 An OTP has been sent to your mail address.Check and Enter the
                 OTP
@@ -71,19 +89,6 @@ const SignupEmail = () => {
                   onChange={(e) => setOtp(e.target.value)}
                 />
               </div>
-
-              <Button
-                type='button'
-                className='btn btn-block'
-                onClick={otpHandler}
-              >
-                Submit OTP
-              </Button>
-            </>
-          )}
-
-          {isEmail && isOtp && (
-            <>
               <div className='form-group'>
                 <input
                   type='text'
@@ -141,14 +146,15 @@ const SignupEmail = () => {
                   <option value='2004'>2004</option>
                 </select>
               </div>
-              <input
+              <button
                 type='submit'
                 className='btn btn-primary'
-                value='Register'
-              />
-            </>
-          )}
+                >
+                Register
+              </button>
+         
         </form>
+        }
         <p className='my-1'>
           Already have an account? <Link to='/signin'>Sign In</Link>
         </p>
