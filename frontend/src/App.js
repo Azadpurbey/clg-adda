@@ -1,40 +1,28 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Material from './components/Material';
-import ProfilePage from './components/ProfilePage';
-import Login from './components/Login';
-import Home from './components/Home';
-import Alumini from './components/Alumini';
-import RegistrationForm from './components/RegistrationForm';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Material from './components/Material'
+import ProfilePage from './components/ProfilePage'
+import Signin from './components/SigninPage'
+import Home from './components/Home'
+import Alumini from './components/AluminiPage'
+import Signup from './components/SignupPage'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import './index.css'
 
 const App = () => {
   return (
-<Router>
-      <div className="App">
-        <Switch>
-          <Route path='/Material'>
-            <Material/>
-          </Route>
-
-          <Route path='/profile'>
-            <ProfilePage/>
-          </Route>
-
-          <Route path='/login'>
-            <Login/>
-          </Route>
-          <Route path='/signUp'>
-            <RegistrationForm/>
-          </Route>
-          <Route path='/alumini'>
-            <Alumini/>
-          </Route>
-          <Route path='/'>
-            <Home/>
-          </Route>
-        </Switch>
-
+    <Router>
+      <Header />
+      <div className='app__container'>
+        <Route path='/Material' component={Material} />
+        <Route path='/profile' component={ProfilePage} />
+        <Route path='/signin' component={Signin} />
+        <Route path='/signUp' component={Signup} />
+        <Route path='/alumini' component={Alumini} />
+        <Route exact path='/' component={Home}></Route>
       </div>
+      <Footer />
     </Router>
   )
 }
