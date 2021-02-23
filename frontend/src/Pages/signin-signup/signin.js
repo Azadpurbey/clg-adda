@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
 import {login} from '../../actions/auth'
 import { useHistory } from "react-router-dom";
+import '../../css/signin-signup.css'
 
 const Signin = () => {
   const [email, setEmail] = useState('seli@gmail.com')
@@ -39,7 +40,7 @@ const Signin = () => {
         <p className='lead'>
           <i className='fas fa-user' /> Sign Into Your Account
         </p>
-        
+
         <form className='form' onSubmit={onSubmit}>
           <div className='form-group'>
             <input

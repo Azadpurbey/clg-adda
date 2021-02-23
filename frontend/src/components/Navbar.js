@@ -27,6 +27,7 @@ const Navbar = () => {
       <Link to='/profile'>
         <li>ProfilePage</li>
       </Link>
+      <Link>Hello</Link>
     {!userInfo ? <> <Link to='/signin'>
         <li>Signin</li>
       </Link> 

@@ -3,6 +3,7 @@ import { Link, Redirect, Route,useHistory } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import {useSelector,useDispatch} from 'react-redux'
 import {emailOtp,register} from '../../actions/auth'
+import '../../css/signin-signup.css'
 
 const SignupEmail = () => {
   const [email, setEmail] = useState('')
@@ -75,6 +76,7 @@ const SignupEmail = () => {
               </form>
           }
 
+
       {isEmail&& !isEmailLoading && <form className='form' onSubmit={OnSubmit}>
               <p className='my-1'>
                 An OTP has been sent to your mail address.Check and Enter the
@@ -89,6 +91,7 @@ const SignupEmail = () => {
                   onChange={(e) => setOtp(e.target.value)}
                 />
               </div>
+
               <div className='form-group'>
                 <input
                   type='text'
@@ -120,8 +123,7 @@ const SignupEmail = () => {
                 <select
                   name='branch'
                   value={branch}
-                  onChange={(e) => setBranch(e.target.value)}
-                >
+                  onChange={(e) => setBranch(e.target.value)}>
                   <option>* Select Your branch</option>
                   <option value='M&C'>M&C</option>
                   <option value='CSE'>CSE</option>
@@ -136,8 +138,7 @@ const SignupEmail = () => {
                 <select
                   name='admission'
                   value={admission}
-                  onChange={(e) => setAdmission(e.target.value)}
-                >
+                  onChange={(e) => setAdmission(e.target.value)}>
                   <option>* Select admission year</option>
                   <option value='2000'>2000</option>
                   <option value='2001'>2001</option>
