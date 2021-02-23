@@ -23,9 +23,9 @@ const Header = () => {
           <Nav className='ml-auto'>
             <Nav.Link href='/material'>Material</Nav.Link>
             <Nav.Link href='/alumini'>Alumini</Nav.Link>
-            <Nav.Link href='/profile'>Profile</Nav.Link>
+           {userInfo && <Nav.Link href='/profile'>{userInfo.user.name}</Nav.Link>}
          {!userInfo ?  <> <Nav.Link href='/signin'>SignIn</Nav.Link>
-            <Nav.Link href='/signup'>SignIn</Nav.Link></> :<Nav.Link onClick={logoutHandler}>LogOut</Nav.Link>}
+            <Nav.Link href='/signup'>SignUp</Nav.Link></> :<Nav.Link onClick={logoutHandler}>LogOut</Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

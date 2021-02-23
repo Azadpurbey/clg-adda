@@ -13,7 +13,7 @@ const SignupEmail = () => {
   const [password2, setPassword2] = useState('')
   const [branch, setBranch] = useState(null)
   const [admission, setAdmission] = useState(null)
-  const [correctPassword,setCorrectPassword]=useState(false);
+  const [correctDetail,setCorrectDetail]=useState(false);
   // const [isEmail, setIsEmail] = useState('')
   const history=useHistory();
 
@@ -24,12 +24,12 @@ const SignupEmail = () => {
   const OnSubmit = (e) => {
     e.preventDefault()
     // console.log({name,otp,email,password,branch,admission})
-    if(password===password2)
+    if(password===password2 && admission!==null && branch!=null)
     {
       dispatch(register({name,otp,email,password,branch,admission}));
     }
     else{
-          setCorrectPassword(true);
+          setCorrectDetail(true);
     }
   }
   const emailHandler = (e) => {
@@ -57,7 +57,7 @@ const SignupEmail = () => {
         {(isEmailLoading || loadingRegister) && <h3>Loading......</h3> }
         {errorOtp && <h3>{errorOtp}</h3>}
         {errorRegister && <h3>{errorRegister}</h3>}
-        {correctPassword && <h3>Please enter correct password</h3>}
+        {correctDetail && <h3>Please write detail properly</h3>}
 
         {!isEmail   && 
             <form className='form' onSubmit={emailHandler}>
@@ -69,6 +69,7 @@ const SignupEmail = () => {
                   name='email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <input type='submit' className='btn btn-primary' value='Send OTP' />
@@ -89,6 +90,7 @@ const SignupEmail = () => {
                   name='otp'
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
+                  required
                 />
               </div>
 
@@ -99,6 +101,7 @@ const SignupEmail = () => {
                   name='name'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
               <div className='form-group'>
@@ -108,6 +111,7 @@ const SignupEmail = () => {
                   name='password'
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </div>
               <div className='form-group'>
@@ -117,12 +121,14 @@ const SignupEmail = () => {
                   name='password2'
                   value={password2}
                   onChange={(e) => setPassword2(e.target.value)}
+                  required
                 />
               </div>
               <div className='form-group'>
                 <select
                   name='branch'
                   value={branch}
+                  required
                   onChange={(e) => setBranch(e.target.value)}>
                   <option>* Select Your branch</option>
                   <option value='M&C'>M&C</option>
@@ -137,6 +143,7 @@ const SignupEmail = () => {
               <div className='form-group'>
                 <select
                   name='admission'
+                  required
                   value={admission}
                   onChange={(e) => setAdmission(e.target.value)}>
                   <option>* Select admission year</option>
