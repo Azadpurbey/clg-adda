@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import {update } from '../actions/auth'
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 const EditProfile = () => {
     const {userInfo}=useSelector(state=>state.userLogin);
     const {user}=userInfo;
@@ -26,17 +26,18 @@ const EditProfile = () => {
            setIsError(true);
          }
     }
-    // useEffect(()=>{
-    //       if(success)
-    //       {
-    //         history.push('/');
-    //       }
-    // },[success,history]);
+    useEffect(()=>{
+          if(success)
+          {
+            history.push('/profile');
+          }
+    },[success,history]);
     return (
         <div>
            {loading && <h3>Loading...</h3>}
            {(error || isError ) && <h3>Edit your Detail Properly</h3>}
            {success && <h3>Your profile is Updated</h3>}
+           <Link to='/profile' className='btn btn-light my-3' >Go Back</Link>
            <h3>Email: {user.email} </h3><br/>
            <form className='form' onSubmit={OnSubmit}>
            <p>Edit your Profile</p>
