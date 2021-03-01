@@ -18,6 +18,7 @@ const Material = ({ history }) => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
   // get all related material
   const materialList = useSelector((state) => state.materialList)
   const { loading, error, materials } = materialList

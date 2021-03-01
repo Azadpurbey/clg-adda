@@ -8,7 +8,7 @@ export const getMaterials = async (req, res) => {
   const sem = req.query.sem
 
   try {
-    const data = await Material.find({ sem })
+    const data = await Material.find({ sem, branch })
     res.json(data)
   } catch (error) {
     return res.json({ error: error })
@@ -68,6 +68,5 @@ export const updateMaterial = async (req, res) => {
   }
 
   const updatedMaterial = await material.save()
-  console.log('after changes', updateMaterial)
   res.status(201).json(updateMaterial)
 }

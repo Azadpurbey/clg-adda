@@ -44,7 +44,6 @@ const Upload = ({ match, history }) => {
     if (material._id != materialId) {
       dispatch(listMaterialDetails(materialId))
     } else {
-      console.log(material)
       setFileName(material.path)
       setTitle(material.title)
       setBranch(material.branch)
@@ -67,7 +66,6 @@ const Upload = ({ match, history }) => {
       }
 
       const { data } = await axios.post('/api/upload', formData, config)
-      console.log('from inside uploading', data)
       setFileName(data)
       setUploading(false)
     } catch (error) {
