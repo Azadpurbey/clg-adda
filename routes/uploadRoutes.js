@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
+import Material from '../models/materialModel.js'
 
 const router = express.Router()
 
@@ -37,11 +38,25 @@ const upload = multer({
   },
 })
 
+const uploadMaterial = async (req, res) => {
+  const material = await Material.create({
+    title: 'Numerical method',
+    description: 'Upto 2nd sem',
+    path: '/home/azad/Desktop/clg_project/uploads/pdf-1614262362552.pdf',
+    rating: 4,
+    branch: 'MNC',
+    sem: 8,
+  })
+  if (material) {
+    res.status(201).json(material.path)
+    console.log(material.path)
+  } else {
+    res.status(400)
+    throw new Error('File is not uploaded')
+  }
+}
+
 // route setup
-router.post('/', upload.single('pdf'), (req, res) => {
-  //   console.log('I an inside route')
-  //   console.log(req.file.path)
-  res.send(`/${req.file.path}`)
-})
+router.post('/', upload.single('pdf'), uploadMaterial)
 
 export default router

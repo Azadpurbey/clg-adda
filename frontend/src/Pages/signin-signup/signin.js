@@ -1,39 +1,34 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
-import {useDispatch,useSelector} from 'react-redux'
-import {login} from '../../actions/auth'
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../actions/auth'
+import { useHistory } from 'react-router-dom'
 import '../../css/signin-signup.css'
 
 const Signin = () => {
   const [email, setEmail] = useState('seli@gmail.com')
   const [password, setPassword] = useState('12345')
-  const dispatch=useDispatch();
-  var history = useHistory();
-  const {loading,userInfo,error} =useSelector(state=>state.userLogin)
+  const dispatch = useDispatch()
+  var history = useHistory()
+  const { loading, userInfo, error } = useSelector((state) => state.userLogin)
 
-  useEffect(()=>{
-    
-    if(userInfo && userInfo.token)
-    {
-        // console.log(userInfo)
-        history.push('/')
-      
+  useEffect(() => {
+    if (userInfo && userInfo.token) {
+      // console.log(userInfo)
+      history.push('/')
     }
-
-  },[history,userInfo])
+  }, [history, userInfo])
 
   const onSubmit = (e) => {
-    e.preventDefault();
-    dispatch(login(email,password));
-
+    e.preventDefault()
+    dispatch(login(email, password))
   }
   return (
     <div className='container'>
       {loading && <h3>Laoding.....</h3>}
       {error && <h3>{error}</h3>}
       <Fragment>
-        <Link to='/home' className='btn btn-dark'>
+        <Link to='/' className='btn btn-dark'>
           HomePage
         </Link>
         <h1 className='large text-primary'>Sign In</h1>

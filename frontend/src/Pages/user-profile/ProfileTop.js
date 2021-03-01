@@ -7,7 +7,7 @@ const ProfileTop = () => {
         <div className='col-sm-2 col-md-2'>
           <img className='round-img my-1' src={pic} alt='' />
         </div>
-        <div class='col-sm-4 col-md-4'>
+        <div className='col-sm-4 col-md-4'>
           <h1 className='large'>Soumya Prakash</h1>
           <p className='lead'>Maths & Computing(2017-2022)</p>
           <p>17JE002940</p>
