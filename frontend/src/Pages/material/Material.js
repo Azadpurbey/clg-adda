@@ -95,7 +95,9 @@ const Material = ({ history }) => {
           </Button>
         </Col>
       </Row>
-
+      <h3>
+        Material of branch {branch} ans sem {sem}
+      </h3>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -105,6 +107,9 @@ const Material = ({ history }) => {
       ) : (
         <>
           <Row>
+            {materials.length == 0 && (
+              <Message variant='success'>{`No any material is available of choosen sem and branch`}</Message>
+            )}
             {materials.map((material) => {
               return (
                 <Col key={material._id} sm={6} md={3} lg={2} xl={2}>

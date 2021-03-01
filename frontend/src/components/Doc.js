@@ -6,7 +6,7 @@ import '../css/Doc.css'
 
 const Doc = ({ material }) => {
   return (
-    <Card className='doc__box'>
+    <Card className='my-3 p-3 rounded'>
       <Card.Img src='/pdf.jpg' variant='top' />
 
       <Card.Body>
