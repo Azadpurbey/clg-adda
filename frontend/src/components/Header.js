@@ -27,7 +27,7 @@ const Header = () => {
             <LinkContainer to='/profContact'>
               <Nav.Link>Prof Contact</Nav.Link>
             </LinkContainer>
-            <LinkContainer to='/contacts'>
+            <LinkContainer to='/material'>
               <Nav.Link>Materials</Nav.Link>
             </LinkContainer>
 

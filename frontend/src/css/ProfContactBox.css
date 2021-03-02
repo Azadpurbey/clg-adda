@@ -1,23 +1,26 @@
 .main_box {
-  background-color: blue;
-  border: 2px solid black;
-  height: 300px;
+  background-color: rgba(75, 177, 163, 0.404);
+  border: 2px solid transparent;
+  height: auto;
   margin-top: 50px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 3px 4px;
+  margin-left: 10px;
 }
 
-img {
+.main_box img {
   width: 100px;
   height: 100px;
-  border-radius: 50%;
-  z-index: 2;
-  /* padding-left: 40px; */
-  border: 5px solid black;
   position: absolute;
-  left: 35%;
+  left: 30%;
   top: 0%;
 }
 .info {
   /* text-align: center; */
   margin-top: 50px;
   padding: 5px;
+}
+h5 {
+  display: inline;
 }
