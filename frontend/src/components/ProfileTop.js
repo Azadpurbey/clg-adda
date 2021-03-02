@@ -10,7 +10,7 @@ const ProfileTop = () => {
         <div className='col-sm-2 col-md-8'>
           <img className='round-img my-1' src={'./soumya.jpeg'} alt='' />
         </div>
-        <div class='col-sm-4 col-md-4'>
+        <div className='col-sm-4 col-md-4'>
           <p style={{ paddingTop: '80px' }} className='lead'>
             {user.name}
           </p>

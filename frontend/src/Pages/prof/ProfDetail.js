@@ -17,12 +17,8 @@ const ProfDetail = ({ history }) => {
 
   useEffect(() => {
     history.push(`/profDetail/${department}`)
-    console.log(`list profs called`)
     dispatch(listProfs(department))
   }, [dispatch, department])
-  console.log(profs)
-  console.log(loading)
-  console.log(`profs`, profs)
 
   return (
     <div style={{ backgroundColor: 'lightcyan', margin: '0', padding: '0' }}>
@@ -63,11 +59,13 @@ const ProfDetail = ({ history }) => {
           <Message variant='success'>{`No prof details of this branch is available`}</Message>
         ) : (
           profs &&
-          profs.map((prof) => (
-            <Col sm={12} md={6} lg={4} xl={3}>
-              <ProfDetailBox prof={prof} />
-            </Col>
-          ))
+          profs.map((prof) => {
+            return (
+              <Col key={prof._id} sm={12} md={6} lg={4} xl={3}>
+                <ProfDetailBox prof={prof} />
+              </Col>
+            )
+          })
         )}
       </Row>
     </div>

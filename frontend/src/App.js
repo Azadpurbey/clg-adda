@@ -6,6 +6,7 @@ import ProfilePage from './Pages/userProfile/Profile'
 import Signin from './Pages/signinSignup/Signin'
 import Home from './Pages/home/Home'
 import Alumini from './Pages/alumini/Alumini'
+import AluminiProfile from './Pages/alumini/AluminiProfile'
 import Signup from './Pages/signinSignup/Signup'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -26,8 +27,9 @@ const App = () => {
       <Route path='/profile' component={ProfilePage} />
       <Route path='/signin' component={Signin} />
       <Route path='/signUp' component={Signup} />
-      <Route path='/alumini' component={Alumini} />
-      <Route path='/profie/edit' exact component={EditProfile} />
+      <Route exact path='/alumini' component={Alumini} />
+      <Route exact path='/alumini/id' component={AluminiProfile} />
+      <Route exact path='/profie/edit' component={EditProfile} />
       <Route exact path='/' component={Home}></Route>
       <Footer />
     </Router>

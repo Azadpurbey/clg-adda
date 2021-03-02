@@ -11,27 +11,27 @@ const ProfDetailBox = ({ prof }) => {
         <img src='/logo512.png' />
       </div>
       <div className='info'>
-        <p>
+        <div>
           {' '}
           <h5>Name: {prof.name}</h5>
-        </p>
+        </div>
 
-        <p className='later1'>
+        <div>
           <h5>Email:</h5> {prof.email}
-        </p>
-        <p className='later1'>
+        </div>
+        <div>
           <h5>Contact:</h5> {prof.contact}
-        </p>
-        <p className='later1'>
+        </div>
+        <div>
           <h5>Department:</h5>
           {prof.department}
-        </p>
-        <p className='later1'>
+        </div>
+        <div>
           <h5>Designation:</h5> {prof.designation}
-        </p>
-        <p className='later'>
+        </div>
+        <div>
           <h5>Area of Interest:</h5> {prof.areaOfInterest}
-        </p>
+        </div>
       </div>
     </div>
   )

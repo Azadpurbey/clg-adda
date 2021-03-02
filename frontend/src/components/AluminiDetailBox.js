@@ -12,7 +12,7 @@ const AluminiDetailBox = () => {
         <p>
           <span>Maths & Computing</span>
         </p>
-        <Link to='/profile' className='btn btn-primary'>
+        <Link to='/alumini/id' className='btn btn-primary'>
           View Profile
         </Link>
       </div>
