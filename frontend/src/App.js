@@ -10,12 +10,14 @@ import Signup from './components/SignupPage'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Upload from './Pages/material/Upload'
+import ProfContact from './Pages/prof/ProfContact'
 
 const App = () => {
   return (
     <Router>
       <Header />
       <div className='app__container'>
+        <Route path='/profContact' component={ProfContact} />
         <Route exact path='/material' component={Material} />
         <Route path='/material/:id/edit' component={Upload} />
         <Route path='/profile' component={ProfilePage} />
