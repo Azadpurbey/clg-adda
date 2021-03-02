@@ -25,7 +25,7 @@ const ProfDetail = ({ history }) => {
   console.log(`profs`, profs)
 
   return (
-    <div style={{ backgroundColor: 'lightcyan', margin: '0px', padding: '0' }}>
+    <div style={{ backgroundColor: 'lightcyan', margin: '0', padding: '0' }}>
       <Row>
         <Col md={3}>
           <Link className='btn btn-dark my-3' to='/'>
@@ -55,20 +55,20 @@ const ProfDetail = ({ history }) => {
         </Col>
       </Row>
       <Row>
-
         {loading ? (
           <Loader />
         ) : error ? (
           <Message variant='danger'>{error}</Message>
+        ) : profs.length === 0 ? (
+          <Message variant='success'>{`No prof details of this branch is available`}</Message>
         ) : (
           profs &&
           profs.map((prof) => (
             <Col sm={12} md={6} lg={4} xl={3}>
-              <ProfDetailBox />
+              <ProfDetailBox prof={prof} />
             </Col>
           ))
         )}
-
       </Row>
     </div>
   )

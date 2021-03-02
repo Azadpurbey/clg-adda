@@ -5,18 +5,15 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { logout } from '../actions/auth'
 
-
 const Header = () => {
-
-  const history=useHistory();
-  const {userInfo}=useSelector(state=>state.userLogin)
-  const dispatch=useDispatch();
-  const logoutHandler=(e)=>{
-    e.preventDefault();
+  const history = useHistory()
+  const { userInfo } = useSelector((state) => state.userLogin)
+  const dispatch = useDispatch()
+  const logoutHandler = (e) => {
+    e.preventDefault()
     // console.log("logout")
-    dispatch(logout());
-    history.push('/');
-
+    dispatch(logout())
+    history.push('/')
   }
 
   return (
