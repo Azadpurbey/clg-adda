@@ -8,6 +8,7 @@ import Alumini from './components/AluminiPage'
 import Signup from './components/SignupPage'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import EditProfile from './components/EditProfile'
 import './index.css'
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path='/signin' component={Signin} />
         <Route path='/signUp' component={Signup} />
         <Route path='/alumini' component={Alumini} />
+        <Route path='/profie/edit' exact component={EditProfile} />
         <Route exact path='/' component={Home}></Route>
       </div>
       <Footer />

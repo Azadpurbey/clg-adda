@@ -5,7 +5,7 @@ import ProfileAbout from './ProfileAbout'
 const Profile = () => {
   return (
     <Fragment>
-      <Link to='/home' className='btn btn-dark'>
+      <Link to='/' className='btn btn-dark'>
         HomePage
       </Link>
       <Link to='/profie/edit' className='btn btn-dark'>
