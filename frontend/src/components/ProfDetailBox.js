@@ -1,6 +1,6 @@
 import React from 'react'
-import '../css/ProfContactBox.css'
-const ProfContactBox = () => {
+import '../css/ProfDetailBox.css'
+const ProfDetailBox = () => {
   const box = {
     backgroundColor: 'red',
   }
@@ -37,4 +37,4 @@ const ProfContactBox = () => {
   )
 }
 
-export default ProfContactBox
+export default ProfDetailBox

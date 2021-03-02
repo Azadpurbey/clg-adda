@@ -1,32 +1,12 @@
 [
   {
-    "user": "6034a8b878d8b62b100503cc",
-    "title": "Numerical method",
-    "description": "Upto 2nd sem",
-    "path": "/home/azad/Desktop/clg_project/uploads/pdf-1614262362552.pdf",
-    "rating": 4,
-    "branch": "MNC",
-    "sem": 8,
-    "createdAt": "2021-02-23T07:03:20.845+00:00"
-  },
-  {
-    "user": "6034a8b878d8b62b100503cc",
-    "title": "Graph theory",
-    "description": "Upto 2nd sem",
-    "path": "/home/azad/Desktop/clg_project/uploads/pdf-1614262362559.pdf",
-    "rating": 5,
-    "branch": "MNC",
-    "sem": 8,
-    "createdAt": "2021-02-23T07:03:20.845+00:00"
-  },
-  {
-    "user": "6034a8b878d8b62b100503cc",
-    "title": "NNDL",
-    "description": "Upto 2nd sem",
-    "path": "/home/azad/Desktop/clg_project/uploads/pdf-1614262362558.pdf",
-    "rating": 3,
-    "branch": "MNC",
-    "sem": 8,
-    "createdAt": "2021-02-23T07:03:20.845+00:00"
+    "name": "Azad Kumar",
+    "email": "azadpurbey2@gmail.com",
+    "contact": "9571479583",
+    "department": "MNC",
+    "designation": "Professor",
+    "areaOfInterest":
+      "Quantum computing and error correction in cubits and Grapg theory and Topology"
   }
+  
 ]
