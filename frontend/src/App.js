@@ -2,9 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './index.css'
 import Material from './Pages/material/Material'
-import ProfilePage from './components/ProfilePage'
+import ProfilePage from './Pages/userProfile/Profile'
 import Signin from './Pages/signinSignup/Signin'
-import Home from './components/Home'
+import Home from './Pages/home/Home'
 import Alumini from './Pages/alumini/Alumini'
 import Signup from './Pages/signinSignup/Signup'
 import Header from './components/Header'
@@ -20,7 +20,6 @@ const App = () => {
   return (
     <Router>
       <Header />
-
       <Route path='/profDetail/:department' component={ProfDetail} />
       <Route exact path='/material' component={Material} />
       <Route path='/material/:id/edit' component={Upload} />
@@ -30,7 +29,6 @@ const App = () => {
       <Route path='/alumini' component={Alumini} />
       <Route path='/profie/edit' exact component={EditProfile} />
       <Route exact path='/' component={Home}></Route>
-
       <Footer />
     </Router>
   )

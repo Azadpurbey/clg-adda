@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import ProfileTop from './ProfileTop'
-import ProfileAbout from './ProfileAbout'
+import ProfileTop from '../../components/ProfileTop'
+import ProfileAbout from '../../components/ProfileAbout'
 const Profile = () => {
   return (
     <Fragment>
