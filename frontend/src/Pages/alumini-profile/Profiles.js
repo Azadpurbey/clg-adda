@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const Profiles = () => {
   return (
     <Fragment>
-      <Link to='/home' className='btn btn-dark'>
+      <Link to='/' className='btn btn-dark'>
         HomePage
       </Link>
       <h1 className='large text-primary'>Aluminis</h1>

@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
+import Material from '../models/materialModel.js'
 
 const router = express.Router()
 
@@ -19,6 +20,7 @@ const storage = multer.diskStorage({
 
 // Middle ware - validation work - correct file type or not
 function checkFileType(file, cb) {
+  console.log("***",file.originalname);
   const filetypes = /pdf/
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
   const mimetype = filetypes.test(file.mimetype)
@@ -31,16 +33,14 @@ function checkFileType(file, cb) {
 }
 
 const upload = multer({
-  storage: storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb)
-  },
+  storage: storage
+  // ,fileFilter: function (req, file, cb) {
+  //   checkFileType(file, cb)
+  // },
 })
 
 // route setup
 router.post('/', upload.single('pdf'), (req, res) => {
-  //   console.log('I an inside route')
-  //   console.log(req.file.path)
   res.send(`/${req.file.path}`)
 })
 

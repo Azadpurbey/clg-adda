@@ -167,3 +167,32 @@ export const forgotPassword=async(req,res)=>{
         res.status(422).json({error:err});
     }
 }
+
+
+
+export const updateUserProfile= async(req,res)=>{
+   
+    const user =await User.findById(req.user._id)
+    
+    if(user){
+        user.name=req.body.name||user.name
+        user.branch=req.body.branch||user.branch
+        user.admission=req.body.admission||user.admission
+        if(req.body.password)
+        {
+            user.password=req.body.password
+        }
+        await user.save();
+        user.password=undefined;
+        res.json({
+            user,
+            token:generateToken(user._id)
+
+        })
+    }
+    else{
+        return res.status(422).json({error:"user not found for edit profile "})
+        
+    }
+
+}
