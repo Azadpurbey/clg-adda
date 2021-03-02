@@ -1,17 +1,22 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { useHistory, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { logout } from '../actions/auth'
 
+
 const Header = () => {
-  const { userInfo } = useSelector((state) => state.userLogin)
-  const dispatch = useDispatch()
-  const logoutHandler = (e) => {
-    e.preventDefault()
-    console.log('logout')
-    dispatch(logout())
+
+  const history=useHistory();
+  const {userInfo}=useSelector(state=>state.userLogin)
+  const dispatch=useDispatch();
+  const logoutHandler=(e)=>{
+    e.preventDefault();
+    // console.log("logout")
+    dispatch(logout());
+    history.push('/');
+
   }
 
   return (

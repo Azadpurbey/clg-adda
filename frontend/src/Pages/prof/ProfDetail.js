@@ -55,6 +55,7 @@ const ProfDetail = ({ history }) => {
         </Col>
       </Row>
       <Row>
+
         {loading ? (
           <Loader />
         ) : error ? (
@@ -67,6 +68,7 @@ const ProfDetail = ({ history }) => {
             </Col>
           ))
         )}
+
       </Row>
     </div>
   )
