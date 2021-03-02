@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react'
-import ProfileItem from './ProfileItem'
+import AluminiDetailBox from '../../components/AluminiDetailBox'
 import { Link } from 'react-router-dom'
 
-const Profiles = () => {
+const Alumini = () => {
   return (
     <Fragment>
       <Link to='/' className='btn btn-dark'>
@@ -13,13 +13,11 @@ const Profiles = () => {
         <i className='fab fa-connectdevelop' /> Browse and connect with aluminis
       </p>
       <div className='profiles'>
-        <ProfileItem />
-        <ProfileItem />
-        <ProfileItem />
-        <ProfileItem />
+        <AluminiDetailBox />
+        <AluminiDetailBox />
       </div>
     </Fragment>
   )
 }
 
-export default Profiles
+export default Alumini

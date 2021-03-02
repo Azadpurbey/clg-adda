@@ -1,11 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import pic from '../../images/soumya_pic.jpeg'
 
-const ProfileItem = () => {
+const AluminiDetailBox = () => {
   return (
     <div className='profile bg-light'>
-      <img src={pic} alt='' className='round-img' />
+      <img src={'/soumya.jpeg'} alt='' className='round-img' />
       <div>
         <h2>Soumya Prakash</h2>
         <p>Batch of 2022</p>
@@ -33,4 +32,4 @@ const ProfileItem = () => {
   )
 }
 
-export default ProfileItem
+export default AluminiDetailBox
