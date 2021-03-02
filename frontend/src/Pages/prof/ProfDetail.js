@@ -59,7 +59,7 @@ const ProfDetail = ({ history }) => {
           <Loader />
         ) : error ? (
           <Message variant='danger'>{error}</Message>
-        ) : profs.length === 0 ? (
+        ) : profs && profs.length === 0 ? (
           <Message variant='success'>{`No prof details of this branch is available`}</Message>
         ) : (
           profs &&
