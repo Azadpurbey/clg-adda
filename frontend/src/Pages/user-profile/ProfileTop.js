@@ -17,6 +17,7 @@ const ProfileTop = () => {
           <p className='lead'>{user.branch}</p>
           <p>{user.admission}</p>
           <p>{user.email}</p>
+
         </div>
       </div>
     </div>

@@ -1,8 +1,9 @@
-.material{
-    display: flex;
-
+.material {
+  display: flex;
 }
-.doc__box{
-    padding: 20px 20px;
-
+main {
+  min-height: 80vh;
+}
+.doc__box {
+  padding: 20px 20px;
 }

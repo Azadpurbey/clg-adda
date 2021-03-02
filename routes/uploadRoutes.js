@@ -1,6 +1,7 @@
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
+import Material from '../models/materialModel.js'
 
 const router = express.Router()
 
@@ -40,8 +41,6 @@ const upload = multer({
 
 // route setup
 router.post('/', upload.single('pdf'), (req, res) => {
-  //   console.log('I an inside route')
-  //   console.log(req.file.path)
   res.send(`/${req.file.path}`)
 })
 

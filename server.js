@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import connectDb from './config/db.js'
 import userRoutes from './routes/userRoutes.js'
 import uploadRoutes from './routes/uploadRoutes.js'
+import materialRoutes from './routes/materialRoutes.js'
 import cors from 'cors'
 dotenv.config()
 
@@ -18,6 +19,7 @@ app.use(cors())
 
 //routes
 app.use('/api/user', userRoutes)
+app.use('/api/material', materialRoutes)
 app.use('/api/upload', uploadRoutes)
 
 //server

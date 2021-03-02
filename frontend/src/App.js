@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Material from './components/Material'
+import './index.css'
+import Material from './Pages/material/Material'
 import ProfilePage from './components/ProfilePage'
 import Signin from './components/SigninPage'
 import Home from './components/Home'
@@ -8,15 +9,21 @@ import Alumini from './components/AluminiPage'
 import Signup from './components/SignupPage'
 import Header from './components/Header'
 import Footer from './components/Footer'
+
 import EditProfile from './components/EditProfile'
 import './index.css'
+
+import Upload from './Pages/material/Upload'
+import ProfContact from './Pages/prof/ProfContact'
 
 const App = () => {
   return (
     <Router>
       <Header />
       <div className='app__container'>
-        <Route path='/Material' component={Material} />
+        <Route path='/profContact' component={ProfContact} />
+        <Route exact path='/material' component={Material} />
+        <Route path='/material/:id/edit' component={Upload} />
         <Route path='/profile' component={ProfilePage} />
         <Route path='/signin' component={Signin} />
         <Route path='/signUp' component={Signup} />
