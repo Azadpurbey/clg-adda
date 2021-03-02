@@ -14,14 +14,14 @@ import EditProfile from './components/EditProfile'
 import './index.css'
 
 import Upload from './Pages/material/Upload'
-import ProfContact from './Pages/prof/ProfContact'
+import ProfDetail from './Pages/prof/ProfDetail'
 
 const App = () => {
   return (
     <Router>
       <Header />
       <div className='app__container'>
-        <Route path='/profContact' component={ProfContact} />
+        <Route path='/profDetail/:department' component={ProfDetail} />
         <Route exact path='/material' component={Material} />
         <Route path='/material/:id/edit' component={Upload} />
         <Route path='/profile' component={ProfilePage} />

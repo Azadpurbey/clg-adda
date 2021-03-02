@@ -29,8 +29,8 @@ const Header = () => {
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='ml-auto'>
-            <LinkContainer to='/profContact'>
-              <Nav.Link>Prof Contact</Nav.Link>
+            <LinkContainer to='/profDetail/MNC'>
+              <Nav.Link>Prof Details</Nav.Link>
             </LinkContainer>
             <LinkContainer to='/material'>
               <Nav.Link>Materials</Nav.Link>

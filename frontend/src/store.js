@@ -11,6 +11,7 @@ import {
 } from './reducers/materialReducer'
 
 
+import { profDetailReducer } from './reducers/profReducer'
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   materialDetails: materialDetailsReducer,
   materialUpdate: materialUpdateReducer,
   materialList: materialListReducer,
+  profDetail: profDetailReducer,
 
 })
 
