@@ -4,6 +4,9 @@ import ProfDetailBox from '../../components/ProfDetailBox'
 import { Link } from 'react-router-dom'
 import { listProfs } from '../../actions/profAction'
 import { useDispatch, useSelector } from 'react-redux'
+import Message from '../../components/Message'
+import Loader from '../../components/Loader'
+
 const ProfDetail = ({ history }) => {
   const dispatch = useDispatch()
   const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
@@ -14,11 +17,12 @@ const ProfDetail = ({ history }) => {
 
   useEffect(() => {
     history.push(`/profDetail/${department}`)
-    if (!profs) {
-      dispatch(listProfs(department))
-    }
+    console.log(`list profs called`)
+    dispatch(listProfs(department))
   }, [dispatch, department])
   console.log(profs)
+  console.log(loading)
+  console.log(`profs`, profs)
 
   return (
     <div style={{ backgroundColor: 'lightcyan', margin: '0px', padding: '0' }}>
@@ -51,11 +55,20 @@ const ProfDetail = ({ history }) => {
         </Col>
       </Row>
       <Row>
-        {profs && profs.map((prof) => (
-          <Col sm={12} md={6} lg={4} xl={3}>
-            <ProfDetailBox />
-          </Col>
-        ))}
+
+        {loading ? (
+          <Loader />
+        ) : error ? (
+          <Message variant='danger'>{error}</Message>
+        ) : (
+          profs &&
+          profs.map((prof) => (
+            <Col sm={12} md={6} lg={4} xl={3}>
+              <ProfDetailBox />
+            </Col>
+          ))
+        )}
+
       </Row>
     </div>
   )
