@@ -1,33 +1,32 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { getAluminiDetail } from '../actions/aluminiAction'
+import style from '../css/AluminiDetailBox.module.css'
+const AluminiDetailBox = ({ alumini }) => {
+  const dispatch = useDispatch()
+  const profileHandler = () => {
+    dispatch(getAluminiDetail(alumini._id))
+  }
 
-const AluminiDetailBox = () => {
   return (
-    <div className='profile bg-light'>
+    <div className={style.profile}>
       <img src={'/soumya.jpeg'} alt='' className='round-img' />
       <div>
-        <h2>Soumya Prakash</h2>
-        <p>Batch of 2022</p>
-        <span>Currently at Samsung R&D</span>
-        <p>
-          <span>Maths & Computing</span>
-        </p>
-        <Link to='/alumini/id' className='btn btn-primary'>
+        <h5>{alumini.name}</h5>
+        <p>Batch of {alumini.batch}</p>
+        {alumini.designation}
+        <p>{alumini.department}</p>
+        {/* <Button onClick={profileHandler} className='btn btn-primary'> */}
+        <Link
+          to={`/alumini/profile/${alumini._id}`}
+          onClick={profileHandler}
+          className='btn btn-primary'>
           View Profile
         </Link>
+        {/* </Button> */}
       </div>
-      <ul>
-        Expertise in
-        <li className='text-dark'>
-          <i className='fas fa-check' /> C/C++
-        </li>
-        <li className='text-dark'>
-          <i className='fas fa-check' /> MERN-stack
-        </li>
-        <li className='text-dark'>
-          <i className='fas fa-check' /> DBMS
-        </li>
-      </ul>
     </div>
   )
 }

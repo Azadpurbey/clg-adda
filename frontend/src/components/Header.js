@@ -33,7 +33,7 @@ const Header = () => {
               <Nav.Link>Materials</Nav.Link>
             </LinkContainer>
 
-            <LinkContainer to='/alumini'>
+            <LinkContainer to='/alumini/MNC'>
               <Nav.Link>Alumini</Nav.Link>
             </LinkContainer>
 

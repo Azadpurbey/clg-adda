@@ -96,7 +96,7 @@ const Material = ({ history }) => {
         </Col>
       </Row>
       <h3>
-        Material of branch {branch} ans sem {sem}
+        Material of branch {branch} and sem {sem}
       </h3>
       {loading ? (
         <Loader />

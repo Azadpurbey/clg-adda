@@ -27,8 +27,8 @@ const App = () => {
       <Route path='/profile' component={ProfilePage} />
       <Route path='/signin' component={Signin} />
       <Route path='/signUp' component={Signup} />
-      <Route exact path='/alumini' component={Alumini} />
-      <Route exact path='/alumini/id' component={AluminiProfile} />
+      <Route exact path='/alumini/:department' component={Alumini} />
+      <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
       <Route exact path='/profie/edit' component={EditProfile} />
       <Route exact path='/' component={Home}></Route>
       <Footer />

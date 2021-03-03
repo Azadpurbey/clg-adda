@@ -21,7 +21,7 @@ export const addProfDetail = async (req, res) => {
 }
 
 //@desc GET prof Details
-//@route GET /api/profDetail/
+//@route GET /api/profDetail/:department
 //@access Public
 
 export const getProfDetail = async (req, res) => {

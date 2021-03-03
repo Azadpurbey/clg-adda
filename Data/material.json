@@ -1,12 +1,15 @@
 [
   {
-    "name": "Azad Kumar",
-    "email": "azadpurbey2@gmail.com",
+    "name": "Sahil",
+    "email": "sahil@gmail.com",
     "contact": "9571479583",
+    "batch": "2017",
     "department": "MNC",
-    "designation": "Professor",
-    "areaOfInterest":
-      "Quantum computing and error correction in cubits and Grapg theory and Topology"
+    "designation": "Senior Developer at Arista Network, Banglore",
+    "linkedIn": "www.linkedin.com/in/sahilpurbey",
+    "twitter": "www.twitter.com/in/sahilpurbey",
+    "facebook": "www.facebook.com/sahilpurbey",
+    "instagram":"www.instagram.com/sahilpurbey"
   }
   
 ]

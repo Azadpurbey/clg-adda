@@ -69,7 +69,7 @@ const Upload = ({ match, history }) => {
       setFileName(data)
       setUploading(false)
     } catch (error) {
-      console.log('$$$', error)
+      alert('only pdf')
       setUploading(false)
     }
   }
@@ -94,8 +94,8 @@ const Upload = ({ match, history }) => {
         GO BACK
       </Link>
       <FormContainer>
-        {/* {loadingUpdate && <Loader />} */}
-        {/* {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+        {loadingUpdate && <Loader />}
+        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (

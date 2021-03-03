@@ -12,12 +12,19 @@ const ProfDetail = ({ history }) => {
   const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
   const [department, setDepartment] = useState('MNC')
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const Data = useSelector((state) => state.profDetail)
   const { loading, error, profs } = Data
 
   useEffect(() => {
-    history.push(`/profDetail/${department}`)
-    dispatch(listProfs(department))
+    if (!userInfo) {
+      history.push('/signin')
+    } else {
+      history.push(`/profDetail/${department}`)
+      dispatch(listProfs(department))
+    }
   }, [dispatch, department])
 
   return (
