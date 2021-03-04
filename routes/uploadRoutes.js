@@ -7,7 +7,7 @@ const router = express.Router()
 // showing storage location
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, 'frontend/public/uploads/')
   },
   filename: function (req, file, cb) {
     cb(
@@ -39,7 +39,15 @@ const upload = multer({
 
 // route setup
 router.post('/', upload.single('pdf'), (req, res) => {
-  res.send(`/${req.file.path}`)
+  const str=req.file.path;
+  var ss="";
+  var i;
+  for(i=16;i<str.length;i++)
+  {
+    ss=ss+str[i];
+  }
+  console.log(ss);
+  res.send(`${ss}`)
 })
 
 export default router
