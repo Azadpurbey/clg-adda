@@ -35,12 +35,11 @@ export const getSingleMaterial = async (req, res) => {
 export const createMaterial = async (req, res) => {
   const material = await Material.create({
     // user: 'test-name',
-    title: 'Test file',
-    description: 'Upto 2nd sem',
-    path: 'testing-path',
-    rating: 4,
-    branch: 'MNC',
-    sem: 8,
+    title: req.body.title,
+    description: req.body.description,
+    path: req.body.path,
+    branch: req.body.branch,
+    sem: req.body.sem,
   })
   if (material) {
     res.status(201).json(material)

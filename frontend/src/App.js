@@ -23,7 +23,7 @@ const App = () => {
       <Header />
       <Route path='/profDetail/:department' component={ProfDetail} />
       <Route exact path='/material' component={Material} />
-      <Route path='/material/:id/edit' component={Upload} />
+      <Route path='/material/upload' component={Upload} />
       <Route path='/profile' component={ProfilePage} />
       <Route path='/signin' component={Signin} />
       <Route path='/signUp' component={Signup} />

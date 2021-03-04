@@ -27,7 +27,7 @@ const materialSchema = new mongoose.Schema(
       required: true,
     },
     sem: {
-      type: String,
+      type: Number,
       required: true,
     },
   },

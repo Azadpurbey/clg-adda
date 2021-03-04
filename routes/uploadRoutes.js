@@ -32,22 +32,23 @@ function checkFileType(file, cb) {
 
 const upload = multer({
   storage: storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb)
-  },
+  // fileFilter: function (req, file, cb) {
+  //   checkFileType(file, cb)
+  // },
 })
 
 // route setup
 router.post('/', upload.single('pdf'), (req, res) => {
-  const str=req.file.path;
-  var ss="";
-  var i;
-  for(i=16;i<str.length;i++)
-  {
-    ss=ss+str[i];
-  }
-  console.log(ss);
-  res.send(`${ss}`)
+  const str = req.file.path
+  // var ss="";
+  // var i;
+  // for(i=16;i<str.length;i++)
+  // {
+  //   ss=ss+str[i];
+  // }
+  // console.log(ss);
+  // res.send(`${str}`)
+  res.send(`/${req.file.path}`)
 })
 
 export default router

@@ -25,7 +25,7 @@ export const listMaterials = (sem, branch) => async (dispatch) => {
   }
 }
 
-export const createMaterial = () => async (dispatch, getState) => {
+export const createMaterial = (material) => async (dispatch, getState) => {
   try {
     dispatch({ type: actionTypes.MATERIAL_CREATE_REQUEST })
 
@@ -40,7 +40,7 @@ export const createMaterial = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.post(`/api/material`, {}, config)
+    const { data } = await axios.post(`/api/material`, material, config)
 
     dispatch({
       type: actionTypes.MATERIAL_CREATE_SUCCESS,
@@ -57,7 +57,7 @@ export const createMaterial = () => async (dispatch, getState) => {
   }
 }
 
-export const listMaterialDetails = (id) => async (dispatch) => {
+export const getMaterialDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.MATERIAL_DETAILS_REQUEST })
 

@@ -6,10 +6,9 @@ import FormContainer from '../../components/FormContainer'
 import Doc from '../../components/Doc'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { createMaterial, listMaterials } from '../../actions/materialAction'
+import { listMaterials } from '../../actions/materialAction'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import { MATERIAL_CREATE_RESET } from '../../constants/materialConstants'
 const Material = ({ history }) => {
   const dispatch = useDispatch()
   const [branch, setBranch] = useState('MNC')
@@ -23,29 +22,13 @@ const Material = ({ history }) => {
   const materialList = useSelector((state) => state.materialList)
   const { loading, error, materials } = materialList
 
-  // create new material
-  const materialCreate = useSelector((state) => state.materialCreate)
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    material: newMaterial,
-  } = materialCreate
-
   useEffect(() => {
-    dispatch({ type: MATERIAL_CREATE_RESET })
     if (!userInfo) {
       history.push('/signin')
-    } else if (successCreate) {
-      history.push(`/material/${newMaterial._id}/edit`)
     } else {
       dispatch(listMaterials(sem, branch))
     }
-  }, [dispatch, sem, branch, successCreate])
-
-  const createMaterialHandler = () => {
-    dispatch(createMaterial())
-  }
+  }, [dispatch, sem, branch])
 
   return (
     <>
@@ -90,9 +73,9 @@ const Material = ({ history }) => {
           </ListGroup>
         </Col>
         <Col className='text-right'>
-          <Button className='my-3' onClick={createMaterialHandler}>
+          <Link className='btn btn-dark my-3' to='/material/upload'>
             <i className='fas fa-plus'></i>Upload
-          </Button>
+          </Link>
         </Col>
       </Row>
       <h3>
