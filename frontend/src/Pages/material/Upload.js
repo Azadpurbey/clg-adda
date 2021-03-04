@@ -55,15 +55,6 @@ const Upload = ({ history }) => {
 
       const { data } = await axios.post('/api/upload', formData, config)
       setFileName(data)
-      dispatch(
-        createMaterial({
-          path: fileName,
-          title,
-          branch,
-          sem,
-          description,
-        })
-      )
       setUploading(false)
     } catch (error) {
       alert('only pdf')
@@ -73,16 +64,15 @@ const Upload = ({ history }) => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    // dispatch(
-    //   createMaterial({
-    //     path: fileName,
-    //     title,
-    //     branch,
-    //     sem,
-    //     description,
-    //   })
-    // )
-    alert('uploaded')
+    dispatch(
+      createMaterial({
+        path: fileName,
+        title,
+        branch,
+        sem,
+        description,
+      })
+    )
   }
 
   return (
