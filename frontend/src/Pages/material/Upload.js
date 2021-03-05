@@ -134,6 +134,7 @@ const Upload = ({ history }) => {
               id='file'
               label='choose-file'
               custom
+              accept="application/pdf"
               onChange={uploadFileHandler}></Form.File>
             {uploading && <Loader />}
           </Form.Group>

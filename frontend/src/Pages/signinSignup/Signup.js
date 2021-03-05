@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { emailOtp, register } from '../../actions/auth'
 import '../../css/SigninSignup.css'
-
+import Loader from '../../components/Loader'
 const SignupEmail = () => {
   const [email, setEmail] = useState('')
   const [otp, setOtp] = useState('')
@@ -21,9 +21,9 @@ const SignupEmail = () => {
   const {
     success: isEmail,
     loading: isEmailLoading,
-    error: errorOtp,
+    error
   } = useSelector((state) => state.emailOtpUser)
-  const { loading: loadingRegister, userRegister, errorRegister } = useSelector(
+  const { loading: loadingRegister, userRegister,error:errorRegister } = useSelector(
     (state) => state.userRegister
   )
 
@@ -40,7 +40,7 @@ const SignupEmail = () => {
     e.preventDefault()
     dispatch(emailOtp(email))
   }
-
+  console.log(errorRegister)
   useEffect(() => {
     if (userRegister) {
       history.push('/')
@@ -57,10 +57,9 @@ const SignupEmail = () => {
         <p className='lead'>
           <i className='fas fa-user' /> Create Your Account
         </p>
-        {(isEmailLoading || loadingRegister) && <h3>Loading......</h3>}
-        {errorOtp && <h3>{errorOtp}</h3>}
-        {errorRegister && <h3>{errorRegister}</h3>}
-        {correctDetail && <h3>Please write detail properly</h3>}
+        {(isEmailLoading || loadingRegister) && <Loader/>}
+        {error && <h3>{error}</h3>}
+        {(errorRegister || correctDetail) &&  <h3>Please check your detail properly</h3>}
 
         {!isEmail && (
           <form className='form' onSubmit={emailHandler}>

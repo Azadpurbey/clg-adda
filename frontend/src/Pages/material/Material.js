@@ -78,7 +78,7 @@ const Material = ({ history }) => {
           </Link>
         </Col>
       </Row>
-      <h3>
+      <h3 style={{textAlign : 'center'}}>
         Material of branch {branch} and sem {sem}
       </h3>
       {loading ? (
@@ -89,7 +89,7 @@ const Material = ({ history }) => {
         <h1>materials not loaded</h1>
       ) : (
         <>
-          <Row>
+          <Row style={{margin:"50px"}}>
             {materials.length == 0 && (
               <Message variant='success'>{`No any material is available of choosen sem and branch`}</Message>
             )}

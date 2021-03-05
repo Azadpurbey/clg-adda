@@ -1,4 +1,5 @@
 import Material from '../models/materialModel.js'
+import User from '../models/user.js'
 
 //@desc Get all related material
 //@route Get /api/material
@@ -33,20 +34,32 @@ export const getSingleMaterial = async (req, res) => {
 //@route POST /api/material
 //@access Public
 export const createMaterial = async (req, res) => {
-  const material = await Material.create({
-    // user: 'test-name',
-    title: req.body.title,
-    description: req.body.description,
-    path: req.body.path,
-    branch: req.body.branch,
-    sem: req.body.sem,
-  })
-  if (material) {
-    res.status(201).json(material)
+  try {
+    
+    const user = await User.findById(req.user._id);
+    user.password=undefined;
+    const material = new Material({
+      user: user,
+     title: req.body.title,
+     description: req.body.description,
+     path: req.body.path,
+     branch: req.body.branch,
+     sem: req.body.sem,
+   })
+   const savedMaterial=await material.save();
+   savedMaterial.user=user;
+   if (savedMaterial) {
+    res.status(201).json(savedMaterial)
   } else {
     res.status(400)
     throw new Error('File is not uploaded')
   }
+    
+  } catch (err) {
+    res.status(404).json({error:err});
+  }
+  
+  
 }
 
 //@desc Update a material

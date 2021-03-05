@@ -19,7 +19,9 @@ const Doc = ({ material }) => {
   
   return (
     <>
+        
         <Card className='my-3 p-3 rounded' >
+        <h6>By: {material.user && material.user.name}</h6>
           <Card.Img src='/pdf.jpg' variant='top' />
 
           <Card.Body>
@@ -34,13 +36,14 @@ const Doc = ({ material }) => {
               <Rating value={material.rating} />
             </Card.Text>
           </Card.Body>
-        </Card>
-        <a href={material.path}>
+          <a href={material.path}>
           <button>
               <i className="fas fa-download"/>
               Download File
           </button>
         </a>
+        </Card>
+        
         
  
       

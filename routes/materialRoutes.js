@@ -13,7 +13,7 @@ import { authToken } from '../middleware/decodeToken.js'
 
 router.get('/', getMaterials)
 router.get('/:id', getSingleMaterial)
-router.post('/', createMaterial)
+router.post('/',authToken, createMaterial)
 router.put('/:id', updateMaterial)
 
 // router.get('/',authToken,(req,res)=>res.send(req.user._id));

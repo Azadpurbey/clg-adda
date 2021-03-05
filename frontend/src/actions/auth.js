@@ -57,7 +57,7 @@ export const emailOtp=(email)=>async(dispatch)=>{
     } catch (error) {
         dispatch({
             type:EMAIL_OTP_FAIL,
-            payload: 'Error in otp'
+            payload: 'Email already exist'
         })
     }
 
@@ -92,7 +92,7 @@ export const register =(form) => async (dispatch)=>{
         
         dispatch({
             type:USER_REGISTER_FAIL,
-            payload: 'Please Write valid Email & Password'
+            payload: 'OTP NOT CORRECT'
         })
 
         

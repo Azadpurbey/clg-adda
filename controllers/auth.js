@@ -61,7 +61,7 @@ export const signup=async(req,res)=>{
         var otpExist=await OTP.findOne({otp});
         if(!otpExist)
         {
-            return res.json({error:"incorrect otp"});
+            return res.status(401).json({error:"incorrect otp"});
         }
 
         user=new User({name,email,password,branch,admission});
@@ -152,7 +152,7 @@ export const forgotPassword=async(req,res)=>{
 
         if(!user || !otp)
         {
-            return res.json({error:"incorrect OTP"});
+            return res.status(402).json({error:"incorrect OTP"});
         }
 
         user.password=password;
