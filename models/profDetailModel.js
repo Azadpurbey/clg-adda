@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 const profDetailSchema = new mongoose.Schema(
-  {
+  { 
+    img_path:{
+      type:String,
+      default:'/logo192.png'
+    },
     name: {
       type: String,
       required: true,

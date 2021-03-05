@@ -49,12 +49,16 @@ const Upload = ({ history }) => {
     try {
       const config = {
         headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+              'Accept-Language': 'en-US,en;q=0.8',
+              'accept': 'application/json',
+              'Content-Type': `multipart/form-data';
+              boundary=${formData._boundary}`,
+            },
       }
 
-      const { data } = await axios.post('/api/upload', formData, config)
-      setFileName(data)
+      const {data} = await axios.post('/api/upload', formData, config)
+      console.log(data);
+      setFileName(data.location)
       setUploading(false)
     } catch (error) {
       alert('only pdf')
@@ -131,7 +135,7 @@ const Upload = ({ history }) => {
               label='choose-file'
               custom
               onChange={uploadFileHandler}></Form.File>
-            {/* {uploading && <Loader />} */}
+            {uploading && <Loader />}
           </Form.Group>
 
           <Button onClick={submitHandler} variant='primary'>
@@ -144,3 +148,4 @@ const Upload = ({ history }) => {
 }
 
 export default Upload
+

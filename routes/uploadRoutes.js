@@ -1,54 +1,53 @@
 import path from 'path'
 import express from 'express'
 import multer from 'multer'
+import aws from 'aws-sdk'
+import multerS3 from 'multer-s3'
 
 const router = express.Router()
 
-// showing storage location
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'frontend/public/uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    )
-  },
+// aws s3 upload *****
+
+const s3 = new aws.S3({
+  bucketName: 'material123',
+  accessKeyId: process.env.AWS_Access_Key_ID,
+  secretAccessKey: process.env.AWS_Secret_Access_Key,
+  region: 'ap-south-1',
 })
 
-// Middle ware - validation work - correct file type or not
-function checkFileType(file, cb) {
-  const filetypes = /pdf/
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
-  const mimetype = filetypes.test(file.mimetype)
+//Single upload
+const materialUpload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'clgprojectbucket',
+    acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname })
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    },
+  }),
+}).single('pdf')
 
-  if (extname && mimetype) {
-    return cb(null, true)
-  } else {
-    cb('Pdf only')
-  }
-}
-
-const upload = multer({
-  storage: storage,
-  // fileFilter: function (req, file, cb) {
-  //   checkFileType(file, cb)
-  // },
-})
-
-// route setup
-router.post('/', upload.single('pdf'), (req, res) => {
-  const str = req.file.path
-  // var ss="";
-  // var i;
-  // for(i=16;i<str.length;i++)
-  // {
-  //   ss=ss+str[i];
-  // }
-  // console.log(ss);
-  // res.send(`${str}`)
-  res.send(`/${req.file.path}`)
+router.post('/', (req, res) => {
+  materialUpload(req, res, (error) => {
+    if (error) {
+      res.json({ error: error })
+    } else {
+      if (req.file === undefined) {
+        res.json('Error: No file Selected')
+      } else {
+        const materialName = req.file.key
+        const materialLocation = req.file.location
+        // console.log(`from inside upload routes`, materialName, materialLocation)
+        res.json({
+          material: materialName,
+          location: materialLocation,
+        })
+      }
+    }
+  })
 })
 
 export default router

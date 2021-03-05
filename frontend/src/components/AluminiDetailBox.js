@@ -12,7 +12,7 @@ const AluminiDetailBox = ({ alumini }) => {
 
   return (
     <div className={style.profile}>
-      <img src={'/soumya.jpeg'} alt='' className='round-img' />
+      <img src={alumini.img_path} alt='' className='round-img' />
       <div>
         <h5>{alumini.name}</h5>
         <p>Batch of {alumini.batch}</p>

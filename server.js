@@ -8,12 +8,22 @@ import profDetailRoutes from './routes/profDetailRoutes.js'
 import aluminiRoutes from './routes/aluminiRoutes.js'
 import morgan from 'morgan'
 import cors from 'cors'
+import aws from 'aws-sdk'
+import bodyParser from 'body-parser'
+
 dotenv.config()
 
 const app = express()
 
 //database
 connectDb()
+
+//aws config
+aws.config.update({
+    secretAccessKey: process.env.AWS_Secret_Access_Key,
+    accessKeyId: process.env.AWS_Access_Key_ID,
+    region: 'ap-south-1'
+});
 
 //middleware
 app.use(express.json())
