@@ -61,7 +61,6 @@ const AddMaterial = ({ history }) => {
         formData,
         config
       )
-      console.log(data)
       setFileName(data.location)
       setUploading(false)
     } catch (error) {

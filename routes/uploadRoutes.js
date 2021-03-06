@@ -40,7 +40,6 @@ router.post('/material', (req, res) => {
       } else {
         const materialName = req.file.key
         const materialLocation = req.file.location
-        // console.log(`from inside upload routes`, materialName, materialLocation)
         res.json({
           material: materialName,
           location: materialLocation,
@@ -75,7 +74,6 @@ router.post('/image', (req, res) => {
       } else {
         const imageName = req.file.key
         const imageLocation = req.file.location
-        console.log(`from inside upload routes->`,imageLocation)
         res.json({
           material: imageName,
           location: imageLocation,
@@ -84,6 +82,5 @@ router.post('/image', (req, res) => {
     }
   })
 })
-
 
 export default router

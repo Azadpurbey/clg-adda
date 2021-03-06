@@ -11,7 +11,6 @@ const Header = () => {
   const dispatch = useDispatch()
   const logoutHandler = (e) => {
     e.preventDefault()
-    // console.log("logout")
     dispatch(logout())
     history.push('/')
   }

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import '../../css/Prof.css'
 import { Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import FormContainer from '../../components/FormContainer'
@@ -11,7 +10,7 @@ import { PROF_CREATE_RESET } from '../../constants/profConstants'
 import { createProf } from '../../actions/profAction'
 
 const AddProf = ({ history }) => {
-  const [img_path, setImg_path] = useState('/logo192.png')
+  const [img_path, setImg_path] = useState('')
   const [name, setName] = useState('examplename')
   const [email, setEmail] = useState('example@gmail.com')
   const [contact, setContact] = useState('96788**990')
@@ -55,11 +54,8 @@ const AddProf = ({ history }) => {
               boundary=${formData._boundary}`,
         },
       }
-      console.log('upload/image is called')
       const { data } = await axios.post('/api/upload/image', formData, config)
-      console.log('from inside addProf page', data.location)
       setImg_path(data.location)
-      console.log(data.location)
       setUploading(false)
     } catch (error) {
       alert('only image')
@@ -145,8 +141,7 @@ const AddProf = ({ history }) => {
             <Form.Control
               type='text'
               placeholder='img_path'
-              value={img_path}
-              onChange={(e) => setImg_path(e.target.value)}></Form.Control>
+              value={img_path}></Form.Control>
             <Form.File
               id='img_path'
               label='choose-file'

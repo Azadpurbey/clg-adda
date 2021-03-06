@@ -1,13 +1,25 @@
 import React from 'react'
+import { Button, Col } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { LinkContainer } from 'react-router-bootstrap'
 import '../css/ProfDetailBox.css'
-const ProfDetailBox = ({ prof }) => {
-  const box = {
-    backgroundColor: 'red',
-  }
+const ProfDetailBox = ({ prof, deleteHandler }) => {
+  const { userInfo } = useSelector((state) => state.userLogin)
+
   return (
     <div className='main_box'>
       <div className='image'>
         <img src={prof.img_path} className='round-img' />
+        {userInfo && userInfo.user.isAdmin && (
+          <Col className='text-right colChange'>
+            <LinkContainer to={`/profDetail/edit/${prof._id}`}>
+              <i className='fas fa-edit'>Edit</i>
+            </LinkContainer>
+            <i className='fas fa-trash' onClick={deleteHandler}>
+              Delete
+            </i>
+          </Col>
+        )}
       </div>
       <div className='info'>
         <div>

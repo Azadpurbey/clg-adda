@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 const ProfileTop = () => {
   const { userInfo } = useSelector((state) => state.userLogin)
   const { user } = userInfo
-  console.log(user.name)
   return (
     <div className='profile-top bg-primary p-2'>
       <div className='row'>

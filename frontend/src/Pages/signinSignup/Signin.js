@@ -13,7 +13,6 @@ const Signin = () => {
 
   useEffect(() => {
     if (userInfo && userInfo.token) {
-      // console.log(userInfo)
       history.push('/')
     }
   }, [history, userInfo])

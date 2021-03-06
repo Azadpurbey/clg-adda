@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Form, Button, ListGroup, Row, Col } from 'react-bootstrap'
 import ProfDetailBox from '../../components/ProfDetailBox'
 import { Link } from 'react-router-dom'
-import { listProfs } from '../../actions/profAction'
+import { listProfs, deleteProf } from '../../actions/profAction'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
@@ -15,8 +15,14 @@ const ProfDetail = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const Data = useSelector((state) => state.profDetail)
+  const Data = useSelector((state) => state.profList)
   const { loading, error, profs } = Data
+
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = useSelector((state) => state.profDelete)
 
   useEffect(() => {
     if (!userInfo) {
@@ -25,7 +31,13 @@ const ProfDetail = ({ history }) => {
       history.push(`/profDetail/${department}`)
       dispatch(listProfs(department))
     }
-  }, [dispatch, department])
+  }, [dispatch, history, userInfo, department, successDelete])
+
+  const deleteProfDetailHandler = (id) => {
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteProf(id))
+    }
+  }
 
   return (
     <div style={{ backgroundColor: 'lightcyan', margin: '0', padding: '0' }}>
@@ -69,7 +81,10 @@ const ProfDetail = ({ history }) => {
           profs.map((prof) => {
             return (
               <Col key={prof._id} sm={12} md={6} lg={4} xl={3}>
-                <ProfDetailBox prof={prof} />
+                <ProfDetailBox
+                  prof={prof}
+                  deleteHandler={() => deleteProfDetailHandler(prof._id)}
+                />
               </Col>
             )
           })
