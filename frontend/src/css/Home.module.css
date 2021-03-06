@@ -1,0 +1,62 @@
+.home {
+  background-color: lightgray;
+}
+.darkoverlay {
+  background-color: rgba(81, 85, 98, 0.315);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.landing {
+  position: relative;
+  background: url('../img/showcase.jpg') no-repeat center center/cover;
+  height: 100vh;
+}
+
+.landinginner {
+  color: #fff;
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.xlarge {
+  font-size: 4rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.lead {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.btn {
+  display: inline-block;
+  background: var(--light-color);
+  color: #333;
+  padding: 0.4rem 1.3rem;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: opacity 0.2s ease-in;
+  outline: none;
+}
+.btnprimary {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.btnlight {
+  background: var(--light-color);
+  color: #333;
+}
+
+.icon {
+}

@@ -1,38 +1,39 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { Col } from 'react-bootstrap'
+import style from '../../css/Home.module.css'
+import Footer from '../../components/Footer'
 const Home = () => {
   return (
-    <div className='home'>
-      <h1>I am furure Home page</h1>
-      <div className='home_body'>
-        <p> Total downloads: {2900}</p>
-        <p> Total contributor: {3}</p>
-        <p> Total Number of user : {1000}</p>
-      </div>
-      <h3>What is Lorem Ipsum?</h3>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
-      </p>
+    <section className={style.landing}>
+      <div className={style.darkoverlay}>
+        <div className={style.landinginner}>
+          <h1 className={style.xlarge}>College Adda</h1>
+          <p className={style.lead}>
+            An online platform for students of IIT(ISM) to access study
+            materials & can get in touch with aluminis & faculties.
+          </p>
+          <div className={style.icon}>
+            <i class='fas fa-cloud-download-alt'></i>
+            <p>Downloads:10</p>
+            <i class='fas fa-users'></i>
+            <p>Users:91</p>
+            <i class='fas fa-code-branch'></i>
+            <p>Contributors:37</p>
+          </div>
 
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book. It has survived not only five
-        centuries, but also the leap into electronic typesetting, remaining
-        essentially unchanged. It was popularised in the 1960s with the release
-        of Letraset sheets containing Lorem Ipsum passages, and more recently
-        with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.
-      </p>
-    </div>
+          <div className='buttons'>
+            <Link className='btn btn-dark my-3' to='/signup'>
+              Register
+            </Link>
+            <Link className='btn btn-light my-3' to='/signin'>
+              Login
+            </Link>
+            <Col className='text-center'>Copyright &copy; ISM</Col>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 

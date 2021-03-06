@@ -9,7 +9,6 @@ import Alumini from './Pages/alumini/Alumini'
 import AluminiProfile from './Pages/alumini/AluminiProfile'
 import Signup from './Pages/signinSignup/Signup'
 import Header from './components/Header'
-import Footer from './components/Footer'
 import EditProfile from './components/EditProfile'
 import Upload from './Pages/material/Upload'
 import ProfDetail from './Pages/prof/ProfDetail'
@@ -23,7 +22,7 @@ const App = () => {
       <Header />
       <Route path='/profDetail/:department' component={ProfDetail} />
       <Route path='/admin/addProf' component={AddProf} />
-      <Route path='/admin/addAlumini' component={AddAlumini } />
+      <Route path='/admin/addAlumini' component={AddAlumini} />
       <Route exact path='/material' component={Material} />
       <Route path='/material/upload' component={Upload} />
       <Route path='/profile' component={ProfilePage} />
@@ -33,7 +32,6 @@ const App = () => {
       <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
       <Route exact path='/profie/edit' component={EditProfile} />
       <Route exact path='/' component={Home}></Route>
-      <Footer />
     </Router>
   )
 }
