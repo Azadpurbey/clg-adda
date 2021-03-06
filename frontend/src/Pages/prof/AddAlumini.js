@@ -95,7 +95,7 @@ const AddAlumini = ({ history }) => {
         GO BACK
       </Link>
       <FormContainer>
-        <Form>
+        <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -190,7 +190,7 @@ const AddAlumini = ({ history }) => {
             {uploading && <Loader />}
           </Form.Group>
 
-          <Button onClick={submitHandler} variant='primary'>
+          <Button type='submit' variant='primary'>
             UPLOAD
           </Button>
         </Form>

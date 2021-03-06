@@ -3,57 +3,64 @@ import React, { useEffect, useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import FormContainer from './FormContainer'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { listProfDetail, updateProf } from '../actions/profAction'
-import { PROF_UPDATE_RESET } from '../constants/profConstants'
+import FormContainer from '../../components/FormContainer'
+import Message from '../../components/Message'
+import Loader from '../../components/Loader'
+import { listAluminiDetail, updateAlumini } from '../../actions/aluminiAction'
+import { ALUMINI_UPDATE_RESET } from '../../constants/aluminiConstants'
 
-const EditProfDetail = ({ match, history }) => {
-  const profId = match.params.id
+const EditAluminiDetail = ({ match, history }) => {
+  const aluminiId = match.params.id
   const [img_path, setImg_path] = useState('')
   const [name, setName] = useState('examplename')
   const [email, setEmail] = useState('example@gmail.com')
-  const [contact, setContact] = useState('96788**990')
+  const [contact, setContact] = useState('')
+  const [batch, setBatch] = useState('')
   const [department, setDepartment] = useState('MNC')
-  const [designation, setDesignation] = useState('Professor')
-  const [areaOfInterest, setAreaOfInterest] = useState(
-    'Quantum computing and error correction in cubits and Grapg theory and Topology'
-  )
+  const [designation, setDesignation] = useState('')
+  const [linkedIn, setLinkedIn] = useState('')
+  const [twitter, setTwitter] = useState('')
+  const [instagram, setInstagram] = useState('')
+  const [facebook, setFacebook] = useState('')
+
   const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
-  const profDetail = useSelector((state) => state.profDetail)
-  const { loading, error, prof } = profDetail
+  const aluminiDetail = useSelector((state) => state.aluminiDetail)
+  const { loading, error, alumini } = aluminiDetail
 
-  const profUpdate = useSelector((state) => state.profUpdate)
+  const aluminiUpdate = useSelector((state) => state.aluminiUpdate)
   const {
     loading: loadingUpdate,
     error: errorUpdate,
     success: successUpdate,
-    // prof: profUpdate,
-  } = profUpdate
+    // alumini: aluminiUpdate,
+  } = aluminiUpdate
 
   useEffect(() => {
     if (successUpdate) {
-      dispatch({ type: PROF_UPDATE_RESET })
-      history.push('/profDetail/MNC')
+      dispatch({ type: ALUMINI_UPDATE_RESET })
+      history.push('/alumini/MNC')
     } else {
-      if (prof === undefined || !prof.name || prof._id !== profId) {
-        dispatch(listProfDetail(profId))
+      if (alumini === undefined || !alumini.name || alumini._id !== aluminiId) {
+        dispatch(listAluminiDetail(aluminiId))
       } else {
-        setImg_path(prof.img_path)
-        setName(prof.name)
-        setEmail(prof.email)
-        setContact(prof.contact)
-        setDepartment(prof.department)
-        setDesignation(prof.designation)
-        setAreaOfInterest(prof.areaOfInterest)
+        setImg_path(alumini.img_path)
+        setName(alumini.name)
+        setEmail(alumini.email)
+        setContact(alumini.contact)
+        setBatch(alumini.batch)
+        setDepartment(alumini.department)
+        setDesignation(alumini.designation)
+        setLinkedIn(alumini.linkedIn)
+        setTwitter(alumini.twitter)
+        setInstagram(alumini.instagram)
+        setFacebook(alumini.facebook)
       }
     }
-  }, [dispatch, prof, profId, history, successUpdate])
+  }, [dispatch, alumini, aluminiId, history, successUpdate])
 
   const uploadFileHandler = async (e) => {
     e.preventDefault()
@@ -82,15 +89,19 @@ const EditProfDetail = ({ match, history }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(
-      updateProf({
-        _id: profId,
+      updateAlumini({
+        _id: aluminiId,
         img_path,
         name,
         email,
         contact,
+        batch,
         department,
         designation,
-        areaOfInterest,
+        linkedIn,
+        twitter,
+        instagram,
+        facebook,
       })
     )
   }
@@ -100,7 +111,7 @@ const EditProfDetail = ({ match, history }) => {
         GO BACK
       </Link>
       <FormContainer>
-        <h1>Edit Prof Detail</h1>
+        <h1>Edit Alumini Detail</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
@@ -150,14 +161,43 @@ const EditProfDetail = ({ match, history }) => {
                 value={designation}
                 onChange={(e) => setDesignation(e.target.value)}></Form.Control>
             </Form.Group>
-            <Form.Group controlId='areaOfInterest'>
-              <Form.Label>Area Of Interest</Form.Label>
+            <Form.Group controlId='batch'>
+              <Form.Label>Batch</Form.Label>
               <Form.Control
                 type='text'
-                value={areaOfInterest}
-                onChange={(e) =>
-                  setAreaOfInterest(e.target.value)
-                }></Form.Control>
+                value={batch}
+                onChange={(e) => setBatch(e.target.value)}></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='linkedIn'>
+              <Form.Label>LinkedIn</Form.Label>
+              <Form.Control
+                type='text'
+                value={linkedIn}
+                onChange={(e) => setLinkedIn(e.target.value)}></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='twitter'>
+              <Form.Label>Twitter</Form.Label>
+              <Form.Control
+                type='text'
+                value={twitter}
+                onChange={(e) => setTwitter(e.target.value)}></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='instagram'>
+              <Form.Label>Instagram</Form.Label>
+              <Form.Control
+                type='text'
+                value={instagram}
+                onChange={(e) => setInstagram(e.target.value)}></Form.Control>
+            </Form.Group>
+            <Form.Group controlId='facebook'>
+              <Form.Label>Facebook</Form.Label>
+              <Form.Control
+                type='text'
+                value={facebook}
+                onChange={(e) => setFacebook(e.target.value)}></Form.Control>
             </Form.Group>
 
             <Form.Group controlId='img_path'>
@@ -185,4 +225,4 @@ const EditProfDetail = ({ match, history }) => {
   )
 }
 
-export default EditProfDetail
+export default EditAluminiDetail

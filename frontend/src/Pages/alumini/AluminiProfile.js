@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Row, Col, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { getAluminiDetail } from '../../actions/aluminiAction'
+// import { listAluminiDetail } from '../../actions/aluminiAction'
 
 import AluminiDetailBox from '../../components/AluminiDetailBox'
 import Loader from '../../components/Loader'
@@ -51,8 +51,8 @@ const AluminiprofilePage = ({ history }) => {
                           <p className='text-secondary mb-1'>
                             {alumini.designation}
                           </p>
-                          <p className='text-muted font-size-sm'>
-                            Bay Area, San Francisco, CA
+                          <p className='text-secondary mb-1'>
+                            Batch {alumini.batch}
                           </p>
                           <button className='btn btn-primary'>Follow</button>
                         </div>

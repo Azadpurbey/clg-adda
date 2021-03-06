@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import { listAluminies } from '../../actions/aluminiAction'
+import { deleteAlumini, listAluminies } from '../../actions/aluminiAction'
 
 const Alumini = ({ history }) => {
   const dispatch = useDispatch()
@@ -19,6 +19,12 @@ const Alumini = ({ history }) => {
     (state) => state.aluminiList
   )
 
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = useSelector((state) => state.aluminiDelete)
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/signin')
@@ -26,7 +32,13 @@ const Alumini = ({ history }) => {
       history.push(`/alumini/${department}`)
       dispatch(listAluminies(department))
     }
-  }, [dispatch, department])
+  }, [dispatch, history, userInfo, department, successDelete])
+
+  const deleteAluminiDetailHandler = (id) => {
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteAlumini(id))
+    }
+  }
 
   return (
     <div style={{ backgroundColor: 'lightcyan', margin: '0', padding: '0' }}>
@@ -70,7 +82,10 @@ const Alumini = ({ history }) => {
           aluminies.map((alumini) => {
             return (
               <Col key={alumini._id} sm={12} md={6} lg={4} xl={3}>
-                <AluminiDetailBox alumini={alumini} />
+                <AluminiDetailBox
+                  alumini={alumini}
+                  deleteHandler={() => deleteAluminiDetailHandler(alumini._id)}
+                />
               </Col>
             )
           })
