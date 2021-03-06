@@ -7,7 +7,6 @@ const ProfDetailBox = ({ prof }) => {
   return (
     <div className='main_box'>
       <div className='image'>
-        {/* <i className='fas fa-check' /> C/C++ */}
         <img src={prof.img_path} className='round-img' />
       </div>
       <div className='info'>

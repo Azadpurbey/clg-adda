@@ -12,3 +12,18 @@ export const profDetailReducer = (state = {}, action) => {
       return state
   }
 }
+
+export const profCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actionTypes.PROF_CREATE_REQUEST:
+      return { loading: true }
+    case actionTypes.PROF_CREATE_SUCCESS:
+      return { loading: false, success: true, prof: action.payload }
+    case actionTypes.PROF_CREATE_FAIL:
+      return { loading: false, error: action.payload }
+    case actionTypes.PROF_CREATE_RESET:
+      return {}
+    default:
+      return state
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import '../../css/Material.css'
+// import '../../css/Material.css'
 import { Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import FormContainer from '../../components/FormContainer'
@@ -16,16 +16,16 @@ import {
 
 const AddAlumini = ({ history }) => {
   const [img_path, setImg_path] = useState('/logo192.png')
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [contact, setContact] = useState('')
-  const [department, setDepartment] = useState('')
-  const [designation, setDesignation] = useState('')
-  const [batch, setBatch] = useState('')
-  const [linkedIn, setLinkedIn] = useState('')
-  const [twitter, setTwitter] = useState('')
-  const [instagram, setInstagram] = useState('')
-  const [facebook, setFacebook] = useState('')
+  const [name, setName] = useState('example')
+  const [email, setEmail] = useState('example@gmail.com')
+  const [contact, setContact] = useState('888***888')
+  const [department, setDepartment] = useState('MNC')
+  const [designation, setDesignation] = useState('Software Developer')
+  const [batch, setBatch] = useState('20**')
+  const [linkedIn, setLinkedIn] = useState('www.linkedin.com/in/examplename')
+  const [twitter, setTwitter] = useState('www.twitter.com/in/examplename')
+  const [instagram, setInstagram] = useState('www.instagram.com/examplename')
+  const [facebook, setFacebook] = useState('www.facebook.com/examplename')
   const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
   const [uploading, setUploading] = useState(false)
 
@@ -64,7 +64,7 @@ const AddAlumini = ({ history }) => {
 
     //   const {data} = await axios.post('/api/upload', formData, config)
     //   console.log(data);
-    //   setFileName(data.location)
+    //   setImg_path(data.location)
     //   setUploading(false)
     // } catch (error) {
     //   alert('only pdf')

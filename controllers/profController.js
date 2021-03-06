@@ -5,6 +5,7 @@ import ProfDetail from '../models/profDetailModel.js'
 
 export const addProfDetail = async (req, res) => {
   const prof = await ProfDetail.create({
+    img_path: req.body.img_path,
     name: req.body.name,
     email: req.body.email,
     contact: req.body.contact,

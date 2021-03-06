@@ -25,3 +25,18 @@ export const aluminiDetailReducer = (state = {}, action) => {
       return state
   }
 }
+
+export const aluminiCreateReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actionTypes.ALUMINI_CREATE_REQUEST:
+      return { loading: true }
+    case actionTypes.ALUMINI_CREATE_SUCCESS:
+      return { loading: false, success: true, alumini: action.payload }
+    case actionTypes.ALUMINI_CREATE_FAIL:
+      return { loading: false, error: action.payload }
+    case actionTypes.ALUMINI_CREATE_RESET:
+      return {}
+    default:
+      return state
+  }
+}

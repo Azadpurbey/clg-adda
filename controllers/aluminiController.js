@@ -5,6 +5,7 @@ import AluminiDetail from '../models/aluminiModel.js'
 
 export const addAluminiDetail = async (req, res) => {
   const alumini = await AluminiDetail.create({
+    img_path: req.body.img_path,
     name: req.body.name,
     email: req.body.email,
     contact: req.body.contact,

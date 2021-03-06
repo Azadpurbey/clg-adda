@@ -15,10 +15,11 @@ import {
   materialListReducer,
 } from './reducers/materialReducer'
 
-import { profDetailReducer } from './reducers/profReducer'
+import { profDetailReducer,profCreateReducer } from './reducers/profReducer'
 import {
   aluminiDetailReducer,
   aluminiListReducer,
+  aluminiCreateReducer,
 } from './reducers/aluminiReducer'
 
 const reducer = combineReducers({
@@ -33,6 +34,8 @@ const reducer = combineReducers({
   profDetail: profDetailReducer,
   aluminiDetail: aluminiDetailReducer,
   aluminiList: aluminiListReducer,
+  aluminiCreate:aluminiCreateReducer,
+  profCreate:profCreateReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

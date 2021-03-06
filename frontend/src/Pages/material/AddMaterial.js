@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import '../../css/Material.css'
+// import '../../css/Material.css'
 import { Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import FormContainer from '../../components/FormContainer'
@@ -14,7 +14,7 @@ import {
   createMaterial,
 } from '../../actions/materialAction'
 
-const Upload = ({ history }) => {
+const AddMaterial = ({ history }) => {
   const [fileName, setFileName] = useState('Test File path')
   const [title, setTitle] = useState('Title')
   const [branch, setBranch] = useState('MNC')
@@ -49,15 +49,19 @@ const Upload = ({ history }) => {
     try {
       const config = {
         headers: {
-              'Accept-Language': 'en-US,en;q=0.8',
-              'accept': 'application/json',
-              'Content-Type': `multipart/form-data';
+          'Accept-Language': 'en-US,en;q=0.8',
+          accept: 'application/json',
+          'Content-Type': `multipart/form-data';
               boundary=${formData._boundary}`,
-            },
+        },
       }
 
-      const {data} = await axios.post('/api/upload', formData, config)
-      console.log(data);
+      const { data } = await axios.post(
+        '/api/upload/material',
+        formData,
+        config
+      )
+      console.log(data)
       setFileName(data.location)
       setUploading(false)
     } catch (error) {
@@ -129,7 +133,11 @@ const Upload = ({ history }) => {
 
           <Form.Group controlId='doc'>
             <Form.Label>DOC</Form.Label>
-            <Form.Control type='text' placeholder={fileName}></Form.Control>
+            <Form.Control
+              type='text'
+              placeholder='enter_file_path'
+              value={fileName}
+              onChange={(e) => setFileName(e.target.value)}></Form.Control>
             <Form.File
               id='file'
               label='choose-file'
@@ -147,5 +155,4 @@ const Upload = ({ history }) => {
   )
 }
 
-export default Upload
-
+export default AddMaterial
