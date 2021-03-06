@@ -21,14 +21,15 @@ const Material = ({ history }) => {
   // get all related material
   const materialList = useSelector((state) => state.materialList)
   const { loading, error, materials } = materialList
-
+  const {success} =useSelector(state=>state.materialDelete);
   useEffect(() => {
+
     if (!userInfo) {
       history.push('/signin')
     } else {
       dispatch(listMaterials(sem, branch))
     }
-  }, [dispatch, sem, branch])
+  }, [dispatch, sem, branch,success])
 
   return (
     <>
@@ -96,7 +97,7 @@ const Material = ({ history }) => {
             {materials.map((material) => {
               return (
                 <Col key={material._id} sm={6} md={3} lg={2} xl={2}>
-                  <Doc material={material} />
+                  <Doc material={material} user={userInfo.user} />
                 </Col>
               )
             })}

@@ -56,3 +56,16 @@ export const materialUpdateReducer = (state = { material: {} }, action) => {
       return state
   }
 }
+
+export const materialDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actionTypes.MATERIAL_DELETE_REQUEST:
+      return { loading: true }
+    case actionTypes.MATERIAL_DELETE_SUCCESS:
+      return { loading: false, success: true}
+    case actionTypes.MATERIAL_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}

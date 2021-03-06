@@ -112,3 +112,29 @@ export const updateMaterial = (material) => async (dispatch, getState) => {
     })
   }
 }
+
+
+export const deleteMaterialAction=(id)=>async(dispatch,getState)=>{
+  try {
+    
+    dispatch({type:actionTypes.MATERIAL_DELETE_REQUEST});
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+    await axios.delete(`/api/material/${id}`,config);
+    dispatch({type:actionTypes.MATERIAL_DELETE_SUCCESS});
+
+  } catch (error) {
+    dispatch({
+      type:actionTypes.MATERIAL_DELETE_FAIL,
+      payload:error
+    })
+  }
+}

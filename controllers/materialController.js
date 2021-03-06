@@ -82,3 +82,18 @@ export const updateMaterial = async (req, res) => {
   const updatedMaterial = await material.save()
   res.status(201).json(updateMaterial)
 }
+
+
+export const removeMaterial=async(req,res)=>{
+  const user=await User.findById(req.user._id);
+  const material =await Material.findById(req.params.id);
+  console.log(user._id,material.user._id,user.isAdmin);
+  if(user.isAdmin===true || (material.user._id.toString()===user._id.toString()))
+  {
+     await Material.deleteOne({_id:req.params.id});
+      res.json({message:"delete succesfully"});
+  }
+  else{
+    return res.status(402).json({error:"Cant Delete"});
+  }
+}

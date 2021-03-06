@@ -15,7 +15,7 @@ import {
 } from '../../actions/materialAction'
 
 const Upload = ({ history }) => {
-  const [fileName, setFileName] = useState('Test File path')
+  const [fileName, setFileName] = useState('')
   const [title, setTitle] = useState('Title')
   const [branch, setBranch] = useState('MNC')
   const [sem, setSem] = useState(1)
@@ -129,7 +129,7 @@ const Upload = ({ history }) => {
 
           <Form.Group controlId='doc'>
             <Form.Label>DOC</Form.Label>
-            <Form.Control type='text' placeholder={fileName}></Form.Control>
+           {fileName && <Form.Control type='text' placeholder={fileName}></Form.Control>}
             <Form.File
               id='file'
               label='choose-file'
