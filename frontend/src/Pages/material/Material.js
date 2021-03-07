@@ -21,14 +21,15 @@ const Material = ({ history }) => {
   // get all related material
   const materialList = useSelector((state) => state.materialList)
   const { loading, error, materials } = materialList
-
+  const {success} =useSelector(state=>state.materialDelete);
   useEffect(() => {
+
     if (!userInfo) {
       history.push('/signin')
     } else {
       dispatch(listMaterials(sem, branch))
     }
-  }, [dispatch, sem, branch])
+  }, [dispatch, sem, branch,success])
 
   return (
     <>
@@ -78,7 +79,7 @@ const Material = ({ history }) => {
           </Link>
         </Col>
       </Row>
-      <h3>
+      <h3 style={{textAlign : 'center'}}>
         Material of branch {branch} and sem {sem}
       </h3>
       {loading ? (
@@ -89,14 +90,14 @@ const Material = ({ history }) => {
         <h1>materials not loaded</h1>
       ) : (
         <>
-          <Row>
+          <Row style={{margin:"50px"}}>
             {materials.length == 0 && (
               <Message variant='success'>{`No any material is available of choosen sem and branch`}</Message>
             )}
             {materials.map((material) => {
               return (
                 <Col key={material._id} sm={6} md={3} lg={2} xl={2}>
-                  <Doc material={material} />
+                  <Doc material={material} user={userInfo.user} />
                 </Col>
               )
             })}

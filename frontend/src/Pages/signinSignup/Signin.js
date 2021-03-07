@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../actions/auth'
 import { useHistory } from 'react-router-dom'
 import '../../css/SigninSignup.css'
+import Loader from '../../components/Loader'
 const Signin = () => {
   const [email, setEmail] = useState('seli@gmail.com')
   const [password, setPassword] = useState('12345')
@@ -23,7 +24,7 @@ const Signin = () => {
   }
   return (
     <div className='container'>
-      {loading && <h3>Laoding.....</h3>}
+      {loading && <Loader/>}
       {error && <h3>{error}</h3>}
       <Fragment>
         <Link to='/' className='btn btn-dark'>

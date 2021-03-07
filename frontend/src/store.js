@@ -13,6 +13,7 @@ import {
   materialDetailsReducer,
   materialUpdateReducer,
   materialListReducer,
+  materialDeleteReducer
 } from './reducers/materialReducer'
 
 import {
@@ -49,6 +50,8 @@ const reducer = combineReducers({
   profUpdate: profUpdateReducer,
   aluminiDelete: aluminiDeleteReducer,
   aluminiUpdate: aluminiUpdateReducer,
+  materialDelete:materialDeleteReducer
+
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

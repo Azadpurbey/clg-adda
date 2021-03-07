@@ -1,11 +1,10 @@
 import mongoose from 'mongoose'
 const materialSchema = new mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: 'user',
-    //   req: true,
-    // },
+    user: {
+      type: mongoose.Schema.Types.Mixed,
+      req: true,
+    },
     title: {
       type: String,
       required: true,

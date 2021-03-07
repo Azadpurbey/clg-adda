@@ -14,8 +14,10 @@ import {
   createMaterial,
 } from '../../actions/materialAction'
 
+
 const AddMaterial = ({ history }) => {
-  const [fileName, setFileName] = useState('Test File path')
+  const [fileName, setFileName] = useState('')
+
   const [title, setTitle] = useState('Title')
   const [branch, setBranch] = useState('MNC')
   const [sem, setSem] = useState(1)
@@ -132,15 +134,19 @@ const AddMaterial = ({ history }) => {
 
           <Form.Group controlId='doc'>
             <Form.Label>DOC</Form.Label>
-            <Form.Control
+
+           {fileName && < Form.Control
               type='text'
               placeholder='enter_file_path'
               value={fileName}
-              onChange={(e) => setFileName(e.target.value)}></Form.Control>
+              onChange={(e) => setFileName(e.target.value)}></Form.Control> }
+          
+
             <Form.File
               id='file'
               label='choose-file'
               custom
+              accept="application/pdf"
               onChange={uploadFileHandler}></Form.File>
             {uploading && <Loader />}
           </Form.Group>

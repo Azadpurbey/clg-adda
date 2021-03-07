@@ -26,10 +26,7 @@ const App = () => {
       <Route exact path='/profDetail/:department' component={ProfDetail} />
       <Route path='/admin/addProf' component={AddProf} />
       <Route path='/admin/addAlumini' component={AddAlumini} />
-<<<<<<< HEAD
-=======
       <Route path='/material/upload' component={AddMaterial} />
->>>>>>> 7a2c3526fffe80112001e4f5cf48f4f7c772828f
       <Route exact path='/material' component={Material} />
       <Route path='/profile' component={ProfilePage} />
       <Route path='/signin' component={Signin} />
