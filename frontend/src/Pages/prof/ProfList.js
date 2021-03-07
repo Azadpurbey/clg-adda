@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 
-const ProfDetail = ({ history }) => {
+const ProfList = ({ history }) => {
   const dispatch = useDispatch()
   const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
   const [department, setDepartment] = useState('MNC')
@@ -94,4 +94,4 @@ const ProfDetail = ({ history }) => {
   )
 }
 
-export default ProfDetail
+export default ProfList

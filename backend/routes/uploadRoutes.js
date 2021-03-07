@@ -7,7 +7,6 @@ import multerS3 from 'multer-s3'
 const router = express.Router()
 
 // aws s3 upload *****
-
 const s3 = new aws.S3({
   bucketName: 'material123',
   accessKeyId: process.env.AWS_Access_Key_ID,
@@ -49,38 +48,35 @@ router.post('/material', (req, res) => {
   })
 })
 
-//Single Material upload
-const imageUpload = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: 'clgprojectbucket',
-    acl: 'public-read',
-    metadata: function (req, file, cb) {
-      cb(null, { fieldName: file.fieldname })
-    },
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString())
-    },
-  }),
-}).single('image')
+//Upload image in upload folder
 
-router.post('/image', (req, res) => {
-  imageUpload(req, res, (error) => {
-    if (error) {
-      res.json({ error: error })
-    } else {
-      if (req.file === undefined) {
-        res.json('Error: No file Selected')
-      } else {
-        const imageName = req.file.key
-        const imageLocation = req.file.location
-        res.json({
-          material: imageName,
-          location: imageLocation,
-        })
-      }
-    }
-  })
+// showing storage location
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(
+      null,
+      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
+    )
+  },
+})
+
+const imageUpload = multer({
+  storage: storage,
+})
+
+// route setup
+router.post('/image', imageUpload.single('image'), (req, res) => {
+  if (req.file === undefined) {
+    res.json({ error: error })
+  } else {
+    res.json({
+      location: `/${req.file.path}`,
+    })
+  }
+  // res.send(`/${req.file.path}`)
 })
 
 export default router

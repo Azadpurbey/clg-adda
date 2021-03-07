@@ -7,8 +7,9 @@ import {
   otpController,
   forgotOtp,
   forgotPassword,
-  updateUserProfile
+  updateUserProfile,
 } from '../controllers/auth.js'
+
 import { authToken } from '../middleware/decodeToken.js'
 
 router.post('/otp', otpController)
@@ -16,7 +17,7 @@ router.post('/signup', signup)
 router.post('/signin', signin)
 router.post('/forgot/otp', forgotOtp)
 router.put('/forgot/password', forgotPassword)
-router.put('/editprofile',authToken,updateUserProfile)
+router.put('/editprofile', authToken, updateUserProfile)
 // router.get('/',authToken,(req,res)=>res.send(req.user._id));
 
 export default router

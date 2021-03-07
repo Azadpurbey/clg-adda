@@ -5,12 +5,12 @@ import Material from './Pages/material/Material'
 import ProfilePage from './Pages/userProfile/Profile'
 import Signin from './Pages/signinSignup/Signin'
 import Home from './Pages/home/Home'
-import Alumini from './Pages/alumini/Alumini'
+import AluminiList from './Pages/alumini/AluminiList'
 import AluminiProfile from './Pages/alumini/AluminiProfile'
 import Signup from './Pages/signinSignup/Signup'
 import Header from './components/Header'
 import EditProfile from './components/EditProfile'
-import ProfDetail from './Pages/prof/ProfDetail'
+import ProfList from './Pages/prof/ProfList'
 import AddProf from './Pages/prof/AddProf'
 import AddAlumini from './Pages/prof/AddAlumini'
 import AddMaterial from './Pages/material/AddMaterial'
@@ -23,7 +23,7 @@ const App = () => {
       <Header />
       <Route path='/profDetail/edit/:id' component={EditProfDetail} />
       <Route path='/alumini/edit/:id' component={EditAluminiDetail} />
-      <Route exact path='/profDetail/:department' component={ProfDetail} />
+      <Route exact path='/profDetail/:department' component={ProfList} />
       <Route path='/admin/addProf' component={AddProf} />
       <Route path='/admin/addAlumini' component={AddAlumini} />
       <Route path='/material/upload' component={AddMaterial} />
@@ -31,7 +31,7 @@ const App = () => {
       <Route path='/profile' component={ProfilePage} />
       <Route path='/signin' component={Signin} />
       <Route path='/signUp' component={Signup} />
-      <Route exact path='/alumini/:department' component={Alumini} />
+      <Route exact path='/alumini/:department' component={AluminiList} />
       <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
 
       <Route exact path='/profie/edit' component={EditProfile} />

@@ -7,7 +7,7 @@ import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import { deleteAlumini, listAluminies } from '../../actions/aluminiAction'
 
-const Alumini = ({ history }) => {
+const AluminiList = ({ history }) => {
   const dispatch = useDispatch()
   const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
   const [department, setDepartment] = useState('MNC')
@@ -102,4 +102,4 @@ const Alumini = ({ history }) => {
   )
 }
 
-export default Alumini
+export default AluminiList

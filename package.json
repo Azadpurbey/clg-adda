@@ -1,14 +1,16 @@
 {
   "name": "clg_project",
+  "proxy": "http://127.0.0.1:5000",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js.js",
   "type": "module",
   "scripts": {
-    "start": "node server",
-    "server": "nodemon server",
-    "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run frontend\" \"npm run server\" "
+    "start": "node backend/server",
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +22,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "express-validator": "^6.9.2",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",

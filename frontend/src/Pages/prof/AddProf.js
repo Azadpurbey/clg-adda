@@ -23,7 +23,7 @@ const AddProf = ({ history }) => {
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
-
+  const { userInfo } = useSelector((state) => state.userLogin)
   const profCreate = useSelector((state) => state.profCreate)
   const {
     loading: loadingCreate,
@@ -48,10 +48,8 @@ const AddProf = ({ history }) => {
     try {
       const config = {
         headers: {
-          'Accept-Language': 'en-US,en;q=0.8',
-          accept: 'application/json',
-          'Content-Type': `multipart/form-data';
-              boundary=${formData._boundary}`,
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${userInfo.token}`,
         },
       }
       const { data } = await axios.post('/api/upload/image', formData, config)
