@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 const ProfileTop = () => {
   const { userInfo } = useSelector((state) => state.userLogin)
   const { user } = userInfo
@@ -16,6 +17,9 @@ const ProfileTop = () => {
           <p className='lead'>{user.branch}</p>
           <p>{user.admission}</p>
           <p>{user.email}</p>
+          <Link to='/profie/edit' className='btn btn-dark'>
+            Edit
+          </Link>
         </div>
       </div>
     </div>
