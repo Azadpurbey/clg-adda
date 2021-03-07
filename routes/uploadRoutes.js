@@ -15,7 +15,7 @@ const s3 = new aws.S3({
   region: 'ap-south-1',
 })
 
-//Single upload
+//Single Material upload
 const materialUpload = multer({
   storage: multerS3({
     s3: s3,
@@ -30,7 +30,7 @@ const materialUpload = multer({
   }),
 }).single('pdf')
 
-router.post('/', (req, res) => {
+router.post('/material', (req, res) => {
   materialUpload(req, res, (error) => {
     if (error) {
       res.json({ error: error })
@@ -40,10 +40,43 @@ router.post('/', (req, res) => {
       } else {
         const materialName = req.file.key
         const materialLocation = req.file.location
-        // console.log(`from inside upload routes`, materialName, materialLocation)
         res.json({
           material: materialName,
           location: materialLocation,
+        })
+      }
+    }
+  })
+})
+
+//Single Material upload
+const imageUpload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'clgprojectbucket',
+    acl: 'public-read',
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname })
+    },
+    key: function (req, file, cb) {
+      cb(null, Date.now().toString())
+    },
+  }),
+}).single('image')
+
+router.post('/image', (req, res) => {
+  imageUpload(req, res, (error) => {
+    if (error) {
+      res.json({ error: error })
+    } else {
+      if (req.file === undefined) {
+        res.json('Error: No file Selected')
+      } else {
+        const imageName = req.file.key
+        const imageLocation = req.file.location
+        res.json({
+          material: imageName,
+          location: imageLocation,
         })
       }
     }

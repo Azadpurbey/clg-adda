@@ -15,10 +15,19 @@ import {
   materialListReducer,
 } from './reducers/materialReducer'
 
-import { profDetailReducer } from './reducers/profReducer'
+import {
+  profDetailReducer,
+  profListReducer,
+  profCreateReducer,
+  profDeleteReducer,
+  profUpdateReducer,
+} from './reducers/profReducer'
 import {
   aluminiDetailReducer,
   aluminiListReducer,
+  aluminiCreateReducer,
+  aluminiDeleteReducer,
+  aluminiUpdateReducer,
 } from './reducers/aluminiReducer'
 
 const reducer = combineReducers({
@@ -31,8 +40,15 @@ const reducer = combineReducers({
   materialUpdate: materialUpdateReducer,
   materialList: materialListReducer,
   profDetail: profDetailReducer,
+  profList: profListReducer,
   aluminiDetail: aluminiDetailReducer,
   aluminiList: aluminiListReducer,
+  aluminiCreate: aluminiCreateReducer,
+  profCreate: profCreateReducer,
+  profDelete: profDeleteReducer,
+  profUpdate: profUpdateReducer,
+  aluminiDelete: aluminiDeleteReducer,
+  aluminiUpdate: aluminiUpdateReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

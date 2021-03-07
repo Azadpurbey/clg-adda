@@ -10,26 +10,33 @@ import AluminiProfile from './Pages/alumini/AluminiProfile'
 import Signup from './Pages/signinSignup/Signup'
 import Header from './components/Header'
 import EditProfile from './components/EditProfile'
-import Upload from './Pages/material/Upload'
 import ProfDetail from './Pages/prof/ProfDetail'
 import AddProf from './Pages/prof/AddProf'
 import AddAlumini from './Pages/prof/AddAlumini'
-import './index.css'
+import AddMaterial from './Pages/material/AddMaterial'
+import EditProfDetail from './Pages/prof/EditProfDetail'
+import EditAluminiDetail from './Pages/alumini/EditAluminiDetail'
 
 const App = () => {
   return (
     <Router>
       <Header />
-      <Route path='/profDetail/:department' component={ProfDetail} />
+      <Route path='/profDetail/edit/:id' component={EditProfDetail} />
+      <Route path='/alumini/edit/:id' component={EditAluminiDetail} />
+      <Route exact path='/profDetail/:department' component={ProfDetail} />
       <Route path='/admin/addProf' component={AddProf} />
       <Route path='/admin/addAlumini' component={AddAlumini} />
+<<<<<<< HEAD
+=======
+      <Route path='/material/upload' component={AddMaterial} />
+>>>>>>> 7a2c3526fffe80112001e4f5cf48f4f7c772828f
       <Route exact path='/material' component={Material} />
-      <Route path='/material/upload' component={Upload} />
       <Route path='/profile' component={ProfilePage} />
       <Route path='/signin' component={Signin} />
       <Route path='/signUp' component={Signup} />
       <Route exact path='/alumini/:department' component={Alumini} />
       <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
+
       <Route exact path='/profie/edit' component={EditProfile} />
       <Route exact path='/' component={Home}></Route>
     </Router>

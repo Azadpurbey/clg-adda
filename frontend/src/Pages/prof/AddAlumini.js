@@ -1,88 +1,92 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import '../../css/Material.css'
 import { Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import FormContainer from '../../components/FormContainer'
 import axios from 'axios'
 import Message from '../../components/Message'
 import Loader from '../../components/Loader'
-import { MATERIAL_CREATE_RESET } from '../../constants/materialConstants'
+import { ALUMINI_CREATE_RESET } from '../../constants/aluminiConstants'
 import {
-  listMaterialDetails,
-  CreateMaterial,
-  createMaterial,
-} from '../../actions/materialAction'
+  listAluminiDetails,
+  CreateAlumini,
+  createAlumini,
+} from '../../actions/aluminiAction'
 
 const AddAlumini = ({ history }) => {
   const [img_path, setImg_path] = useState('/logo192.png')
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [contact, setContact] = useState('')
-  const [department, setDepartment] = useState('')
-  const [designation, setDesignation] = useState('')
-  const [batch, setBatch] = useState('')
-  const [linkedIn, setLinkedIn] = useState('')
-  const [twitter, setTwitter] = useState('')
-  const [instagram, setInstagram] = useState('')
-  const [facebook, setFacebook] = useState('')
+  const [name, setName] = useState('example')
+  const [email, setEmail] = useState('example@gmail.com')
+  const [contact, setContact] = useState('888***888')
+  const [department, setDepartment] = useState('MNC')
+  const [designation, setDesignation] = useState('Software Developer')
+  const [batch, setBatch] = useState('20**')
+  const [linkedIn, setLinkedIn] = useState('www.linkedin.com/in/examplename')
+  const [twitter, setTwitter] = useState('www.twitter.com/in/examplename')
+  const [instagram, setInstagram] = useState('www.instagram.com/examplename')
+  const [facebook, setFacebook] = useState('www.facebook.com/examplename')
   const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
   const [uploading, setUploading] = useState(false)
 
-//   const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-//   const materialCreate = useSelector((state) => state.materialCreate)
-//   const {
-//     loading: loadingCreate,
-//     error: errorCreate,
-//     success: successCreate,
-//     material: newMaterial,
-//   } = materialCreate
+  const aluminiCreate = useSelector((state) => state.aluminiCreate)
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    alumini: newAlumini,
+  } = aluminiCreate
 
-//   useEffect(() => {
-//     if (successCreate) {
-//       dispatch({ type: MATERIAL_CREATE_RESET })
-//       history.push('/material')
-//     }
-//   }, [dispatch, successCreate])
+  useEffect(() => {
+    if (successCreate) {
+      dispatch({ type: ALUMINI_CREATE_RESET })
+      history.push('/alumini/MNC')
+    }
+  }, [dispatch, successCreate])
 
   const uploadFileHandler = async (e) => {
     e.preventDefault()
-    // const file = e.target.files[0]
-    // const formData = new FormData()
-    // formData.append('pdf', file)
-    // setUploading(true)
-    // try {
-    //   const config = {
-    //     headers: {
-    //           'Accept-Language': 'en-US,en;q=0.8',
-    //           'accept': 'application/json',
-    //           'Content-Type': `multipart/form-data';
-    //           boundary=${formData._boundary}`,
-    //         },
-    //   }
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Accept-Language': 'en-US,en;q=0.8',
+          accept: 'application/json',
+          'Content-Type': `multipart/form-data';
+              boundary=${formData._boundary}`,
+        },
+      }
 
-    //   const {data} = await axios.post('/api/upload', formData, config)
-    //   console.log(data);
-    //   setFileName(data.location)
-    //   setUploading(false)
-    // } catch (error) {
-    //   alert('only pdf')
-    //   setUploading(false)
-    // }
+      const { data } = await axios.post('/api/upload/image', formData, config)
+      setImg_path(data.location)
+      setUploading(false)
+    } catch (error) {
+      alert('only pdf')
+      setUploading(false)
+    }
   }
 
   const submitHandler = (e) => {
     e.preventDefault()
-    // dispatch(
-    //   createMaterial({
-    //     path: fileName,
-    //     title,
-    //     branch,
-    //     sem,
-    //     department,
-    //   })
-    // )
+    dispatch(
+      createAlumini({
+        img_path,
+        name,
+        email,
+        contact,
+        department,
+        designation,
+        batch,
+        linkedIn,
+        twitter,
+        instagram,
+        facebook,
+      })
+    )
   }
 
   return (
@@ -91,7 +95,7 @@ const AddAlumini = ({ history }) => {
         GO BACK
       </Link>
       <FormContainer>
-        <Form>
+        <Form onSubmit={submitHandler}>
           <Form.Group controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -146,7 +150,7 @@ const AddAlumini = ({ history }) => {
             <Form.Control
               type='text'
               value={linkedIn}
-              onChange={(e) =>setLinkedIn(e.target.value)}></Form.Control>
+              onChange={(e) => setLinkedIn(e.target.value)}></Form.Control>
           </Form.Group>
 
           <Form.Group controlId='twitter'>
@@ -171,21 +175,22 @@ const AddAlumini = ({ history }) => {
               value={facebook}
               onChange={(e) => setFacebook(e.target.value)}></Form.Control>
           </Form.Group>
-          
 
           <Form.Group controlId='img_path'>
             <Form.Label>Image</Form.Label>
-            <Form.Control type='text' placeholder='img_path'></Form.Control>
+            <Form.Control
+              type='text'
+              placeholder='img_path'
+              value={img_path}></Form.Control>
             <Form.File
               id='img_path'
               label='choose-file'
-             
               custom
               onChange={uploadFileHandler}></Form.File>
             {uploading && <Loader />}
           </Form.Group>
 
-          <Button onClick={submitHandler} variant='primary'>
+          <Button type='submit' variant='primary'>
             UPLOAD
           </Button>
         </Form>
@@ -195,4 +200,3 @@ const AddAlumini = ({ history }) => {
 }
 
 export default AddAlumini
-
