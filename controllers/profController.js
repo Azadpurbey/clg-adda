@@ -41,7 +41,6 @@ export const getProfDetailByDepartment = async (req, res) => {
 //@desc GET prof Details By id
 //@route GET /api/profDetail/profile/:id
 //@access Public
-
 export const getProfDetailById = async (req, res) => {
   const id = req.params.id
   const prof = await ProfDetail.findById(id)
@@ -56,7 +55,7 @@ export const getProfDetailById = async (req, res) => {
 
 //@desc DELETE prof Details
 //@route DELETE /api/profDetail/:id
-//@access Private
+//@access Public
 
 export const deleteProfDetail = async (req, res) => {
   const id = req.params.id
@@ -74,7 +73,7 @@ export const deleteProfDetail = async (req, res) => {
 
 //@desc PUT prof Details
 //@route PUT /api/profDetail/edit/:id
-//@access Private
+//@access Public
 
 export const updateProfDetail = async (req, res) => {
   const id = req.params.id

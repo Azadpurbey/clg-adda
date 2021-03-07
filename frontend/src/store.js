@@ -26,6 +26,8 @@ import {
   aluminiDetailReducer,
   aluminiListReducer,
   aluminiCreateReducer,
+  aluminiDeleteReducer,
+  aluminiUpdateReducer,
 } from './reducers/aluminiReducer'
 
 const reducer = combineReducers({
@@ -45,6 +47,8 @@ const reducer = combineReducers({
   profCreate: profCreateReducer,
   profDelete: profDeleteReducer,
   profUpdate: profUpdateReducer,
+  aluminiDelete: aluminiDeleteReducer,
+  aluminiUpdate: aluminiUpdateReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

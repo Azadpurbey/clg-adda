@@ -14,15 +14,16 @@ import EditProfile from './components/EditProfile'
 import ProfDetail from './Pages/prof/ProfDetail'
 import AddProf from './Pages/prof/AddProf'
 import AddAlumini from './Pages/prof/AddAlumini'
-import './index.css'
 import AddMaterial from './Pages/material/AddMaterial'
-import EditProfDetail from './components/EditProfDetail'
+import EditProfDetail from './Pages/prof/EditProfDetail'
+import EditAluminiDetail from './Pages/alumini/EditAluminiDetail'
 
 const App = () => {
   return (
     <Router>
       <Header />
       <Route path='/profDetail/edit/:id' component={EditProfDetail} />
+      <Route path='/alumini/edit/:id' component={EditAluminiDetail} />
       <Route exact path='/profDetail/:department' component={ProfDetail} />
       <Route path='/admin/addProf' component={AddProf} />
       <Route path='/admin/addAlumini' component={AddAlumini} />
