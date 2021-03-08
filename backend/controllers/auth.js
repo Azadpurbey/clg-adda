@@ -29,7 +29,7 @@ export const otpController = async (req, res) => {
 
     transport
       .sendMail({
-        from: 'ssoumyaprakash05@gmail.com',
+        from: 'azadpurbey2@gmail.com',
         to: `<${req.body.email}>`,
         subject: 'OTP from college-project for registration ',
         html: `<h1>${otpNumber}</h1>`,
