@@ -1,5 +1,5 @@
 
-import {USER_UPDATE_PROFILE_FAIL,USER_UPDATE_PROFILE_REQUEST,USER_UPDATE_PROFILE_SUCCESS, USER_LOGIN_FAIL,USER_LOGIN_REQUEST,USER_LOGIN_SUCCESS,USER_LOGOUT,USER_REGISTER_FAIL,USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,EMAIL_OTP_FAIL,EMAIL_OTP_REQUEST,EMAIL_OTP_SUCCESS} from '../constants/auth'
+import {USER_UPDATE_PROFILE_FAIL,USER_UPDATE_PROFILE_REQUEST,USER_UPDATE_PROFILE_SUCCESS, USER_LOGIN_FAIL,USER_LOGIN_REQUEST,USER_LOGIN_SUCCESS,USER_LOGOUT,USER_REGISTER_FAIL,USER_REGISTER_REQUEST,USER_REGISTER_SUCCESS,EMAIL_OTP_FAIL,EMAIL_OTP_REQUEST,EMAIL_OTP_SUCCESS, USER_LIST_REQUEST, USER_LIST_SUCCESS, USER_LIST_FAIL} from '../constants/auth'
 
 export const userLoginReducer = (state={},action)=>{
     switch(action.type)
@@ -60,6 +60,20 @@ export const updateUserProfileReducer=(state={},action)=>{
             return {loading:false,success:false,error:action.payload}
         case USER_LOGOUT:
             return {}  
+        default:
+            return state;
+    }
+}
+
+export const userListReducer=(state={},action)=>
+{
+    switch (action.type) {
+        case USER_LIST_REQUEST:
+            return {loading:true}
+        case USER_LIST_SUCCESS:
+            return {loading:false,success:true,userLists:action.payload}
+        case USER_LIST_FAIL:
+            return {loading:false,success:false,error:action.payload}
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import {USER_UPDATE_PROFILE_FAIL,USER_UPDATE_PROFILE_SUCCESS,USER_UPDATE_PROFILE_REQUEST, USER_LOGOUT,USER_LOGIN_SUCCESS,USER_LOGIN_REQUEST,USER_LOGIN_FAIL,USER_REGISTER_SUCCESS,USER_REGISTER_REQUEST,USER_REGISTER_FAIL,EMAIL_OTP_FAIL,EMAIL_OTP_SUCCESS,EMAIL_OTP_REQUEST} from '../constants/auth'
+import {USER_LIST_FAIL,USER_LIST_SUCCESS,USER_LIST_REQUEST, USER_UPDATE_PROFILE_FAIL,USER_UPDATE_PROFILE_SUCCESS,USER_UPDATE_PROFILE_REQUEST, USER_LOGOUT,USER_LOGIN_SUCCESS,USER_LOGIN_REQUEST,USER_LOGIN_FAIL,USER_REGISTER_SUCCESS,USER_REGISTER_REQUEST,USER_REGISTER_FAIL,EMAIL_OTP_FAIL,EMAIL_OTP_SUCCESS,EMAIL_OTP_REQUEST} from '../constants/auth'
 import axios from 'axios'
 
 export const login =(email,password) => async (dispatch)=>{
@@ -134,5 +134,31 @@ export const update=(updateForm)=>async(dispatch,getState)=>{
     } catch (error) {
         
         dispatch({type:USER_UPDATE_PROFILE_FAIL,payload:error})
+    }
+}
+
+
+export const userListAction=()=>async(dispatch)=>{
+    try {
+        
+        dispatch({type:USER_LIST_REQUEST});
+        const config={
+            headers:{
+                'Content-Type':'application/json'
+            },
+        }
+
+        const {data}= await axios.get('/api/user/',config);
+        dispatch({
+            type:USER_LIST_SUCCESS,
+            payload:data
+        })
+
+        
+
+    } catch (error) {
+
+        dispatch({type:USER_LIST_FAIL,payload:error})
+        
     }
 }

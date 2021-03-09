@@ -30,6 +30,9 @@ const Header = () => {
           <LinkContainer to='/material'>
             <Nav.Link>Materials</Nav.Link>
           </LinkContainer>
+          <LinkContainer to='/users'>
+            <Nav.Link>UserList</Nav.Link>
+          </LinkContainer>
 
           <LinkContainer to='/alumini/MNC'>
             <Nav.Link>Alumini</Nav.Link>

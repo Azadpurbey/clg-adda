@@ -178,3 +178,26 @@ export const updateUserProfile = async (req, res) => {
     return res.status(422).json({ error: 'user not found for edit profile ' })
   }
 }
+
+
+export const allUSers=async(req,res)=>{
+  try {
+   const user= await User.find({});
+   user.map(u=>u.password=undefined);
+   res.json({user});
+  } catch (err) {
+    return res.status(422).json({ error: err })
+  }
+}
+export const singleUser=async(req,res)=>{
+  
+  try {
+          const user=await User.findById(req.params.id);
+          user.password=undefined;
+          res.json(user);
+  } catch (error) {
+    return res.status(422).json({ error: err })
+  }
+  
+
+}

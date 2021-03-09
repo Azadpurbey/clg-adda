@@ -16,6 +16,8 @@ import AddAlumini from './Pages/prof/AddAlumini'
 import AddMaterial from './Pages/material/AddMaterial'
 import EditProfDetail from './Pages/prof/EditProfDetail'
 import EditAluminiDetail from './Pages/alumini/EditAluminiDetail'
+import UserList from './components/UserList'
+import SingleUserProfile from './components/SingleUserProfile'
 
 const App = () => {
   return (
@@ -33,9 +35,11 @@ const App = () => {
       <Route path='/signUp' component={Signup} />
       <Route exact path='/alumini/:department' component={AluminiList} />
       <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
-
+       
       <Route exact path='/profie/edit' component={EditProfile} />
       <Route exact path='/' component={Home}></Route>
+      <Route exact path="/users" component={UserList}/>
+      <Route exact path="/user/:id" component={SingleUserProfile}/>
     </Router>
   )
 }
