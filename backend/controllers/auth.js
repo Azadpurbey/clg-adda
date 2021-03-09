@@ -158,6 +158,13 @@ export const updateUserProfile = async (req, res) => {
     user.name = req.body.name || user.name
     user.branch = req.body.branch || user.branch
     user.admission = req.body.admission || user.admission
+    user.img_path=req.body.img_path || user.img_path
+    user.linkedIn=req.body.linkedIn || user.linkedIn
+    user.twitter=req.body.twitter || user.twitter
+    user.instagram=req.body.instagram || user.instagram
+    user.facebook=req.body.facebook || user.facebook
+    user.tips=req.body.tips || user.tips
+    user.about=req.body.about || user.about
     if (req.body.password) {
       user.password = req.body.password
     }
