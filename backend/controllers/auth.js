@@ -4,6 +4,7 @@ import OTP from '../models/otp.js'
 import rn from 'random-number'
 import nodemailer from 'nodemailer'
 import nodemailerSendgrid from 'nodemailer-sendgrid'
+import c from 'config'
 
 export const otpController = async (req, res) => {
   const api_key = process.env.SENDGRID_API
@@ -182,8 +183,15 @@ export const updateUserProfile = async (req, res) => {
 
 export const allUSers=async(req,res)=>{
   try {
-   const user= await User.find({});
-   user.map(u=>u.password=undefined);
+   const userChk= await User.find({});
+   userChk.map(u=>u.password=undefined);
+   var user=[];
+   userChk.map((u)=>{
+        if(u._id.toString()!==req.user._id.toString())
+        {
+          user.push(u);
+        }
+   })
    res.json({user});
   } catch (err) {
     return res.status(422).json({ error: err })
@@ -200,4 +208,61 @@ export const singleUser=async(req,res)=>{
   }
   
 
+}
+
+
+export const handleFollow=async(req,res)=>{
+  try {
+    const user =await User.findById(req.user._id);
+    const followingUser=await User.findById(req.params.id);
+    if(!user || !followingUser)
+    {
+     return res.status(401).json({error:"not found"});
+    }
+    followingUser.password=undefined;
+   
+   
+    var chkFollowing=false;
+    user.following.map((f)=>{
+      if(f._id.toString()===req.params.id.toString())
+      {
+        chkFollowing=true;
+      }
+    })
+    console.log(chkFollowing);
+    if(chkFollowing)
+    {
+      console.log("checking beero")
+      const removeIndex=user.following.map(f=>f._id.toString()).indexOf(req.params.id.toString());
+      user.following.splice(removeIndex,1);
+      await user.save();
+      return res.json({message:'unfollowed',});
+    } 
+    else{
+      user.following.push(followingUser);
+      await user.save();
+     return  res.json({message:"followed"});
+    }
+  } catch (err) {
+    return res.status(401).json({ error: err });
+  }
+}
+
+export const checkFollow=async(req,res)=>{
+  try {
+    const user =await User.findById(req.user._id);
+    var chk=false;
+    user.following.map((f)=>{
+      if(f._id.toString()===req.params.id.toString())
+      {
+        chk=true;
+      }
+    })
+    res.json({message:chk});
+  
+
+
+  } catch (err) {
+    return res.status(401).json({ error: err });
+  }
 }

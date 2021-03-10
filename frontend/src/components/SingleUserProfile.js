@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Loader from './Loader';
-
+import {useDispatch, useSelector} from 'react-redux'
+import {addFollowingAction} from '../actions/auth'
 const SingleUserProfile = ({match,history}) => {
 
     const [userInfo,setUserInfo]=useState('');
     const [loading,setLoading]=useState(false);
-
+    const  [show,setShow]=useState(false);
+    const {userInfo:userInfoLogin}=useSelector(state=>state.userLogin);
     useEffect(async()=>{
         const config={
             headers:{
@@ -19,14 +21,37 @@ const SingleUserProfile = ({match,history}) => {
             const {data}=await axios.get(`/api/user/${match.params.id}`,config)
             console.log(data);
             setUserInfo(data);
-            setLoading(false);
+            
         } catch (error) {
             console.log(error);
         }
         
-        
+        const config2={
+          headers:{
+            'Content-Type':'application/json',
+            Authorization:`Bearer ${userInfoLogin.token}`
+        },
+        }
+        try {
+          
+          const {data}=await  axios.get(`/api/user/followCheck/${match.params.id}`,config2)
+          console.log("$$",data);
+          setShow(data.message);
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
         
     },[])
+
+const dispatch=useDispatch();
+
+
+    const followHandler=(e)=>{
+      e.preventDefault();
+      dispatch(addFollowingAction(match.params.id))
+      setShow(!show);
+    }
 
 
     return (
@@ -56,7 +81,7 @@ const SingleUserProfile = ({match,history}) => {
                           <p className='text-secondary mb-1'>
                             Batch {userInfo.admission}
                           </p>
-                          <button className='btn btn-primary'>Follow</button>
+                          <button className='btn btn-primary' onClick={followHandler} >{show ?"UnFollow" : "Follow"}</button>
                         </div>
                       </div>
                     </div>

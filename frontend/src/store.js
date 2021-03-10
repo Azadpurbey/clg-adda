@@ -6,7 +6,8 @@ import {
   userRegisterReducer,
   emailOtpUserReducer,
   updateUserProfileReducer,
-  userListReducer
+  userListReducer,
+  addFollowUserReducer
 } from './reducers/authReducer'
 
 import {
@@ -52,7 +53,8 @@ const reducer = combineReducers({
   aluminiDelete: aluminiDeleteReducer,
   aluminiUpdate: aluminiUpdateReducer,
   materialDelete:materialDeleteReducer,
-  userList:userListReducer
+  userList:userListReducer,
+  addFollowUser:addFollowUserReducer
 
 })
 

@@ -1,4 +1,4 @@
-import {USER_LIST_FAIL,USER_LIST_SUCCESS,USER_LIST_REQUEST, USER_UPDATE_PROFILE_FAIL,USER_UPDATE_PROFILE_SUCCESS,USER_UPDATE_PROFILE_REQUEST, USER_LOGOUT,USER_LOGIN_SUCCESS,USER_LOGIN_REQUEST,USER_LOGIN_FAIL,USER_REGISTER_SUCCESS,USER_REGISTER_REQUEST,USER_REGISTER_FAIL,EMAIL_OTP_FAIL,EMAIL_OTP_SUCCESS,EMAIL_OTP_REQUEST} from '../constants/auth'
+import {USER_LIST_FAIL,USER_LIST_SUCCESS,USER_LIST_REQUEST, USER_UPDATE_PROFILE_FAIL,USER_UPDATE_PROFILE_SUCCESS,USER_UPDATE_PROFILE_REQUEST, USER_LOGOUT,USER_LOGIN_SUCCESS,USER_LOGIN_REQUEST,USER_LOGIN_FAIL,USER_REGISTER_SUCCESS,USER_REGISTER_REQUEST,USER_REGISTER_FAIL,EMAIL_OTP_FAIL,EMAIL_OTP_SUCCESS,EMAIL_OTP_REQUEST, FOLLOW_ADD_FAIL, FOLLOW_ADD_REQUEST, FOLLOW_ADD_SUCCESS} from '../constants/auth'
 import axios from 'axios'
 
 export const login =(email,password) => async (dispatch)=>{
@@ -138,13 +138,15 @@ export const update=(updateForm)=>async(dispatch,getState)=>{
 }
 
 
-export const userListAction=()=>async(dispatch)=>{
+export const userListAction=()=>async(dispatch,getState)=>{
     try {
         
         dispatch({type:USER_LIST_REQUEST});
+        const {userLogin:{userInfo}}=getState();
         const config={
             headers:{
-                'Content-Type':'application/json'
+                'Content-Type':'application/json',
+                Authorization:`Bearer ${userInfo.token}`
             },
         }
 
@@ -160,5 +162,25 @@ export const userListAction=()=>async(dispatch)=>{
 
         dispatch({type:USER_LIST_FAIL,payload:error})
         
+    }
+}
+
+export const addFollowingAction=(id)=>async(dispatch,getState)=>{
+    try {
+
+        dispatch({type:FOLLOW_ADD_REQUEST});
+        const {userLogin:{userInfo}}=getState();
+        // console.log(userInfo.token,id);
+        const config={
+            headers:{
+                'Content-Type':'application/json',
+                Authorization:`Bearer ${userInfo.token}`
+            },
+        }
+       const {data}= await axios.put(`/api/user/follow/${id}/`,{},config)
+        dispatch({type:FOLLOW_ADD_SUCCESS,payload:data});
+        
+    } catch (err) {
+        dispatch({type:FOLLOW_ADD_FAIL,payload:err});
     }
 }

@@ -8,9 +8,10 @@ import Loader from './Loader';
 
 const UserList = () => {
 
-
     const dispatch=useDispatch();
     const {laoding,error,userLists}=useSelector(state=>state.userList);
+
+
     // const {user}=userLists;
    console.log(userLists && userLists.user[0]._id)
    useEffect(()=>{
@@ -33,7 +34,7 @@ const UserList = () => {
                 </thead>
                 <tbody>
                    {userLists && userLists.user.map(u=>(
-                       <tr key={u._id}> 
+                        <tr key={u._id}> 
                         <td>{u.name}</td>
                         <td><a href={`mailto:${u.email}`}>{u.email}</a></td>
                         <td>{u.branch}</td>
@@ -55,6 +56,7 @@ const UserList = () => {
                             </Button>
                         </td>
                        </tr>
+                       
                    ))}
                 </tbody>
 
