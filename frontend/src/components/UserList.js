@@ -29,7 +29,7 @@ const UserList = () => {
                         <td>Branch</td>
                         <td>Admission</td>
                         <td></td>
-                        <td></td>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -46,14 +46,6 @@ const UserList = () => {
                                 className='btn btn-primary'>
                                 View 
                             </Link>
-                        </td>
-                        <td>    
-                            <Button
-                                
-                                // onClick={profileHandler}
-                                className='btn btn-primary'>
-                                Follow
-                            </Button>
                         </td>
                        </tr>
                        
