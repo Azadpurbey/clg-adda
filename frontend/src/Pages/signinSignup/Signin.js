@@ -6,8 +6,8 @@ import { useHistory } from 'react-router-dom'
 import '../../css/SigninSignup.css'
 import Loader from '../../components/Loader'
 const Signin = () => {
-  const [email, setEmail] = useState('seli@gmail.com')
-  const [password, setPassword] = useState('12345')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const dispatch = useDispatch()
   var history = useHistory()
   const { loading, userInfo, error } = useSelector((state) => state.userLogin)
