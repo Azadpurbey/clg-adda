@@ -28,13 +28,13 @@ const App = () => {
       <Route path='/admin/addAlumini' component={AddAlumini} />
       <Route path='/material/upload' component={AddMaterial} />
       <Route exact path='/material' component={Material} />
-      <Route path='/profile' component={ProfilePage} />
+      <Route exact path='/profile' component={ProfilePage} />
       <Route path='/signin' component={Signin} />
       <Route path='/signUp' component={Signup} />
       <Route exact path='/alumini/:department' component={AluminiList} />
       <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
 
-      <Route exact path='/profie/edit' component={EditProfile} />
+      <Route exact path='/profile/edit' component={EditProfile} />
       <Route exact path='/' component={Home}></Route>
     </Router>
   )
