@@ -7,7 +7,7 @@ import {
   emailOtpUserReducer,
   updateUserProfileReducer,
   userListReducer,
-  addFollowUserReducer
+  addFollowUserReducer,
 } from './reducers/authReducer'
 
 import {
@@ -15,7 +15,7 @@ import {
   materialDetailsReducer,
   materialUpdateReducer,
   materialListReducer,
-  materialDeleteReducer
+  materialDeleteReducer,
 } from './reducers/materialReducer'
 
 import {
@@ -52,10 +52,9 @@ const reducer = combineReducers({
   profUpdate: profUpdateReducer,
   aluminiDelete: aluminiDeleteReducer,
   aluminiUpdate: aluminiUpdateReducer,
-  materialDelete:materialDeleteReducer,
-  userList:userListReducer,
-  addFollowUser:addFollowUserReducer
-
+  materialDelete: materialDeleteReducer,
+  userList: userListReducer,
+  addFollowUser: addFollowUserReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
