@@ -21,7 +21,6 @@ export const authToken = async (req, res, next) => {
     }
   }
   if (!token) {
-    res.status(422)
-    throw new Error('Invalid token')
+    res.status(422).json({error:'Invalid token'})
   }
 }

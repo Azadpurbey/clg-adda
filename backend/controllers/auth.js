@@ -4,6 +4,7 @@ import OTP from '../models/otp.js'
 import rn from 'random-number'
 import nodemailer from 'nodemailer'
 import nodemailerSendgrid from 'nodemailer-sendgrid'
+import c from 'config'
 
 export const otpController = async (req, res) => {
   const api_key = process.env.SENDGRID_API
@@ -29,7 +30,7 @@ export const otpController = async (req, res) => {
 
     transport
       .sendMail({
-        from: 'ssoumyaprakash05@gmail.com',
+        from: 'azadpurbey2@gmail.com',
         to: `<${req.body.email}>`,
         subject: 'OTP from college-project for registration ',
         html: `<h1>${otpNumber}</h1>`,
@@ -158,6 +159,13 @@ export const updateUserProfile = async (req, res) => {
     user.name = req.body.name || user.name
     user.branch = req.body.branch || user.branch
     user.admission = req.body.admission || user.admission
+    user.img_path = req.body.img_path || user.img_path
+    user.linkedIn = req.body.linkedIn || user.linkedIn
+    user.twitter = req.body.twitter || user.twitter
+    user.instagram = req.body.instagram || user.instagram
+    user.facebook = req.body.facebook || user.facebook
+    user.tips = req.body.tips || user.tips
+    user.about = req.body.about || user.about
     if (req.body.password) {
       user.password = req.body.password
     }
@@ -169,5 +177,92 @@ export const updateUserProfile = async (req, res) => {
     })
   } else {
     return res.status(422).json({ error: 'user not found for edit profile ' })
+  }
+}
+
+
+export const allUSers=async(req,res)=>{
+  try {
+   const userChk= await User.find({});
+   userChk.map(u=>u.password=undefined);
+   var user=[];
+   userChk.map((u)=>{
+        if(u._id.toString()!==req.user._id.toString())
+        {
+          user.push(u);
+        }
+   })
+   res.json({user});
+  } catch (err) {
+    return res.status(422).json({ error: err })
+  }
+}
+export const singleUser=async(req,res)=>{
+  
+  try {
+          const user=await User.findById(req.params.id);
+          user.password=undefined;
+          res.json(user);
+  } catch (error) {
+    return res.status(422).json({ error: err })
+  }
+  
+
+}
+
+
+export const handleFollow=async(req,res)=>{
+  try {
+    const user =await User.findById(req.user._id);
+    const followingUser=await User.findById(req.params.id);
+    if(!user || !followingUser)
+    {
+     return res.status(401).json({error:"not found"});
+    }
+    followingUser.password=undefined;
+   
+   
+    var chkFollowing=false;
+    user.following.map((f)=>{
+      if(f._id.toString()===req.params.id.toString())
+      {
+        chkFollowing=true;
+      }
+    })
+    console.log(chkFollowing);
+    if(chkFollowing)
+    {
+      console.log("checking beero")
+      const removeIndex=user.following.map(f=>f._id.toString()).indexOf(req.params.id.toString());
+      user.following.splice(removeIndex,1);
+      await user.save();
+      return res.json({message:'unfollowed',});
+    } 
+    else{
+      user.following.push(followingUser);
+      await user.save();
+     return  res.json({message:"followed"});
+    }
+  } catch (err) {
+    return res.status(401).json({ error: err });
+  }
+}
+
+export const checkFollow=async(req,res)=>{
+  try {
+    const user =await User.findById(req.user._id);
+    var chk=false;
+    user.following.map((f)=>{
+      if(f._id.toString()===req.params.id.toString())
+      {
+        chk=true;
+      }
+    })
+    res.json({message:chk});
+  
+
+
+  } catch (err) {
+    return res.status(401).json({ error: err });
   }
 }

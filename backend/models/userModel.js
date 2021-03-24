@@ -24,13 +24,43 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    photo: {
-      type: String,
+    img_path:{
+      type:String,
+      default:'/logo192.png'
     },
     isAdmin: {
       type: Boolean,
       default: false,
     },
+    following:[
+     { type: mongoose.Schema.Types.Mixed,
+      ref:'user'}
+    ],
+    linkedIn: {
+      type: String,
+      default: 'Not available',
+    },
+    twitter: {
+      type: String,
+      default: 'Not available',
+    },
+    instagram: {
+      type: String,
+      default: 'Not available',
+    },
+    facebook: {
+      type: String,
+      default: 'Not available',
+    },
+    tips:{
+      type:String,
+      default:"NA"
+    },
+    about:{
+      type:String,
+      default:"NA"
+    }
+
   },
   { timestamps: true }
 )
