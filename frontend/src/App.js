@@ -18,6 +18,7 @@ import EditProfDetail from './Pages/prof/EditProfDetail'
 import EditAluminiDetail from './Pages/alumini/EditAluminiDetail'
 import UserList from './components/UserList'
 import SingleUserProfile from './components/SingleUserProfile'
+import Following from './Pages/following/Following'
 
 const App = () => {
   return (
@@ -41,6 +42,8 @@ const App = () => {
       <Route exact path='/' component={Home}></Route>
       <Route exact path='/users' component={UserList} />
       <Route exact path='/user/:id' component={SingleUserProfile} />
+
+      <Route path='/following' component={Following} />
     </Router>
   )
 }

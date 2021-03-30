@@ -24,16 +24,20 @@ const Header = () => {
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>
+          <LinkContainer to='/following'>
+            <Nav.Link>Following</Nav.Link>
+          </LinkContainer>
           <LinkContainer to='/profDetail/MNC'>
             <Nav.Link>Faculty</Nav.Link>
           </LinkContainer>
           <LinkContainer to='/material'>
             <Nav.Link>Materials</Nav.Link>
           </LinkContainer>
-          {userInfo && <LinkContainer to='/users'>
-            <Nav.Link>UserList</Nav.Link>
-          </LinkContainer>
-          }
+          {userInfo && (
+            <LinkContainer to='/users'>
+              <Nav.Link>UserList</Nav.Link>
+            </LinkContainer>
+          )}
 
           <LinkContainer to='/alumini/MNC'>
             <Nav.Link>Alumini</Nav.Link>

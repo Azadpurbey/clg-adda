@@ -1,148 +1,146 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Loader from './Loader';
-import {useDispatch, useSelector} from 'react-redux'
-import {addFollowingAction} from '../actions/auth'
-const SingleUserProfile = ({match,history}) => {
-
-    const [userInfo,setUserInfo]=useState('');
-    const [loading,setLoading]=useState(false);
-    const  [show,setShow]=useState(false);
-    const {userInfo:userInfoLogin}=useSelector(state=>state.userLogin);
-    useEffect(async()=>{
-        const config={
-            headers:{
-                'Content-Type':'application/json'
-            },
-        }
-        console.log(match.params.id);
-        try {
-            setLoading(true);
-            const {data}=await axios.get(`/api/user/${match.params.id}`,config)
-            console.log(data);
-            setUserInfo(data);
-            
-        } catch (error) {
-            console.log(error);
-        }
-        
-        const config2={
-          headers:{
-            'Content-Type':'application/json',
-            Authorization:`Bearer ${userInfoLogin.token}`
-        },
-        }
-        try {
-          
-          const {data}=await  axios.get(`/api/user/followCheck/${match.params.id}`,config2)
-          console.log("$$",data);
-          setShow(data.message);
-          setLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
-        
-    },[])
-
-const dispatch=useDispatch();
-
-
-    const followHandler=(e)=>{
-      e.preventDefault();
-      dispatch(addFollowingAction(match.params.id))
-      setShow(!show);
+import Loader from './Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { addFollowingAction } from '../actions/auth'
+const SingleUserProfile = ({ match, history }) => {
+  const [userInfo, setUserInfo] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState(false)
+  const { userInfo: userInfoLogin } = useSelector((state) => state.userLogin)
+  useEffect(async () => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+    console.log(match.params.id)
+    try {
+      setLoading(true)
+      const { data } = await axios.get(`/api/user/${match.params.id}`, config)
+      console.log(data)
+      setUserInfo(data)
+    } catch (error) {
+      console.log(error)
     }
 
+    const config2 = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfoLogin.token}`,
+      },
+    }
+    try {
+      const { data } = await axios.get(
+        `/api/user/followCheck/${match.params.id}`,
+        config2
+      )
+      console.log('$$', data)
+      setShow(data.message)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
 
-    return (
-        <>
-           
+  const dispatch = useDispatch()
 
-          {  loading ? <Loader/> : userInfo ?( 
+  const followHandler = (e) => {
+    e.preventDefault()
+    dispatch(addFollowingAction(match.params.id))
+    setShow(!show)
+  }
 
-            <div className='container'>
-            <div className='main-body'>
-              <div className='row gutters-sm'>
-                <div className='col-md-4 mb-3'>
-                  <div className='card'>
-                    <div className='card-body'>
-                      <div className='d-flex flex-column align-items-center text-center'>
-                        <img
-                          src={userInfo.img_path}
-                          alt='Admin'
-                          className='rounded-circle'
-                          width='150'
-                        />
-                        <div className='mt-3'>
-                          <h4>{userInfo.name}</h4>
-                          <p className='text-secondary mb-1'>
-                            {userInfo.email}
-                          </p>
-                          <p className='text-secondary mb-1'>
-                            Batch {userInfo.admission}
-                          </p>
-                          <button className='btn btn-primary' onClick={followHandler} >{show ?"UnFollow" : "Follow"}</button>
-                        </div>
+  return (
+    <>
+      {loading ? (
+        <Loader />
+      ) : userInfo ? (
+        <div className='container'>
+          <div className='main-body'>
+            <div className='row gutters-sm'>
+              <div className='col-md-4 mb-3'>
+                <div className='card'>
+                  <div className='card-body'>
+                    <div className='d-flex flex-column align-items-center text-center'>
+                      <img
+                        src={userInfo.img_path}
+                        alt='Admin'
+                        className='rounded-circle'
+                        width='150'
+                      />
+                      <div className='mt-3'>
+                        <h4>{userInfo.name}</h4>
+                        <p className='text-secondary mb-1'>{userInfo.email}</p>
+                        <p className='text-secondary mb-1'>
+                          Batch {userInfo.admission}
+                        </p>
+                        <button
+                          className='btn btn-primary'
+                          onClick={followHandler}>
+                          {show ? 'UnFollow' : 'Follow'}
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className='col-md-8'>
-                  <div className='card mb-3'>
-                    <div className='card-body'>
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Name</h6>
-                        </div>
-                        <div className='col-sm-9 text-secondary'>
-                          {userInfo.name}
-                        </div>
+              </div>
+              <div className='col-md-8'>
+                <div className='card mb-3'>
+                  <div className='card-body'>
+                    <div className='row'>
+                      <div className='col-sm-3'>
+                        <h6 className='mb-0'>Name</h6>
                       </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Email</h6>
-                        </div>
-                        <div className='col-sm-9 text-secondary'>
-                          {userInfo.email}
-                        </div>
+                      <div className='col-sm-9 text-secondary'>
+                        {userInfo.name}
                       </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Admission</h6>
-                        </div>
-                        <div className='col-sm-9 text-secondary'>
-                          {userInfo.admission}
-                        </div>
+                    </div>
+                    <hr />
+                    <div className='row'>
+                      <div className='col-sm-3'>
+                        <h6 className='mb-0'>Email</h6>
                       </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Branch</h6>
-                        </div>
-                        <div className='col-sm-9 text-secondary'>
-                          {userInfo.branch}
-                        </div>
+                      <div className='col-sm-9 text-secondary'>
+                        {userInfo.email}
                       </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>Tips for Juniors</h6>
-                        </div>
-                        <div className='col-sm-9 text-secondary'>
-                          {userInfo.tips}
-                        </div>
+                    </div>
+                    <hr />
+                    <div className='row'>
+                      <div className='col-sm-3'>
+                        <h6 className='mb-0'>Admission</h6>
                       </div>
-                      <hr />
-                      <div className='row'>
-                        <div className='col-sm-3'>
-                          <h6 className='mb-0'>About</h6>
-                        </div>
-                        <div className='col-sm-9 text-secondary'>
-                          {userInfo.about}
-                        </div>
+                      <div className='col-sm-9 text-secondary'>
+                        {userInfo.admission}
                       </div>
+                    </div>
+                    <hr />
+                    <div className='row'>
+                      <div className='col-sm-3'>
+                        <h6 className='mb-0'>Branch</h6>
+                      </div>
+                      <div className='col-sm-9 text-secondary'>
+                        {userInfo.branch}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className='row'>
+                      <div className='col-sm-3'>
+                        <h6 className='mb-0'>Tips for Juniors</h6>
+                      </div>
+                      <div className='col-sm-9 text-secondary'>
+                        {userInfo.tips}
+                      </div>
+                    </div>
+                    <hr />
+                    <div className='row'>
+                      <div className='col-sm-3'>
+                        <h6 className='mb-0'>About</h6>
+                      </div>
+                      <div className='col-sm-9 text-secondary'>
+                        {userInfo.about}
+                      </div>
+                    </div>
                   </div>
                   <div className='card mt-3'>
                     <ul className='list-group list-group-flush'>
@@ -246,11 +244,12 @@ const dispatch=useDispatch();
               </div>
             </div>
           </div>
-            </div>
-          ) : <p></p> }
-              
-        </>
-    )
+        </div>
+      ) : (
+        <p></p>
+      )}
+    </>
+  )
 }
 
 export default SingleUserProfile
