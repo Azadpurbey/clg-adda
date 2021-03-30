@@ -18,6 +18,7 @@ import {
   FOLLOW_ADD_FAIL,
   FOLLOW_ADD_REQUEST,
   FOLLOW_ADD_SUCCESS,
+  USER_UPDATE_REFRESH,
 } from '../constants/auth'
 import axios from 'axios'
 
@@ -137,6 +138,9 @@ export const update = (updateForm) => async (dispatch, getState) => {
     localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
+    })
+    dispatch({
+      type:USER_UPDATE_REFRESH,
     })
   } catch (error) {
     dispatch({ type: USER_UPDATE_PROFILE_FAIL, payload: error })
