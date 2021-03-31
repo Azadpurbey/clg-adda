@@ -32,26 +32,29 @@ const App = () => {
     <Router>
       <Header />
       <Route path='/profDetail/edit/:id' component={EditProfDetail} />
+      <Route exact path='/profDetail/:department' component={ProfList} />
 
       <Route path='/alumini/edit/:id' component={EditAluminiDetail} />
-      <Route exact path='/profDetail/:department' component={ProfList} />
-      <Route path='/admin/addProf' component={AddProf} />
-      <Route path='/admin/addAlumini' component={AddAlumini} />
-      <Route path='/material/upload' component={AddMaterial} />
-      <Route exact path='/material' component={Material} />
-      <Route exact path='/profile' component={ProfilePage} />
-      <Route path='/signin' component={Signin} />
-      <Route path='/signUp' component={Signup} />
       <Route exact path='/alumini/:department' component={AluminiList} />
       <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
 
-      <Route exact path='/profile/edit' component={EditProfile} />
+      <Route path='/admin/addProf' component={AddProf} />
+      <Route path='/admin/addAlumini' component={AddAlumini} />
 
-      <Route exact path='/' component={Home}></Route>
+      <Route path='/material/upload' component={AddMaterial} />
+      <Route exact path='/material' component={Material} />
+
+      <Route exact path='/profile/edit' component={EditProfile} />
+      <Route exact path='/profile' component={ProfilePage} />
+
+      <Route path='/signin' component={Signin} />
+      <Route path='/signUp' component={Signup} />
+
       <Route exact path='/users' component={UserList} />
+      <Route path='/user/following/:id' component={Following} />
       <Route exact path='/user/:id' component={SingleUserProfile} />
 
-      <Route path='/following' component={Following} />
+      <Route exact path='/' component={Home}></Route>
     </Router>
   )
 }

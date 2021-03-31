@@ -1,14 +1,27 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { listUserTipLink } from '../../actions/auth'
+import FollowingBox from '../../components/FollowingBox'
 
 const Following = () => {
+  const dispatch = useDispatch()
   const { userInfo } = useSelector((state) => state.userLogin)
-  const { user } = userInfo
+
+  const { loading, error, tipLink } = useSelector((state) => state.userTipLink)
+  console.log('test', loading, error, tipLink)
+  useEffect(() => {
+    dispatch(listUserTipLink(userInfo.user._id))
+    console.log('from Following page2', tipLink)
+  }, [])
+  console.log('from Following page', tipLink)
+
   return (
     <>
-      <h1>I am following</h1>
-      {/* <Tips/>
-            <ImportantLinks/> */}
+      <FollowingBox />
+      <FollowingBox />
+      <FollowingBox />
+      <FollowingBox />
+      <FollowingBox />
     </>
   )
 }

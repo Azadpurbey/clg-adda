@@ -31,7 +31,9 @@ const Home = () => {
                 <Link className='btn btn-dark my-3' to='/profile'>
                   Profile
                 </Link>
-                <Link className='btn btn-light my-3' to='/following'>
+                <Link
+                  className='btn btn-light my-3'
+                  to={`/user/following/${userInfo.user._id}`}>
                   Following
                 </Link>
                 <Col className='text-center'>Copyright &copy; ISM</Col>

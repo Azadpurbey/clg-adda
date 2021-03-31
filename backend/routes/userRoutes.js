@@ -12,10 +12,9 @@ import {
   singleUser,
   handleFollow,
   checkFollow,
-  getTipById,
   addTipById,
-  getLinkById,
   addLinkById,
+  getTipAndLinkById,
 } from '../controllers/auth.js'
 
 import { authToken } from '../middleware/decodeToken.js'
@@ -29,8 +28,10 @@ router.put('/editprofile', authToken, updateUserProfile)
 router.get('/', authToken, allUsers)
 router.put('/follow/:id', authToken, handleFollow)
 router.get('/followCheck/:id', authToken, checkFollow)
-router.route('/tip/:id').get(getTipById).post(addTipById)
-router.route('/link/:id').get(getLinkById).post(addLinkById)
+router.get('/following/:id', getTipAndLinkById)
+
+router.route('/tip/:id').post(addTipById)
+router.route('/link/:id').post(addLinkById)
 
 router.get('/:id', singleUser)
 

@@ -192,10 +192,9 @@ export const allUsers = async (req, res) => {
 
 export const singleUser = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id)
-    user.password = undefined
-    res.json(user)
-  } catch (error) {
+    const user = await User.findById(req.params.id).select('-password')
+    res.status(201).json(user)
+  } catch (err) {
     return res.status(422).json({ error: err })
   }
 }
@@ -249,12 +248,18 @@ export const checkFollow = async (req, res) => {
   }
 }
 
-export const getTipById = async (req, res) => {
-  console.log(req.params.id)
+export const getTipAndLinkById = async (req, res) => {
+  console.log(req.params.id) // login in user id
+  // console.log(req.user._id)
   const user = await User.findById(req.params.id)
+  var tip_link_list = []
+
+  user.following.map((x) => {
+    tip_link_list.push({ name: x.name, tips: x.tips, impLinks: x.impLinks })
+  })
 
   if (user) {
-    res.json(user.tips)
+    res.json(tip_link_list)
   } else {
     res.status(404)
     throw new Error('User not found')
@@ -277,17 +282,6 @@ export const addTipById = async (req, res) => {
       user,
       token: generateToken(user._id),
     })
-  } else {
-    res.status(404)
-    throw new Error('User not found')
-  }
-}
-
-export const getLinkById = async (req, res) => {
-  const user = await User.findById(req.params.id)
-
-  if (user) {
-    res.json(user.impLinks)
   } else {
     res.status(404)
     throw new Error('User not found')

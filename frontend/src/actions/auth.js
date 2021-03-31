@@ -32,6 +32,49 @@ export const login = (email, password) => async (dispatch) => {
   }
 }
 
+export const listUserDetail = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.USER_DETAIL_REQUEST })
+
+    const { data } = await axios.get(`/api/user/${id}`)
+
+    dispatch({
+      type: actionTypes.USER_DETAIL_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: actionTypes.USER_DETAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const listUserTipLink = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.USER_TIP_LINK_REQUEST })
+
+    const { data } = await axios.get(`/api/user/following/${id}`)
+    console.log('from listUserTipLink action', data)
+
+    dispatch({
+      type: actionTypes.USER_TIP_LINK_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: actionTypes.USER_TIP_LINK_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
 export const emailOtp = (email) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.EMAIL_OTP_REQUEST })
@@ -137,7 +180,7 @@ export const userListAction = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get('/api/user/', config)
-    console.log('from inside auth action', data)
+    //console.log('from inside auth action', data)
     dispatch({
       type: actionTypes.USER_LIST_SUCCESS,
       payload: data,

@@ -70,7 +70,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'Not available',
     },
-    following: [{ type: String }],
+    following: [{ type: mongoose.Schema.Types.Mixed, ref: 'user' }],
     tips: [tipSchema],
     impLinks: [impLinkSchema],
   },

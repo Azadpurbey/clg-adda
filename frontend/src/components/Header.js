@@ -24,7 +24,7 @@ const Header = () => {
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>
-          <LinkContainer to='/following'>
+          <LinkContainer to={`/user/following/${userInfo.user._id}`}>
             <Nav.Link>Following</Nav.Link>
           </LinkContainer>
           <LinkContainer to='/profDetail/MNC'>

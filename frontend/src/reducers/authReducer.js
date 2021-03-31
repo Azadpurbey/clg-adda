@@ -15,6 +15,36 @@ export const userLoginReducer = (state = {}, action) => {
   }
 }
 
+export const userDetailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actionTypes.USER_DETAIL_REQUEST:
+      return { laoding: true }
+    case actionTypes.USER_DETAIL_SUCCESS:
+      return { loading: false, curUser: action.payload }
+    case actionTypes.USER_DETAIL_FAIL:
+      return { loading: false, error: action.payload }
+    case actionTypes.USER_DETAIL_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
+export const userTipLinkReducer = (state = {}, action) => {
+  switch (action.type) {
+    case actionTypes.USER_TIP_LINK_REQUEST:
+      return { laoding: true }
+    case actionTypes.USER_TIP_LINK_SUCCESS:
+      return { loading: false, tipLink: action.payload }
+    case actionTypes.USER_TIP_LINK_FAIL:
+      return { loading: false, error: action.payload }
+    case actionTypes.USER_TIP_LINK_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.USER_REGISTER_REQUEST:

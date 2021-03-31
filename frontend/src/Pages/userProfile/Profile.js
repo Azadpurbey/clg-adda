@@ -9,24 +9,7 @@ import { ADD_LINK_RESET, ADD_TIP_RESET } from '../../constants/auth'
 
 import { addLinkAction, addTipAction } from '../../actions/auth'
 const style1 = {
-  borderStyle: 'none',
-  borderColor: 'black',
-  width: '100%',
-  height: '100%',
-  display: 'block',
-  boxSizing: 'border-box',
-  borderWidth: '1px',
-  marginBottom: '1px',
-}
-const style2 = {
-  width: '100%',
-  boxSizing: 'border-box',
-  height: '35px',
-  padding: '5px',
-}
-const style3 = {
-  width: '250px',
-  border: '1px solid black',
+  marginLeft: '10px',
 }
 
 const Profile = () => {
@@ -65,6 +48,7 @@ const Profile = () => {
     e.preventDefault()
     dispatch(addTipAction(tip))
   }
+
   return (
     <div className='container'>
       <div className='main-body'>
@@ -92,7 +76,6 @@ const Profile = () => {
                     <p className='text-muted font-size-sm'>
                       Bay Area, San Francisco, CA
                     </p>
-                    <button className='btn btn-primary'>Followers : 5</button>
                     <button className='btn btn-outline-primary'>
                       Following : {user.following.length}
                     </button>
@@ -143,6 +126,7 @@ const Profile = () => {
                   </h6>
                   <span className='text-secondary'>{user.twitter}</span>
                 </li>
+
                 <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
                   <h6 className='mb-0'>
                     <svg
@@ -170,6 +154,7 @@ const Profile = () => {
                   </h6>
                   <span className='text-secondary'>bootdey</span>
                 </li>
+
                 <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
                   <h6 className='mb-0'>
                     <svg
@@ -213,7 +198,9 @@ const Profile = () => {
                   <div className='col-sm-3'>
                     <h6 className='mb-0'>Batch</h6>
                   </div>
-                  <div className='col-sm-9 text-secondary'>{user.batch}</div>
+                  <div className='col-sm-9 text-secondary'>
+                    {user.admission}
+                  </div>
                 </div>
                 <hr></hr>
                 <div className='row'>
@@ -223,79 +210,67 @@ const Profile = () => {
                   <div className='col-sm-9 text-secondary'>{user.branch}</div>
                 </div>
                 <hr></hr>
-                <div className='row'>
-                  <div className='col-sm-3'>
-                    <h6 className='mb-0'>Designation</h6>
-                  </div>
-                  <div className='col-sm-9 text-secondary'>Student</div>
-                </div>
               </div>
             </div>
 
-            <div className='row gutters-sm'>
-              <div className='col-sm-6 mb-3'>
-                <div className='card h-100'>
-                  <div className='card-body'>
-                    <h6 className='d-flex align-items-center mb-3'>
-                      <i className='material-icons text-info mr-2'>Imp Tips</i>
-                    </h6>
-                    {user.tips && (
-                      <ol>
-                        {user.tips.map((x) => (
-                          <li key={x._id}>{x.tip}</li>
-                        ))}
-                      </ol>
-                    )}
+            <div className='row gutters-sm style1'>
+              <div className='col-sm-6 mb-3 card'>
+                <div className='card-body'>
+                  <h6 className='d-flex align-items-center mb-3'>
+                    <i className='material-icons text-info mr-2'>Imp Tips</i>
+                  </h6>
+                  {user.tips && (
+                    <ol>
+                      {user.tips.map((x) => (
+                        <li key={x._id}>{x.tip}</li>
+                      ))}
+                    </ol>
+                  )}
 
-                    <Form onSubmit={addTipSubmitHandler}>
-                      <Form.Group controlId='addTips'>
-                        <Form.Label>Add Tip</Form.Label>
-                        <Form.Control
-                          as='textarea'
-                          row='3'
-                          value={tip}
-                          onChange={(e) =>
-                            setTip(e.target.value)
-                          }></Form.Control>
-                      </Form.Group>
-                      <Button type='submit' variant='primary'>
-                        Submit
-                      </Button>
-                    </Form>
-                  </div>
+                  <Form onSubmit={addTipSubmitHandler}>
+                    <Form.Group controlId='addTips'>
+                      <Form.Label>Add Tip</Form.Label>
+                      <Form.Control
+                        as='textarea'
+                        row='3'
+                        value={tip}
+                        onChange={(e) => setTip(e.target.value)}></Form.Control>
+                    </Form.Group>
+                    <Button type='submit' variant='primary'>
+                      Submit
+                    </Button>
+                  </Form>
                 </div>
               </div>
 
-              <div className='col-sm-6 mb-3'>
-                <div className='card h-100'>
-                  <div className='card-body'>
-                    <h6 className='d-flex align-items-center mb-3'>
-                      <i className='material-icons text-info mr-2'>Imp Links</i>
-                    </h6>
-                    {user.impLinks && (
-                      <ol>
-                        {user.impLinks.map((x) => (
-                          <li key={x._id}>{x.link}</li>
-                        ))}
-                      </ol>
-                    )}
+              <div className='col-sm-6 mb-3 card'>
+                <div className='card-body'>
+                  <h6 className='d-flex align-items-center mb-3'>
+                    <i className='material-icons text-info mr-2'>Imp Links</i>
+                  </h6>
+                  {user.impLinks && (
+                    <ol>
+                      {user.impLinks.map((x) => (
+                        <li key={x._id}>{x.link}</li>
+                      ))}
+                    </ol>
+                  )}
 
-                    <Form onSubmit={addLinkSubmitHandler}>
-                      <Form.Group controlId='addLink'>
-                        <Form.Label>Add Important Link</Form.Label>
-                        <Form.Control
-                          as='textarea'
-                          row='3'
-                          value={link}
-                          onChange={(e) =>
-                            setLink(e.target.value)
-                          }></Form.Control>
-                      </Form.Group>
-                      <Button type='submit' variant='primary'>
-                        Submit
-                      </Button>
-                    </Form>
-                  </div>
+                  <Form onSubmit={addLinkSubmitHandler}>
+                    <Form.Group controlId='addLink'>
+                      <Form.Label>Add Important Link</Form.Label>
+                      <Form.Control
+                        as='textarea'
+                        row='3'
+                        value={link}
+                        onChange={(e) =>
+                          setLink(e.target.value)
+                        }></Form.Control>
+                    </Form.Group>
+                    <Button type='submit' variant='primary'>
+                      Submit
+                    </Button>
+                  </Form>
                 </div>
               </div>
             </div>
