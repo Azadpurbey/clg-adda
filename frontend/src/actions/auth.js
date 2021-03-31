@@ -1,4 +1,5 @@
 import * as actionTypes from '../constants/auth'
+
 import axios from 'axios'
 
 export const login = (email, password) => async (dispatch) => {
@@ -160,6 +161,9 @@ export const update = (updateForm) => async (dispatch, getState) => {
     localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({
       type: actionTypes.USER_UPDATE_PROFILE_SUCCESS,
+    })
+    dispatch({
+      type: USER_UPDATE_REFRESH,
     })
   } catch (error) {
     dispatch({ type: actionTypes.USER_UPDATE_PROFILE_FAIL, payload: error })
