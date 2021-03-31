@@ -163,7 +163,7 @@ export const update = (updateForm) => async (dispatch, getState) => {
       type: actionTypes.USER_UPDATE_PROFILE_SUCCESS,
     })
     dispatch({
-      type: USER_UPDATE_REFRESH,
+      type: actionTypes.USER_UPDATE_REFRESH,
     })
   } catch (error) {
     dispatch({ type: actionTypes.USER_UPDATE_PROFILE_FAIL, payload: error })

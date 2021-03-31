@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { listUserTipLink } from '../../actions/auth'
 import FollowingBox from '../../components/FollowingBox'
+import Loader from '../../components/Loader'
+import Message from '../../components/Message'
 
 const Following = () => {
   const dispatch = useDispatch()
@@ -11,17 +13,25 @@ const Following = () => {
   console.log('test', loading, error, tipLink)
   useEffect(() => {
     dispatch(listUserTipLink(userInfo.user._id))
-    console.log('from Following page2', tipLink)
-  }, [])
-  console.log('from Following page', tipLink)
+  }, [userInfo])
 
   return (
     <>
-      <FollowingBox />
-      <FollowingBox />
-      <FollowingBox />
-      <FollowingBox />
-      <FollowingBox />
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'></Message>
+      ) : (
+        tipLink &&
+        tipLink.map((x, i) => (
+          <FollowingBox
+            key={i}
+            name={x.name}
+            tips={x.tips}
+            impLinks={x.impLinks}
+          />
+        ))
+      )}
     </>
   )
 }
