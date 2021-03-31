@@ -1,24 +1,27 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import connectDb from './config/db.js'
-import userRoutes from './routes/userRoutes.js'
-import uploadRoutes from './routes/uploadRoutes.js'
-import materialRoutes from './routes/materialRoutes.js'
-import profDetailRoutes from './routes/profDetailRoutes.js'
-import aluminiRoutes from './routes/aluminiRoutes.js'
+
 import morgan from 'morgan'
 import cors from 'cors'
 import aws from 'aws-sdk'
 import path from 'path'
 import bodyParser from 'body-parser'
+
+import userRoutes from './routes/userRoutes.js'
+import uploadRoutes from './routes/uploadRoutes.js'
+import materialRoutes from './routes/materialRoutes.js'
+import profDetailRoutes from './routes/profDetailRoutes.js'
+import aluminiRoutes from './routes/aluminiRoutes.js'
+
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 
 dotenv.config()
 
-const app = express()
-
 //database
 connectDb()
+
+const app = express()
 
 //aws config
 aws.config.update({
@@ -30,6 +33,9 @@ aws.config.update({
 //middleware
 app.use(express.json())
 app.use(cors())
+
+//console.log('.env test', process.env.NODE_ENV)
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
@@ -55,8 +61,6 @@ if (process.env.NODE_ENV === 'production') {
     res.send('API is running...')
   })
 }
-
-// *********************
 
 app.use(notFound)
 app.use(errorHandler)

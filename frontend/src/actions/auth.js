@@ -1,30 +1,10 @@
-import {
-  USER_LIST_FAIL,
-  USER_LIST_SUCCESS,
-  USER_LIST_REQUEST,
-  USER_UPDATE_PROFILE_FAIL,
-  USER_UPDATE_PROFILE_SUCCESS,
-  USER_UPDATE_PROFILE_REQUEST,
-  USER_LOGOUT,
-  USER_LOGIN_SUCCESS,
-  USER_LOGIN_REQUEST,
-  USER_LOGIN_FAIL,
-  USER_REGISTER_SUCCESS,
-  USER_REGISTER_REQUEST,
-  USER_REGISTER_FAIL,
-  EMAIL_OTP_FAIL,
-  EMAIL_OTP_SUCCESS,
-  EMAIL_OTP_REQUEST,
-  FOLLOW_ADD_FAIL,
-  FOLLOW_ADD_REQUEST,
-  FOLLOW_ADD_SUCCESS,
-} from '../constants/auth'
+import * as actionTypes from '../constants/auth'
 import axios from 'axios'
 
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
-      type: USER_LOGIN_REQUEST,
+      type: actionTypes.USER_LOGIN_REQUEST,
     })
 
     const config = {
@@ -39,14 +19,14 @@ export const login = (email, password) => async (dispatch) => {
       config
     )
     dispatch({
-      type: USER_LOGIN_SUCCESS,
+      type: actionTypes.USER_LOGIN_SUCCESS,
       payload: data,
     })
 
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: USER_LOGIN_FAIL,
+      type: actionTypes.USER_LOGIN_FAIL,
       payload: 'Invalid Email & Password',
     })
   }
@@ -54,7 +34,7 @@ export const login = (email, password) => async (dispatch) => {
 
 export const emailOtp = (email) => async (dispatch) => {
   try {
-    dispatch({ type: EMAIL_OTP_REQUEST })
+    dispatch({ type: actionTypes.EMAIL_OTP_REQUEST })
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -63,11 +43,11 @@ export const emailOtp = (email) => async (dispatch) => {
 
     const { data } = await axios.post('/api/user/otp', { email }, config)
     dispatch({
-      type: EMAIL_OTP_SUCCESS,
+      type: actionTypes.EMAIL_OTP_SUCCESS,
     })
   } catch (error) {
     dispatch({
-      type: EMAIL_OTP_FAIL,
+      type: actionTypes.EMAIL_OTP_FAIL,
       payload: 'Email already exist',
     })
   }
@@ -76,7 +56,7 @@ export const emailOtp = (email) => async (dispatch) => {
 export const register = (form) => async (dispatch) => {
   try {
     dispatch({
-      type: USER_REGISTER_REQUEST,
+      type: actionTypes.USER_REGISTER_REQUEST,
     })
 
     const config = {
@@ -87,17 +67,17 @@ export const register = (form) => async (dispatch) => {
 
     const { data } = await axios.post('/api/user/signup', form, config)
     dispatch({
-      type: USER_REGISTER_SUCCESS,
+      type: actionTypes.USER_REGISTER_SUCCESS,
       payload: data,
     })
     dispatch({
-      type: USER_LOGIN_SUCCESS,
+      type: actionTypes.USER_LOGIN_SUCCESS,
       payload: data,
     })
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: USER_REGISTER_FAIL,
+      type: actionTypes.USER_REGISTER_FAIL,
       payload: 'OTP NOT CORRECT',
     })
   }
@@ -107,13 +87,13 @@ export const logout = () => async (dispatch) => {
   localStorage.removeItem('userInfo')
 
   dispatch({
-    type: USER_LOGOUT,
+    type: actionTypes.USER_LOGOUT,
   })
 }
 
 export const update = (updateForm) => async (dispatch, getState) => {
   try {
-    dispatch({ type: USER_UPDATE_PROFILE_REQUEST })
+    dispatch({ type: actionTypes.USER_UPDATE_PROFILE_REQUEST })
 
     const {
       userLogin: { userInfo },
@@ -131,21 +111,21 @@ export const update = (updateForm) => async (dispatch, getState) => {
       config
     )
     dispatch({
-      type: USER_LOGIN_SUCCESS,
+      type: actionTypes.USER_LOGIN_SUCCESS,
       payload: data,
     })
     localStorage.setItem('userInfo', JSON.stringify(data))
     dispatch({
-      type: USER_UPDATE_PROFILE_SUCCESS,
+      type: actionTypes.USER_UPDATE_PROFILE_SUCCESS,
     })
   } catch (error) {
-    dispatch({ type: USER_UPDATE_PROFILE_FAIL, payload: error })
+    dispatch({ type: actionTypes.USER_UPDATE_PROFILE_FAIL, payload: error })
   }
 }
 
 export const userListAction = () => async (dispatch, getState) => {
   try {
-    dispatch({ type: USER_LIST_REQUEST })
+    dispatch({ type: actionTypes.USER_LIST_REQUEST })
     const {
       userLogin: { userInfo },
     } = getState()
@@ -157,18 +137,19 @@ export const userListAction = () => async (dispatch, getState) => {
     }
 
     const { data } = await axios.get('/api/user/', config)
+    console.log('from inside auth action', data)
     dispatch({
-      type: USER_LIST_SUCCESS,
+      type: actionTypes.USER_LIST_SUCCESS,
       payload: data,
     })
   } catch (error) {
-    dispatch({ type: USER_LIST_FAIL, payload: error })
+    dispatch({ type: actionTypes.USER_LIST_FAIL, payload: error })
   }
 }
 
 export const addFollowingAction = (id) => async (dispatch, getState) => {
   try {
-    dispatch({ type: FOLLOW_ADD_REQUEST })
+    dispatch({ type: actionTypes.FOLLOW_ADD_REQUEST })
     const {
       userLogin: { userInfo },
     } = getState()
@@ -180,8 +161,92 @@ export const addFollowingAction = (id) => async (dispatch, getState) => {
       },
     }
     const { data } = await axios.put(`/api/user/follow/${id}/`, {}, config)
-    dispatch({ type: FOLLOW_ADD_SUCCESS, payload: data })
+    dispatch({ type: actionTypes.FOLLOW_ADD_SUCCESS, payload: data })
   } catch (err) {
-    dispatch({ type: FOLLOW_ADD_FAIL, payload: err })
+    dispatch({ type: actionTypes.FOLLOW_ADD_FAIL, payload: err })
+  }
+}
+
+export const addTipAction = (tip) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actionTypes.ADD_TIP_REQUEST })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const userId = userInfo.user._id
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.post(
+      `/api/user/tip/${userId}`,
+      { tip },
+      config
+    )
+    dispatch({
+      type: actionTypes.USER_LOGIN_SUCCESS,
+      payload: data,
+    })
+    localStorage.setItem('userInfo', JSON.stringify(data))
+
+    dispatch({
+      type: actionTypes.ADD_TIP_SUCCESS,
+    })
+  } catch (error) {
+    dispatch({
+      type: actionTypes.ADD_TIP_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const addLinkAction = (link) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actionTypes.ADD_LINK_REQUEST })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const userId = userInfo.user._id
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.post(
+      `/api/user/link/${userId}`,
+      { link },
+      config
+    )
+    dispatch({
+      type: actionTypes.USER_LOGIN_SUCCESS,
+      payload: data,
+    })
+    localStorage.setItem('userInfo', JSON.stringify(data))
+
+    dispatch({
+      type: actionTypes.ADD_LINK_SUCCESS,
+    })
+  } catch (error) {
+    dispatch({
+      type: actionTypes.ADD_LINK_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 }

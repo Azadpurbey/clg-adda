@@ -4,6 +4,7 @@ import OTP from '../models/otp.js'
 import rn from 'random-number'
 import nodemailer from 'nodemailer'
 import nodemailerSendgrid from 'nodemailer-sendgrid'
+
 import c from 'config'
 
 export const otpController = async (req, res) => {
@@ -180,89 +181,133 @@ export const updateUserProfile = async (req, res) => {
   }
 }
 
-
-export const allUSers=async(req,res)=>{
+export const allUsers = async (req, res) => {
   try {
-   const userChk= await User.find({});
-   userChk.map(u=>u.password=undefined);
-   var user=[];
-   userChk.map((u)=>{
-        if(u._id.toString()!==req.user._id.toString())
-        {
-          user.push(u);
-        }
-   })
-   res.json({user});
+    const user = await User.find({}).select('-password')
+    res.json({ user })
   } catch (err) {
     return res.status(422).json({ error: err })
   }
 }
-export const singleUser=async(req,res)=>{
-  
+
+export const singleUser = async (req, res) => {
   try {
-          const user=await User.findById(req.params.id);
-          user.password=undefined;
-          res.json(user);
+    const user = await User.findById(req.params.id)
+    user.password = undefined
+    res.json(user)
   } catch (error) {
     return res.status(422).json({ error: err })
   }
-  
-
 }
 
-
-export const handleFollow=async(req,res)=>{
+export const handleFollow = async (req, res) => {
   try {
-    const user =await User.findById(req.user._id);
-    const followingUser=await User.findById(req.params.id);
-    if(!user || !followingUser)
-    {
-     return res.status(401).json({error:"not found"});
+    const user = await User.findById(req.user._id)
+    const followingUser = await User.findById(req.params.id)
+    if (!user || !followingUser) {
+      return res.status(401).json({ error: 'not found' })
     }
-    followingUser.password=undefined;
-   
-   
-    var chkFollowing=false;
-    user.following.map((f)=>{
-      if(f._id.toString()===req.params.id.toString())
-      {
-        chkFollowing=true;
+    followingUser.password = undefined
+
+    var chkFollowing = false
+    user.following.map((f) => {
+      if (f._id.toString() === req.params.id.toString()) {
+        chkFollowing = true
       }
     })
-    console.log(chkFollowing);
-    if(chkFollowing)
-    {
-      console.log("checking beero")
-      const removeIndex=user.following.map(f=>f._id.toString()).indexOf(req.params.id.toString());
-      user.following.splice(removeIndex,1);
-      await user.save();
-      return res.json({message:'unfollowed',});
-    } 
-    else{
-      user.following.push(followingUser);
-      await user.save();
-     return  res.json({message:"followed"});
+    console.log(chkFollowing)
+    if (chkFollowing) {
+      console.log('checking beero')
+      const removeIndex = user.following
+        .map((f) => f._id.toString())
+        .indexOf(req.params.id.toString())
+      user.following.splice(removeIndex, 1)
+      await user.save()
+      return res.json({ message: 'unfollowed' })
+    } else {
+      user.following.push(followingUser)
+      await user.save()
+      return res.json({ message: 'followed' })
     }
   } catch (err) {
-    return res.status(401).json({ error: err });
+    return res.status(401).json({ error: err })
   }
 }
 
-export const checkFollow=async(req,res)=>{
+export const checkFollow = async (req, res) => {
   try {
-    const user =await User.findById(req.user._id);
-    var chk=false;
-    user.following.map((f)=>{
-      if(f._id.toString()===req.params.id.toString())
-      {
-        chk=true;
+    const user = await User.findById(req.user._id)
+    var chk = false
+    user.following.map((f) => {
+      if (f._id.toString() === req.params.id.toString()) {
+        chk = true
       }
     })
-    res.json({message:chk});
-  
-
-
+    res.json({ message: chk })
   } catch (err) {
-    return res.status(401).json({ error: err });
+    return res.status(401).json({ error: err })
+  }
+}
+
+export const getTipById = async (req, res) => {
+  console.log(req.params.id)
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    res.json(user.tips)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+}
+
+export const addTipById = async (req, res) => {
+  const { tip } = req.body
+  console.log('from insideaut', tip)
+  const user = await User.findById(req.params.id)
+  const cur_tip = {
+    tip: tip,
+  }
+
+  if (user) {
+    user.tips.push(cur_tip)
+    await user.save()
+
+    res.status(201).json({
+      user,
+      token: generateToken(user._id),
+    })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+}
+
+export const getLinkById = async (req, res) => {
+  const user = await User.findById(req.params.id)
+
+  if (user) {
+    res.json(user.impLinks)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+}
+
+export const addLinkById = async (req, res) => {
+  const { link } = req.body
+  const user = await User.findById(req.params.id)
+  const cur_link = {
+    link: link,
+  }
+
+  if (user) {
+    user.impLinks.push(cur_link)
+    await user.save()
+
+    res.status(201).json({ user, token: generateToken(user._id) })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
   }
 }

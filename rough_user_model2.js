@@ -1,28 +1,6 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcryptjs'
 
-const tipSchema = mongoose.Schema(
-  {
-    tip: {
-      type: String,
-    },
-  },
-  {
-    timestamps: true,
-  }
-)
-
-const impLinkSchema = mongoose.Schema(
-  {
-    link: {
-      type: String,
-    },
-  },
-  {
-    timestamps: true,
-  }
-)
-
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -54,6 +32,7 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    following: [{ type: mongoose.Schema.Types.Mixed, ref: 'user' }],
     linkedIn: {
       type: String,
       default: 'Not available',
@@ -70,9 +49,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'Not available',
     },
-    following: [{ type: String }],
-    tips: [tipSchema],
-    impLinks: [impLinkSchema],
+    tips: {
+      type: String,
+      default: 'NA',
+    },
+    about: {
+      type: String,
+      default: 'NA',
+    },
   },
   { timestamps: true }
 )

@@ -8,6 +8,8 @@ import {
   updateUserProfileReducer,
   userListReducer,
   addFollowUserReducer,
+  addTipReducer,
+  addLinkReducer,
 } from './reducers/authReducer'
 
 import {
@@ -55,6 +57,8 @@ const reducer = combineReducers({
   materialDelete: materialDeleteReducer,
   userList: userListReducer,
   addFollowUser: addFollowUserReducer,
+  addTip: addTipReducer,
+  addLink: addLinkReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

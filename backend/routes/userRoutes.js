@@ -8,10 +8,14 @@ import {
   forgotOtp,
   forgotPassword,
   updateUserProfile,
-  allUSers,
+  allUsers,
   singleUser,
   handleFollow,
-  checkFollow
+  checkFollow,
+  getTipById,
+  addTipById,
+  getLinkById,
+  addLinkById,
 } from '../controllers/auth.js'
 
 import { authToken } from '../middleware/decodeToken.js'
@@ -22,10 +26,12 @@ router.post('/signin', signin)
 router.post('/forgot/otp', forgotOtp)
 router.put('/forgot/password', forgotPassword)
 router.put('/editprofile', authToken, updateUserProfile)
-router.get('/',authToken,allUSers);
-router.get('/:id',singleUser);
-// router.get('/',authToken,(req,res)=>res.send(req.user._id));
-router.put('/follow/:id',authToken,handleFollow);
-router.get('/followCheck/:id',authToken,checkFollow);
+router.get('/', authToken, allUsers)
+router.put('/follow/:id', authToken, handleFollow)
+router.get('/followCheck/:id', authToken, checkFollow)
+router.route('/tip/:id').get(getTipById).post(addTipById)
+router.route('/link/:id').get(getLinkById).post(addLinkById)
+
+router.get('/:id', singleUser)
 
 export default router

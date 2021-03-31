@@ -3,7 +3,7 @@
   "proxy": "http://127.0.0.1:5000",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "node backend/server",

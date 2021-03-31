@@ -19,11 +19,11 @@ const Home = () => {
               materials & can get in touch with aluminis & faculties.
             </p>
             <div className={style.icon}>
-              <i class='fas fa-cloud-download-alt'></i>
+              <i className='fas fa-cloud-download-alt'></i>
               <p>Downloads:10</p>
-              <i class='fas fa-users'></i>
+              <i className='fas fa-users'></i>
               <p>Users:91</p>
-              <i class='fas fa-code-branch'></i>
+              <i className='fas fa-code-branch'></i>
               <p>Contributors:37</p>
             </div>
             {userInfo ? (

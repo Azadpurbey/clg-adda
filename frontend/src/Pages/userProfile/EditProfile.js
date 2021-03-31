@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { update } from '../actions/auth'
 import { Link, useHistory } from 'react-router-dom'
-import FormContainer from './FormContainer'
+
+import { update } from '../../actions/auth'
+import FormContainer from '../../components/FormContainer'
+import { USER_UPDATE_PROFILE_RESET } from '../../constants/auth'
 const EditProfile = () => {
   const { userInfo } = useSelector((state) => state.userLogin)
   const { user } = userInfo
@@ -31,9 +33,11 @@ const EditProfile = () => {
   }
   useEffect(() => {
     if (success) {
+      dispatch({ type: USER_UPDATE_PROFILE_RESET })
       history.push('/profile')
     }
   }, [success, history])
+
   return (
     <>
       {loading && <h3>Loading...</h3>}

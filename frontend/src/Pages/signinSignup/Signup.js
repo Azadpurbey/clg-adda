@@ -19,14 +19,14 @@ const SignupEmail = () => {
   const history = useHistory()
 
   const dispatch = useDispatch()
-  const {
-    success: isEmail,
-    loading: isEmailLoading,
-    error
-  } = useSelector((state) => state.emailOtpUser)
-  const { loading: loadingRegister, userRegister,error:errorRegister } = useSelector(
-    (state) => state.userRegister
+  const { success: isEmail, loading: isEmailLoading, error } = useSelector(
+    (state) => state.emailOtpUser
   )
+  const {
+    loading: loadingRegister,
+    userRegister,
+    error: errorRegister,
+  } = useSelector((state) => state.userRegister)
 
   const OnSubmit = (e) => {
     e.preventDefault()
@@ -41,7 +41,7 @@ const SignupEmail = () => {
     e.preventDefault()
     dispatch(emailOtp(email))
   }
-  console.log(errorRegister)
+  //console.log(errorRegister)
   useEffect(() => {
     if (userRegister) {
       history.push('/')
@@ -58,9 +58,11 @@ const SignupEmail = () => {
         <p className='lead'>
           <i className='fas fa-user' /> Create Your Account
         </p>
-        {(isEmailLoading || loadingRegister) && <Loader/>}
-        {error && <Message variant="danger">{error}</Message>}
-        {(errorRegister || correctDetail) && <Message variant="danger">Please check your detail properly</Message>}
+        {(isEmailLoading || loadingRegister) && <Loader />}
+        {error && <Message variant='danger'>{error}</Message>}
+        {(errorRegister || correctDetail) && (
+          <Message variant='danger'>Please check your detail properly</Message>
+        )}
 
         {!isEmail && (
           <form className='form' onSubmit={emailHandler}>
@@ -132,12 +134,12 @@ const SignupEmail = () => {
                 required
                 onChange={(e) => setBranch(e.target.value)}>
                 <option>* Select Your branch</option>
-                <option value='M&C'>M&C</option>
+                <option value='MNC'>MNC</option>
                 <option value='CSE'>CSE</option>
                 <option value='ECE'>ECE</option>
-                <option value='Mechanical'>Mechanical</option>
-                <option value='Chemical'>Chemical</option>
-                <option value='Electrical'>Electrical</option>
+                <option value='Mechanical'>MECH</option>
+                <option value='Chemical'>CHE</option>
+                <option value='Electrical'>EE</option>
               </select>
             </div>
 

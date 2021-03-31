@@ -1,21 +1,28 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './index.css'
-import Material from './Pages/material/Material'
-import ProfilePage from './Pages/userProfile/Profile'
-import Signin from './Pages/signinSignup/Signin'
-import Home from './Pages/home/Home'
-import AluminiList from './Pages/alumini/AluminiList'
-import AluminiProfile from './Pages/alumini/AluminiProfile'
-import Signup from './Pages/signinSignup/Signup'
+
 import Header from './components/Header'
-import EditProfile from './components/EditProfile'
+
+import Signup from './Pages/signinSignup/Signup'
+import Signin from './Pages/signinSignup/Signin'
+import ProfilePage from './Pages/userProfile/Profile'
+import EditProfile from './Pages/userProfile/EditProfile'
+
+import Home from './Pages/home/Home'
+
 import ProfList from './Pages/prof/ProfList'
 import AddProf from './Pages/prof/AddProf'
-import AddAlumini from './Pages/prof/AddAlumini'
-import AddMaterial from './Pages/material/AddMaterial'
 import EditProfDetail from './Pages/prof/EditProfDetail'
+
+import AddAlumini from './Pages/prof/AddAlumini'
+import AluminiList from './Pages/alumini/AluminiList'
+import AluminiProfile from './Pages/alumini/AluminiProfile'
 import EditAluminiDetail from './Pages/alumini/EditAluminiDetail'
+
+import Material from './Pages/material/Material'
+import AddMaterial from './Pages/material/AddMaterial'
+
 import UserList from './components/UserList'
 import SingleUserProfile from './components/SingleUserProfile'
 import Following from './Pages/following/Following'
@@ -25,6 +32,7 @@ const App = () => {
     <Router>
       <Header />
       <Route path='/profDetail/edit/:id' component={EditProfDetail} />
+
       <Route path='/alumini/edit/:id' component={EditAluminiDetail} />
       <Route exact path='/profDetail/:department' component={ProfList} />
       <Route path='/admin/addProf' component={AddProf} />
@@ -37,7 +45,7 @@ const App = () => {
       <Route exact path='/alumini/:department' component={AluminiList} />
       <Route exact path='/alumini/profile/:id' component={AluminiProfile} />
 
-      <Route exact path='/profie/edit' component={EditProfile} />
+      <Route exact path='/profile/edit' component={EditProfile} />
 
       <Route exact path='/' component={Home}></Route>
       <Route exact path='/users' component={UserList} />
