@@ -9,7 +9,20 @@ import { deleteAlumini, listAluminies } from '../../actions/aluminiAction'
 
 const AluminiList = ({ history }) => {
   const dispatch = useDispatch()
-  const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
+  const DepartmentList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
   const [department, setDepartment] = useState('MNC')
 
   const userLogin = useSelector((state) => state.userLogin)

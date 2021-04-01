@@ -20,7 +20,20 @@ const EditProfDetail = ({ match, history }) => {
   const [areaOfInterest, setAreaOfInterest] = useState(
     'Quantum computing and error correction in cubits and Grapg theory and Topology'
   )
-  const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
+  const DepartmentList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()

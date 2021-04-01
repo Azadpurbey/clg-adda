@@ -23,7 +23,20 @@ const AddMaterial = ({ history }) => {
   const [branch, setBranch] = useState('MNC')
   const [sem, setSem] = useState(1)
   const [description, setDescription] = useState('Enter description')
-  const BranchList = ['MNC', 'CSE', 'ECE', 'EE']
+  const BranchList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
@@ -46,6 +59,8 @@ const AddMaterial = ({ history }) => {
   const uploadFileHandler = async (e) => {
     e.preventDefault()
     const file = e.target.files[0]
+    //console.log(file)
+
     const formData = new FormData()
     formData.append('pdf', file)
     setUploading(true)
@@ -56,7 +71,6 @@ const AddMaterial = ({ history }) => {
           accept: 'application/json',
           'Content-Type': `multipart/form-data';
               boundary=${formData._boundary}`,
-          Authorization: `Bearer ${userInfo.token}`,
         },
       }
 
@@ -69,7 +83,7 @@ const AddMaterial = ({ history }) => {
       setFileName(data.location)
       setUploading(false)
     } catch (error) {
-      alert('only pdf')
+      console.log('cur', error)
       setUploading(false)
     }
   }

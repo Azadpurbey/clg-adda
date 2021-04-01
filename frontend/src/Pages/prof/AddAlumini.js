@@ -25,7 +25,20 @@ const AddAlumini = ({ history }) => {
   const [twitter, setTwitter] = useState('www.twitter.com/in/examplename')
   const [instagram, setInstagram] = useState('www.instagram.com/examplename')
   const [facebook, setFacebook] = useState('www.facebook.com/examplename')
-  const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
+  const DepartmentList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()

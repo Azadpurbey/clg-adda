@@ -13,7 +13,20 @@ const Material = ({ history }) => {
   const dispatch = useDispatch()
   const [branch, setBranch] = useState('MNC')
   const [sem, setSem] = useState(1)
-  const BranchList = ['MNC', 'CSE', 'ECE', 'EE']
+  const BranchList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -21,15 +34,14 @@ const Material = ({ history }) => {
   // get all related material
   const materialList = useSelector((state) => state.materialList)
   const { loading, error, materials } = materialList
-  const {success} =useSelector(state=>state.materialDelete);
+  const { success } = useSelector((state) => state.materialDelete)
   useEffect(() => {
-
     if (!userInfo) {
       history.push('/signin')
     } else {
       dispatch(listMaterials(sem, branch))
     }
-  }, [dispatch, sem, branch,success])
+  }, [dispatch, sem, branch, success])
 
   return (
     <>
@@ -79,7 +91,7 @@ const Material = ({ history }) => {
           </Link>
         </Col>
       </Row>
-      <h3 style={{textAlign : 'center'}}>
+      <h3 style={{ textAlign: 'center' }}>
         Material of branch {branch} and sem {sem}
       </h3>
       {loading ? (
@@ -90,7 +102,7 @@ const Material = ({ history }) => {
         <h1>materials not loaded</h1>
       ) : (
         <>
-          <Row style={{margin:"50px"}}>
+          <Row style={{ margin: '50px' }}>
             {materials.length == 0 && (
               <Message variant='success'>{`No any material is available of choosen sem and branch`}</Message>
             )}

@@ -32,14 +32,14 @@ const materialUpload = multer({
 router.post('/material', (req, res) => {
   materialUpload(req, res, (error) => {
     if (error) {
-      res.json({ error: error })
+      res.status(404).json({ error: error })
     } else {
       if (req.file === undefined) {
-        res.json('Error: No file Selected')
+        res.status(403).json({ Error: 'No file Selected' })
       } else {
         const materialName = req.file.key
         const materialLocation = req.file.location
-        res.json({
+        res.status(201).json({
           material: materialName,
           location: materialLocation,
         })

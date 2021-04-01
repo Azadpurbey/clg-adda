@@ -23,7 +23,20 @@ const EditAluminiDetail = ({ match, history }) => {
   const [instagram, setInstagram] = useState('')
   const [facebook, setFacebook] = useState('')
 
-  const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
+  const DepartmentList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
   const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()

@@ -15,7 +15,20 @@ const EditProfile = () => {
   const [admission, setAdmission] = useState(user.admission)
   const [isError, setIsError] = useState(false)
 
-  const DepartmentList = ['MNC', 'CSE', 'ECE', 'EE']
+  const DepartmentList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
 
   const { loading, success, error } = useSelector(
     (state) => state.updateUserProfile
