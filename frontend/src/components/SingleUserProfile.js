@@ -5,6 +5,7 @@ import Loader from './Loader'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { addFollowingAction, listUserDetail } from '../actions/auth'
+import { Link } from 'react-router-dom'
 const SingleUserProfile = ({ match, history }) => {
   const dispatch = useDispatch()
   const [show, setShow] = useState(false)
@@ -41,6 +42,9 @@ const SingleUserProfile = ({ match, history }) => {
 
   return (
     <>
+      <Link className='btn btn-dark my-3' to='/users'>
+        GO BACK
+      </Link>
       {loading || loading2 ? (
         <Loader />
       ) : error ? (

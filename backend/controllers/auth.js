@@ -184,7 +184,8 @@ export const updateUserProfile = async (req, res) => {
 export const allUsers = async (req, res) => {
   try {
     const user = await User.find({}).select('-password')
-    res.json({ user })
+    // console.log(user)
+    res.json(user)
   } catch (err) {
     return res.status(422).json({ error: err })
   }

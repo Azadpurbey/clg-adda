@@ -13,14 +13,14 @@ const Following = () => {
   console.log('test', loading, error, tipLink)
   useEffect(() => {
     dispatch(listUserTipLink(userInfo.user._id))
-  }, [userInfo])
+  }, [])
 
   return (
     <>
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'></Message>
+        <Message variant='danger'>{error}</Message>
       ) : (
         tipLink &&
         tipLink.map((x, i) => (

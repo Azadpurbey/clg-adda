@@ -19,6 +19,7 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     )
+
     dispatch({
       type: actionTypes.USER_LOGIN_SUCCESS,
       payload: data,
@@ -32,7 +33,7 @@ export const login = (email, password) => async (dispatch) => {
     })
   }
 }
-
+// get user detail by id
 export const listUserDetail = (id) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.USER_DETAIL_REQUEST })
@@ -46,6 +47,27 @@ export const listUserDetail = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: actionTypes.USER_DETAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+// get all user detail
+export const userListAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: actionTypes.USER_LIST_REQUEST })
+
+    const { data } = await axios.get('/api/user/')
+    dispatch({
+      type: actionTypes.USER_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: actionTypes.USER_LIST_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -167,30 +189,6 @@ export const update = (updateForm) => async (dispatch, getState) => {
     })
   } catch (error) {
     dispatch({ type: actionTypes.USER_UPDATE_PROFILE_FAIL, payload: error })
-  }
-}
-
-export const userListAction = () => async (dispatch, getState) => {
-  try {
-    dispatch({ type: actionTypes.USER_LIST_REQUEST })
-    const {
-      userLogin: { userInfo },
-    } = getState()
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-
-    const { data } = await axios.get('/api/user/', config)
-    //console.log('from inside auth action', data)
-    dispatch({
-      type: actionTypes.USER_LIST_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({ type: actionTypes.USER_LIST_FAIL, payload: error })
   }
 }
 

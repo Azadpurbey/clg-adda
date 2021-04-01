@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Col } from 'react-bootstrap'
 import style from '../../css/Home.module.css'
 import Footer from '../../components/Footer'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { userListAction } from '../../actions/auth'
 const Home = () => {
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
+  const { userInfo } = useSelector((state) => state.userLogin)
+
+  const dispatch = useDispatch()
+  const { loading, error, userLists } = useSelector((state) => state.userList)
+
+  useEffect(() => {
+    dispatch(userListAction())
+  }, [dispatch])
 
   return (
     <div className='home'>
@@ -22,9 +29,9 @@ const Home = () => {
               <i className='fas fa-cloud-download-alt'></i>
               <p>Downloads:10</p>
               <i className='fas fa-users'></i>
-              <p>Users:91</p>
+              <p>Users:{userLists?.length}</p>
               <i className='fas fa-code-branch'></i>
-              <p>Contributors:37</p>
+              <p>Contributors: 3</p>
             </div>
             {userInfo ? (
               <div className='buttons'>

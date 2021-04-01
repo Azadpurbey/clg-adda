@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/auth'
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.USER_LOGIN_REQUEST:
-      return { laoding: true }
+      return { loading: true }
     case actionTypes.USER_LOGIN_SUCCESS:
       return { loading: false, userInfo: action.payload }
     case actionTypes.USER_LOGIN_FAIL:
@@ -18,7 +18,7 @@ export const userLoginReducer = (state = {}, action) => {
 export const userDetailReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.USER_DETAIL_REQUEST:
-      return { laoding: true }
+      return { loading: true }
     case actionTypes.USER_DETAIL_SUCCESS:
       return { loading: false, curUser: action.payload }
     case actionTypes.USER_DETAIL_FAIL:
@@ -33,7 +33,7 @@ export const userDetailReducer = (state = {}, action) => {
 export const userTipLinkReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.USER_TIP_LINK_REQUEST:
-      return { laoding: true }
+      return { loading: true }
     case actionTypes.USER_TIP_LINK_SUCCESS:
       return { loading: false, tipLink: action.payload }
     case actionTypes.USER_TIP_LINK_FAIL:
@@ -48,7 +48,7 @@ export const userTipLinkReducer = (state = {}, action) => {
 export const userRegisterReducer = (state = {}, action) => {
   switch (action.type) {
     case actionTypes.USER_REGISTER_REQUEST:
-      return { laoding: true }
+      return { loading: true }
     case actionTypes.USER_REGISTER_SUCCESS:
       return { loading: false, userRegister: true }
     case actionTypes.USER_REGISTER_FAIL:

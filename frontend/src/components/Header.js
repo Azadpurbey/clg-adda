@@ -16,15 +16,15 @@ const Header = () => {
   }
 
   return (
-    <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+    <Navbar bg='dark' sticky='top' variant='dark' expand='lg' collapseOnSelect>
       <LinkContainer to='/'>
         <Navbar.Brand>College-Adda</Navbar.Brand>
       </LinkContainer>
-      {/* <div className='ml-right'> */}
+
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto'>
-          <LinkContainer to={`/user/following`}>
+          <LinkContainer to='/user/following'>
             <Nav.Link>Following</Nav.Link>
           </LinkContainer>
           <LinkContainer to='/profDetail/MNC'>
@@ -33,11 +33,10 @@ const Header = () => {
           <LinkContainer to='/material'>
             <Nav.Link>Materials</Nav.Link>
           </LinkContainer>
-          {userInfo && (
-            <LinkContainer to='/users'>
-              <Nav.Link>UserList</Nav.Link>
-            </LinkContainer>
-          )}
+
+          <LinkContainer to='/users'>
+            <Nav.Link>UserList</Nav.Link>
+          </LinkContainer>
 
           <LinkContainer to='/alumini/MNC'>
             <Nav.Link>Alumini</Nav.Link>
@@ -63,17 +62,14 @@ const Header = () => {
               </NavDropdown.Item>
             </NavDropdown>
           ) : (
-            <>
-              <LinkContainer to='/signin'>
-                <Nav.Link>
-                  <i className='fas fa-user' /> Sign In
-                </Nav.Link>
-              </LinkContainer>
-            </>
+            <LinkContainer to='/signin'>
+              <Nav.Link>
+                <i className='fas fa-user' /> Sign In
+              </Nav.Link>
+            </LinkContainer>
           )}
         </Nav>
       </Navbar.Collapse>
-      {/* </div> */}
     </Navbar>
   )
 }
