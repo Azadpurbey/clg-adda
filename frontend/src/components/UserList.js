@@ -8,12 +8,15 @@ import { userListAction } from '../actions/auth'
 import Loader from './Loader'
 import Message from './Message'
 
-const UserList = () => {
+const UserList = ({ history }) => {
   const dispatch = useDispatch()
   const { loading, error, userLists } = useSelector((state) => state.userList)
 
+  const { userInfo } = useSelector((state) => state.userLogin)
   useEffect(() => {
-    dispatch(userListAction())
+    if (!userInfo) {
+      history.push('/signin')
+    } else dispatch(userListAction())
   }, [dispatch])
 
   return (

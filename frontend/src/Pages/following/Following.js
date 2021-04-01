@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { listUserTipLink } from '../../actions/auth'
 import FollowingBox from '../../components/FollowingBox'
 import Loader from '../../components/Loader'
@@ -21,20 +22,25 @@ const Following = ({ history }) => {
 
   return (
     <>
+      <Link className='btn btn-dark my-3' to='/'>
+        GO BACK
+      </Link>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        tipLink &&
-        tipLink.map((x, i) => (
-          <FollowingBox
-            key={i}
-            name={x.name}
-            tips={x.tips}
-            impLinks={x.impLinks}
-          />
-        ))
+        <div style={{ padding: '50px 200px' }}>
+          {tipLink &&
+            tipLink.map((x, i) => (
+              <FollowingBox
+                key={i}
+                name={x.name}
+                tips={x.tips}
+                impLinks={x.impLinks}
+              />
+            ))}
+        </div>
       )}
     </>
   )

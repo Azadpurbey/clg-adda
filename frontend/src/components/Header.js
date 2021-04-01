@@ -16,7 +16,7 @@ const Header = () => {
   }
 
   return (
-    <Navbar bg='dark' sticky='top' variant='dark' expand='lg' collapseOnSelect>
+    <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
       <LinkContainer to='/'>
         <Navbar.Brand>College-Adda</Navbar.Brand>
       </LinkContainer>

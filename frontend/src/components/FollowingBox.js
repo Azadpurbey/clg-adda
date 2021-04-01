@@ -4,7 +4,7 @@ const FollowingBox = ({ name, tips, impLinks }) => {
   return (
     <div>
       <h4>{name}</h4>
-      <div className='row gutters-sm style1'>
+      <div className='row gutters-sm'>
         <div className='col-sm-6 mb-3 card'>
           <div className='card-body'>
             <h6 className='d-flex align-items-center mb-3'>
