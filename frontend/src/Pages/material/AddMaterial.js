@@ -15,6 +15,8 @@ import {
 } from '../../actions/materialAction'
 
 const AddMaterial = ({ history }) => {
+  const { userInfo } = useSelector((state) => state.userLogin)
+
   const [fileName, setFileName] = useState('')
 
   const [title, setTitle] = useState('Title')
@@ -54,6 +56,7 @@ const AddMaterial = ({ history }) => {
           accept: 'application/json',
           'Content-Type': `multipart/form-data';
               boundary=${formData._boundary}`,
+          Authorization: `Bearer ${userInfo.token}`,
         },
       }
 
@@ -62,7 +65,7 @@ const AddMaterial = ({ history }) => {
         formData,
         config
       )
-      console.log(data)
+      console.log('add material', data)
       setFileName(data.location)
       setUploading(false)
     } catch (error) {

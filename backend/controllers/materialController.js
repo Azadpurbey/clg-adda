@@ -46,7 +46,7 @@ export const createMaterial = async (req, res) => {
       sem: req.body.sem,
     })
     const savedMaterial = await material.save()
-    savedMaterial.user = user
+    //savedMaterial.user = user
     if (savedMaterial) {
       res.status(201).json(savedMaterial)
     } else {
