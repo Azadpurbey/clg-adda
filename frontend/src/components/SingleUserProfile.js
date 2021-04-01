@@ -47,7 +47,7 @@ const SingleUserProfile = ({ match, history }) => {
   return (
     <>
       <Link className='btn btn-dark my-3' to='/users'>
-        GO BACK checking.....
+        GO BACK
       </Link>
       {loading || loading2 ? (
        <Loader /> 
