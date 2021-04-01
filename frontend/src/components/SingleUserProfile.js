@@ -14,6 +14,8 @@ const SingleUserProfile = ({ match, history }) => {
   const { loading, error, curUser } = useSelector((state) => state.userDetail)
 
   useEffect(async () => {
+    
+    
     dispatch(listUserDetail(match.params.id))
 
     try {
@@ -33,6 +35,7 @@ const SingleUserProfile = ({ match, history }) => {
     } catch (error) {
       console.log(error)
     }
+  
   }, [history, match])
 
   const followHandler = (e) => {
@@ -44,10 +47,10 @@ const SingleUserProfile = ({ match, history }) => {
   return (
     <>
       <Link className='btn btn-dark my-3' to='/users'>
-        GO BACK
+        GO BACK checking.....
       </Link>
       {loading || loading2 ? (
-        <Loader />
+       <Loader /> 
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
