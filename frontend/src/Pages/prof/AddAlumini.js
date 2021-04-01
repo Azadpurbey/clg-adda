@@ -65,7 +65,7 @@ const AddAlumini = ({ history }) => {
       setImg_path(data.location)
       setUploading(false)
     } catch (error) {
-      alert('only pdf')
+      alert('only img')
       setUploading(false)
     }
   }

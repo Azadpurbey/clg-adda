@@ -14,7 +14,6 @@ import {
   createMaterial,
 } from '../../actions/materialAction'
 
-
 const AddMaterial = ({ history }) => {
   const [fileName, setFileName] = useState('')
 
@@ -63,6 +62,7 @@ const AddMaterial = ({ history }) => {
         formData,
         config
       )
+      console.log(data)
       setFileName(data.location)
       setUploading(false)
     } catch (error) {
@@ -135,18 +135,19 @@ const AddMaterial = ({ history }) => {
           <Form.Group controlId='doc'>
             <Form.Label>DOC</Form.Label>
 
-           {fileName && < Form.Control
-              type='text'
-              placeholder='enter_file_path'
-              value={fileName}
-              onChange={(e) => setFileName(e.target.value)}></Form.Control> }
-          
+            {fileName && (
+              <Form.Control
+                type='text'
+                placeholder='enter_file_path'
+                value={fileName}
+                onChange={(e) => setFileName(e.target.value)}></Form.Control>
+            )}
 
             <Form.File
               id='file'
               label='choose-file'
               custom
-              accept="application/pdf"
+              accept='application/pdf'
               onChange={uploadFileHandler}></Form.File>
             {uploading && <Loader />}
           </Form.Group>

@@ -51,8 +51,8 @@ const App = () => {
       <Route exact path='/signUp' component={Signup} />
 
       <Route exact path='/users' component={UserList} />
-      <Route exact path='/user/following' component={Following} />
       <Route exact path='/user/:id' component={SingleUserProfile} />
+      <Route exact path='/user/following' component={Following} />
 
       <Route exact path='/' component={Home}></Route>
     </Router>

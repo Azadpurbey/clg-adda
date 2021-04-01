@@ -8,7 +8,7 @@ const router = express.Router()
 
 // aws s3 upload *****
 const s3 = new aws.S3({
-  bucketName: 'material123',
+  bucketName: 'clgbucket4',
   accessKeyId: process.env.AWS_Access_Key_ID,
   secretAccessKey: process.env.AWS_Secret_Access_Key,
   region: 'ap-south-1',
@@ -18,7 +18,7 @@ const s3 = new aws.S3({
 const materialUpload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'clgprojectbucket',
+    bucket: 'clgbucket4',
     acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname })
