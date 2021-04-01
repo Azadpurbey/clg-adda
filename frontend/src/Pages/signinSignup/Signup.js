@@ -15,7 +15,20 @@ const SignupEmail = () => {
   const [branch, setBranch] = useState(null)
   const [admission, setAdmission] = useState(null)
   const [correctDetail, setCorrectDetail] = useState(false)
-  // const [isEmail, setIsEmail] = useState('')
+  const BranchList = [
+    'MNC',
+    'CSE',
+    'ECE',
+    'EE',
+    'CHE',
+    'MME',
+    'CE',
+    'PE',
+    'CIV',
+    'MECH',
+    'EI',
+    'PE',
+  ]
   const history = useHistory()
 
   const dispatch = useDispatch()
@@ -134,12 +147,11 @@ const SignupEmail = () => {
                 required
                 onChange={(e) => setBranch(e.target.value)}>
                 <option>* Select Your branch</option>
-                <option value='MNC'>MNC</option>
-                <option value='CSE'>CSE</option>
-                <option value='ECE'>ECE</option>
-                <option value='Mechanical'>MECH</option>
-                <option value='Chemical'>CHE</option>
-                <option value='Electrical'>EE</option>
+                {BranchList.map((department) => (
+                  <option key={department} value={department}>
+                    {department}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -150,11 +162,11 @@ const SignupEmail = () => {
                 value={admission}
                 onChange={(e) => setAdmission(e.target.value)}>
                 <option>* Select admission year</option>
-                <option value='2000'>2000</option>
-                <option value='2001'>2001</option>
-                <option value='2002'>2002</option>
-                <option value='2003'>2003</option>
-                <option value='2004'>2004</option>
+                {[...Array(20).keys()].map((x) => (
+                  <option key={2010 + x} value={2010 + x}>
+                    {2010 + x}
+                  </option>
+                ))}
               </select>
             </div>
             <button type='submit' className='btn btn-primary'>

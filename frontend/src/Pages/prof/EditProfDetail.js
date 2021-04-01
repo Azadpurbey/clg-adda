@@ -18,7 +18,7 @@ const EditProfDetail = ({ match, history }) => {
   const [department, setDepartment] = useState('MNC')
   const [designation, setDesignation] = useState('Professor')
   const [areaOfInterest, setAreaOfInterest] = useState(
-    'Quantum computing and error correction in cubits and Grapg theory and Topology'
+    'Machile Learning and Artifical robotics, Working on self Driving car'
   )
   const DepartmentList = [
     'MNC',

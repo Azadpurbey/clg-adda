@@ -1,9 +1,12 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Form } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 
 import { update } from '../../actions/auth'
 import FormContainer from '../../components/FormContainer'
+import Loader from '../../components/Loader'
 import { USER_UPDATE_PROFILE_RESET } from '../../constants/auth'
 const EditProfile = () => {
   const { userInfo } = useSelector((state) => state.userLogin)
@@ -13,7 +16,10 @@ const EditProfile = () => {
   const [password2, setPassword2] = useState('')
   const [branch, setBranch] = useState(user.branch)
   const [admission, setAdmission] = useState(user.admission)
+  const [img_path, setImg_path] = useState(user.img_path)
   const [isError, setIsError] = useState(false)
+
+  const [uploading, setUploading] = useState(false)
 
   const DepartmentList = [
     'MNC',
@@ -36,20 +42,45 @@ const EditProfile = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const OnSubmit = (e) => {
-    e.preventDefault()
-    if (password2 === password) {
-      dispatch(update({ name, branch, admission, password }))
-    } else {
-      setIsError(true)
-    }
-  }
   useEffect(() => {
     if (success) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET })
       history.push('/profile')
     }
   }, [success, history])
+
+  const uploadFileHandler = async (e) => {
+    e.preventDefault()
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          'Accept-Language': 'en-US,en;q=0.8',
+          accept: 'application/json',
+          'Content-Type': `multipart/form-data';
+                boundary=${formData._boundary}`,
+        },
+      }
+      const { data } = await axios.post('/api/upload/image', formData, config)
+      setImg_path(data.location)
+      setUploading(false)
+    } catch (error) {
+      alert('only image')
+      setUploading(false)
+    }
+  }
+
+  const OnSubmit = (e) => {
+    e.preventDefault()
+    if (password2 === password) {
+      dispatch(update({ name, branch, admission, password, img_path }))
+    } else {
+      setIsError(true)
+    }
+  }
 
   return (
     <>
@@ -118,6 +149,21 @@ const EditProfile = () => {
               onChange={(e) => setPassword2(e.target.value)}
             />
           </div>
+          <Form.Group controlId='img_path'>
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='img_path'
+              value={img_path}
+              onChange={(e) => setImg_path(e.target.value)}></Form.Control>
+            <Form.File
+              id='img_path'
+              label='choose-file'
+              onChange={uploadFileHandler}
+              custom></Form.File>
+            {uploading && <Loader />}
+          </Form.Group>
+
           <button type='submit' className='btn btn-primary'>
             Update
           </button>

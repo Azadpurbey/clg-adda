@@ -29,6 +29,10 @@ const Following = ({ history }) => {
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
+      ) : tipLink?.length === 0 ? (
+        <Message variant='success'>
+          {`Currently You don't follow any one`}
+        </Message>
       ) : (
         <div style={{ padding: '50px 200px' }}>
           {tipLink &&
