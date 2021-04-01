@@ -15,13 +15,14 @@ const SingleUserProfile = ({ match, history }) => {
 
   useEffect(async () => {
     dispatch(listUserDetail(match.params.id))
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
+
     try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
       const { data } = await axios.get(
         `/api/user/followCheck/${match.params.id}`,
         config

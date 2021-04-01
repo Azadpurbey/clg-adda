@@ -5,14 +5,18 @@ import FollowingBox from '../../components/FollowingBox'
 import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 
-const Following = () => {
+const Following = ({ history }) => {
   const dispatch = useDispatch()
   const { userInfo } = useSelector((state) => state.userLogin)
 
   const { loading, error, tipLink } = useSelector((state) => state.userTipLink)
   console.log('test', loading, error, tipLink)
   useEffect(() => {
-    dispatch(listUserTipLink(userInfo.user._id))
+    if (!userInfo) {
+      history.push('/signin')
+    } else {
+      dispatch(listUserTipLink(userInfo.user._id))
+    }
   }, [])
 
   return (
