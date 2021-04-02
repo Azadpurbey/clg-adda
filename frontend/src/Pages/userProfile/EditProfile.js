@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-
+import { Row, Col, Container } from 'react-bootstrap'
 import { update } from '../../actions/auth'
 import FormContainer from '../../components/FormContainer'
 import { USER_UPDATE_PROFILE_RESET } from '../../constants/auth'
@@ -62,72 +62,76 @@ const EditProfile = () => {
       <Link to='/profile' className='btn btn-dark my-3'>
         Go Back
       </Link>
-      <div className='container' style={{ marginTop: '0px' }}>
-        <h3>Email: {user.email} </h3>
-        <br />
-        <form className='form' onSubmit={OnSubmit}>
-          <p>Edit your Profile</p>
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='Name'
-              name='name'
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
+      <Container style={{ marginTop: '0px' }}>
+        <Row className='justify-content-md-center'>
+          <Col xs={12} md={6}>
+            <h3>Email: {user.email} </h3>
+            <br />
+            <form className='form' onSubmit={OnSubmit}>
+              <p>Edit your Profile</p>
+              <div className='form-group'>
+                <input
+                  type='text'
+                  placeholder='Name'
+                  name='name'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
 
-          <div className='form-group'>
-            <select
-              name='branch'
-              value={branch}
-              onChange={(e) => setBranch(e.target.value)}
-            >
-              {DepartmentList.map((department) => (
-                <option key={department} value={department}>
-                  {department}
-                </option>
-              ))}
-            </select>
-          </div>
+              <div className='form-group'>
+                <select
+                  name='branch'
+                  value={branch}
+                  onChange={(e) => setBranch(e.target.value)}
+                >
+                  {DepartmentList.map((department) => (
+                    <option key={department} value={department}>
+                      {department}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-          <div className='form-group'>
-            <select
-              name='admission'
-              value={admission}
-              onChange={(e) => setAdmission(e.target.value)}
-            >
-              {[...Array(20).keys()].map((x) => (
-                <option key={2010 + x} value={2010 + x}>
-                  {2010 + x}
-                </option>
-              ))}
-            </select>
-          </div>
-          <p>Want to Change password</p>
-          <div className='form-group'>
-            <input
-              type='password'
-              placeholder='Update Password'
-              name='password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='password'
-              placeholder='Confirm update Password'
-              name='password2'
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
-            />
-          </div>
-          <button type='submit' className='btn btn-primary'>
-            Update
-          </button>
-        </form>
-      </div>
+              <div className='form-group'>
+                <select
+                  name='admission'
+                  value={admission}
+                  onChange={(e) => setAdmission(e.target.value)}
+                >
+                  {[...Array(20).keys()].map((x) => (
+                    <option key={2010 + x} value={2010 + x}>
+                      {2010 + x}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <p>Want to Change password</p>
+              <div className='form-group'>
+                <input
+                  type='password'
+                  placeholder='Update Password'
+                  name='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className='form-group'>
+                <input
+                  type='password'
+                  placeholder='Confirm update Password'
+                  name='password2'
+                  value={password2}
+                  onChange={(e) => setPassword2(e.target.value)}
+                />
+              </div>
+              <button type='submit' className='btn btn-primary'>
+                Update
+              </button>
+            </form>
+          </Col>
+        </Row>
+      </Container>
     </>
   )
 }
