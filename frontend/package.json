@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "https://git.heroku.com/clg-add-sas.git",
+  "proxy": "https://clg-add-sas.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
