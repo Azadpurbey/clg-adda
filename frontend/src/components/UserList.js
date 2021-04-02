@@ -3,7 +3,6 @@ import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
-
 import { userListAction } from '../actions/auth'
 import Loader from './Loader'
 import Message from './Message'

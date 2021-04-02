@@ -81,7 +81,6 @@ export const listUserTipLink = (id) => async (dispatch) => {
     dispatch({ type: actionTypes.USER_TIP_LINK_REQUEST })
 
     const { data } = await axios.get(`/api/user/following/${id}`)
-    console.log('from listUserTipLink action', data)
 
     dispatch({
       type: actionTypes.USER_TIP_LINK_SUCCESS,
@@ -97,7 +96,6 @@ export const listUserTipLink = (id) => async (dispatch) => {
     })
   }
 }
-
 export const emailOtp = (email) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.EMAIL_OTP_REQUEST })

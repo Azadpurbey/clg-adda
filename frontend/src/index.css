@@ -1,5 +1,16 @@
 * {
   margin: 0;
   padding: 0;
+  /* width: 100%; */
   /* overflow: hidden; */
+}
+body {
+  overflow-x: hidden;
+}
+
+.row {
+  width: 100%;
+}
+.col {
+  padding-right: 0 !important;
 }

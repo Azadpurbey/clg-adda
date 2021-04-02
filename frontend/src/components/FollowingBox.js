@@ -1,41 +1,35 @@
 import React from 'react'
-
+import { LinkContainer } from 'react-router-bootstrap'
+import { Button, Col } from 'react-bootstrap'
+import style from '../css/FollowingBox.module.css'
 const FollowingBox = ({ name, tips, impLinks }) => {
   return (
-    <div>
-      <h4>{name}</h4>
-      <div className='row gutters-sm'>
-        <div className='col-sm-6 mb-3 card'>
-          <div className='card-body'>
-            <h6 className='d-flex align-items-center mb-3'>
-              <i className='material-icons text-info mr-2'>Imp Tips</i>
-            </h6>
-            {tips && (
-              <ol>
-                {tips.map((x) => (
-                  <li key={x._id}>{x.tip}</li>
-                ))}
-              </ol>
-            )}
-          </div>
+    <>
+      <h6>Name:- {name}</h6>
+      <div className={style.tipLinkBox}>
+        <div>
+          <h6>Imp Links</h6>
+          {tips && (
+            <ul>
+              {tips.map((x) => (
+                <li key={x._id}>{x.tip}</li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        <div className='col-sm-6 mb-3 card'>
-          <div className='card-body'>
-            <h6 className='d-flex align-items-center mb-3'>
-              <i className='material-icons text-info mr-2'>Imp Links</i>
-            </h6>
-            {impLinks && (
-              <ol>
-                {impLinks.map((x) => (
-                  <li key={x._id}>{x.link}</li>
-                ))}
-              </ol>
-            )}
-          </div>
+        <div>
+          <h6>Imp Tips</h6>
+          {impLinks && (
+            <ul>
+              {impLinks.map((x) => (
+                <li key={x._id}>{x.link}</li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

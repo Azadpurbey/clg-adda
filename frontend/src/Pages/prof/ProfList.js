@@ -53,7 +53,13 @@ const ProfList = ({ history }) => {
   }
 
   return (
-    <div style={{ backgroundColor: 'lightcyan', margin: '0', padding: '0' }}>
+    <div
+      style={{
+        backgroundColor: 'lightcyan',
+        margin: '0',
+        padding: '0',
+        width: '100%',
+      }}>
       <Row>
         <Col md={3}>
           <Link className='btn btn-dark my-3' to='/'>

@@ -103,13 +103,6 @@ const AluminiList = ({ history }) => {
             )
           })
         )}
-        {/* {[...Array(10).keys()].map((x) => {
-          return (
-            <Col keys={x} sm={12} md={6} lg={4} xl={3}>
-              <AluminiDetailBox />
-            </Col>
-          )
-        })} */}
       </Row>
     </div>
   )

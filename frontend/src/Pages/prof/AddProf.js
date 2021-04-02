@@ -10,7 +10,7 @@ import { PROF_CREATE_RESET } from '../../constants/profConstants'
 import { createProf } from '../../actions/profAction'
 
 const AddProf = ({ history }) => {
-  const [img_path, setImg_path] = useState('')
+  const [img_path, setImg_path] = useState('/logo192.png')
   const [name, setName] = useState('examplename')
   const [email, setEmail] = useState('example@gmail.com')
   const [contact, setContact] = useState('96788**990')

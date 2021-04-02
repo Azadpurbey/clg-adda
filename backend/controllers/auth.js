@@ -269,7 +269,7 @@ export const getTipAndLinkById = async (req, res) => {
 
 export const addTipById = async (req, res) => {
   const { tip } = req.body
-  console.log('from insideaut', tip)
+
   const user = await User.findById(req.params.id)
   const cur_tip = {
     tip: tip,

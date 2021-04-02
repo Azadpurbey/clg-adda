@@ -24,7 +24,7 @@ const Signin = () => {
   }
   return (
     <div className='container'>
-      {loading && <Loader/>}
+      {loading && <Loader />}
       {error && <h3>{error}</h3>}
       <Fragment>
         <Link to='/' className='btn btn-dark'>

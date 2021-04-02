@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Col, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { listUserTipLink } from '../../actions/auth'
@@ -11,7 +12,6 @@ const Following = ({ history }) => {
   const { userInfo } = useSelector((state) => state.userLogin)
 
   const { loading, error, tipLink } = useSelector((state) => state.userTipLink)
-  console.log('test', loading, error, tipLink)
   useEffect(() => {
     if (!userInfo) {
       history.push('/signin')
@@ -34,16 +34,20 @@ const Following = ({ history }) => {
           {`Currently You don't follow any one`}
         </Message>
       ) : (
-        <div style={{ padding: '50px 200px' }}>
-          {tipLink &&
-            tipLink.map((x, i) => (
-              <FollowingBox
-                key={i}
-                name={x.name}
-                tips={x.tips}
-                impLinks={x.impLinks}
-              />
-            ))}
+        <div>
+          <Row>
+            {tipLink &&
+              tipLink.map((x, i) => (
+                <Col key={i} sm={12} md={6} lg={6} xl={6}>
+                  <FollowingBox
+                    key={i}
+                    name={x.name}
+                    tips={x.tips}
+                    impLinks={x.impLinks}
+                  />
+                </Col>
+              ))}
+          </Row>
         </div>
       )}
     </>
