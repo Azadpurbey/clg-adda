@@ -139,9 +139,9 @@ const AluminiprofilePage = ({ history }) => {
                           </svg>
                           LinkedIn
                         </h6>
-                        <span className='text-secondary'>
+                        <a className='text-secondary' href={alumini.linkedIn}>
                           {alumini.linkedIn}
-                        </span>
+                        </a>
                       </li>
                       <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
                         <h6 className='mb-0'>
@@ -160,9 +160,9 @@ const AluminiprofilePage = ({ history }) => {
                           </svg>
                           Twitter
                         </h6>
-                        <span className='text-secondary'>
+                        <a className='text-secondary' href={alumini.twitter}>
                           {alumini.twitter}
-                        </span>
+                        </a>
                       </li>
                       <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
                         <h6 className='mb-0'>
@@ -189,9 +189,9 @@ const AluminiprofilePage = ({ history }) => {
                           </svg>
                           Instagram
                         </h6>
-                        <span className='text-secondary'>
+                        <a className='text-secondary' href={alumini.instagram}>
                           {alumini.instagram}
-                        </span>
+                        </a>
                       </li>
                       <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
                         <h6 className='mb-0'>
@@ -210,9 +210,9 @@ const AluminiprofilePage = ({ history }) => {
                           </svg>
                           Facebook
                         </h6>
-                        <span className='text-secondary'>
+                        <a className='text-secondary' href={alumini.facebook}>
                           {alumini.facebook}
-                        </span>
+                        </a>
                       </li>
                     </ul>
                   </div>

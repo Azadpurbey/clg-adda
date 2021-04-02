@@ -101,9 +101,9 @@ const SingleUserProfile = ({ match, history }) => {
                           </svg>
                           LinkedIn
                         </h6>
-                        <span className='text-secondary'>
+                        <a className='text-secondary' href={curUser.linkedIn}>
                           {curUser.linkedIn}
-                        </span>
+                        </a>
                       </li>
 
                       <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
@@ -123,9 +123,9 @@ const SingleUserProfile = ({ match, history }) => {
                           </svg>
                           Twitter
                         </h6>
-                        <span className='text-secondary'>
+                        <a className='text-secondary' href={curUser.twitter}>
                           {curUser.twitter}
-                        </span>
+                        </a>
                       </li>
 
                       <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
@@ -153,7 +153,9 @@ const SingleUserProfile = ({ match, history }) => {
                           </svg>
                           Instagram
                         </h6>
-                        <span className='text-secondary'>bootdey</span>
+                        <a className='text-secondary' href={curUser.instagram}>
+                          {curUser.instagram}
+                        </a>
                       </li>
 
                       <li className='list-group-item d-flex justify-content-between align-items-center flex-wrap'>
@@ -173,7 +175,9 @@ const SingleUserProfile = ({ match, history }) => {
                           </svg>
                           Facebook
                         </h6>
-                        <span className='text-secondary'>bootdey</span>
+                        <a className='text-secondary' href={curUser.facebook}>
+                          {curUser.facebook}
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -248,7 +252,11 @@ const SingleUserProfile = ({ match, history }) => {
                         {curUser.impLinks && (
                           <ol>
                             {curUser.impLinks.map((x) => (
-                              <li key={x._id}>{x.link}</li>
+                              <li key={x._id}>
+                                <a className='text-secondary' href={x.link}>
+                                  {x.link}
+                                </a>
+                              </li>
                             ))}
                           </ol>
                         )}

@@ -10,7 +10,11 @@ const UserForm = () => {
         {user.impLinks && (
           <ol>
             {user.impLinks.map((x) => (
-              <li key={x._id}>{x.link}</li>
+              <li key={x._id}>
+                <a className='text-secondary' href={x.link}>
+                  {x.link}
+                </a>
+              </li>
             ))}
           </ol>
         )}
