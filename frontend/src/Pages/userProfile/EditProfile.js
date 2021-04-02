@@ -5,6 +5,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { update } from '../../actions/auth'
 import FormContainer from '../../components/FormContainer'
 import { USER_UPDATE_PROFILE_RESET } from '../../constants/auth'
+const style2 = {
+  marginTop: '0px',
+}
 const EditProfile = () => {
   const { userInfo } = useSelector((state) => state.userLogin)
   const { user } = userInfo
@@ -59,7 +62,7 @@ const EditProfile = () => {
       <Link to='/profile' className='btn btn-dark my-3'>
         Go Back
       </Link>
-      <FormContainer>
+      <div className='container' style={{ marginTop: '0px' }}>
         <h3>Email: {user.email} </h3>
         <br />
         <form className='form' onSubmit={OnSubmit}>
@@ -78,7 +81,8 @@ const EditProfile = () => {
             <select
               name='branch'
               value={branch}
-              onChange={(e) => setBranch(e.target.value)}>
+              onChange={(e) => setBranch(e.target.value)}
+            >
               {DepartmentList.map((department) => (
                 <option key={department} value={department}>
                   {department}
@@ -91,7 +95,8 @@ const EditProfile = () => {
             <select
               name='admission'
               value={admission}
-              onChange={(e) => setAdmission(e.target.value)}>
+              onChange={(e) => setAdmission(e.target.value)}
+            >
               {[...Array(20).keys()].map((x) => (
                 <option key={2010 + x} value={2010 + x}>
                   {2010 + x}
@@ -122,7 +127,7 @@ const EditProfile = () => {
             Update
           </button>
         </form>
-      </FormContainer>
+      </div>
     </>
   )
 }
