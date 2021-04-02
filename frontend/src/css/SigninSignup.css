@@ -41,7 +41,7 @@ img {
   overflow: hidden;
   padding: 0 2rem;
   margin-top: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 3rem !important;
 }
 
 /* Text Styles*/
@@ -467,10 +467,6 @@ button {
 
 /* Mobile Styles */
 @media (max-width: 700px) {
-  .container {
-    margin-top: 8rem;
-  }
-
   .hide-sm {
     display: none;
   }

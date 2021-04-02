@@ -82,7 +82,7 @@ export const updateMaterial = async (req, res) => {
 export const removeMaterial = async (req, res) => {
   const user = await User.findById(req.user._id)
   const material = await Material.findById(req.params.id)
-  console.log(user._id, material.user._id, user.isAdmin)
+
   if (
     user.isAdmin === true ||
     material.user._id.toString() === user._id.toString()

@@ -35,7 +35,6 @@ const AddMaterial = ({ history }) => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
   const [uploading, setUploading] = useState(false)
 
@@ -79,11 +78,10 @@ const AddMaterial = ({ history }) => {
         formData,
         config
       )
-      console.log('add material', data)
+
       setFileName(data.location)
       setUploading(false)
     } catch (error) {
-      console.log('cur', error)
       setUploading(false)
     }
   }

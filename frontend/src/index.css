@@ -7,10 +7,9 @@
 body {
   overflow-x: hidden;
 }
-
 .row {
   width: 100%;
 }
-.col {
+.row .col {
   padding-right: 0 !important;
 }

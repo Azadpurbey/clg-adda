@@ -17,10 +17,10 @@ const AddAlumini = ({ history }) => {
   const [img_path, setImg_path] = useState('/logo192.png')
   const [name, setName] = useState('example')
   const [email, setEmail] = useState('example@gmail.com')
-  const [contact, setContact] = useState('888***888')
+  const [contact, setContact] = useState('9845679430')
   const [department, setDepartment] = useState('MNC')
   const [designation, setDesignation] = useState('Software Developer')
-  const [batch, setBatch] = useState('20**')
+  const [batch, setBatch] = useState('2017')
   const [linkedIn, setLinkedIn] = useState('www.linkedin.com/in/examplename')
   const [twitter, setTwitter] = useState('www.twitter.com/in/examplename')
   const [instagram, setInstagram] = useState('www.instagram.com/examplename')
@@ -37,7 +37,6 @@ const AddAlumini = ({ history }) => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
   const [uploading, setUploading] = useState(false)
 

@@ -25,7 +25,6 @@ const Material = ({ history }) => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
 
   const userLogin = useSelector((state) => state.userLogin)

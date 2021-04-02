@@ -35,7 +35,6 @@ const EditAluminiDetail = ({ match, history }) => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
   const [uploading, setUploading] = useState(false)
 

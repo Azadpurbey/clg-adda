@@ -33,7 +33,6 @@ const EditProfile = () => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
 
   const { loading, success, error } = useSelector(

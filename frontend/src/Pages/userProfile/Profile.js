@@ -41,7 +41,7 @@ const Profile = () => {
 
   const addLinkSubmitHandler = (e) => {
     e.preventDefault()
-    console.log('link submit handler')
+
     dispatch(addLinkAction(link))
   }
   const addTipSubmitHandler = (e) => {

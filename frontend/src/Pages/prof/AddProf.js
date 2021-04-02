@@ -13,7 +13,7 @@ const AddProf = ({ history }) => {
   const [img_path, setImg_path] = useState('/logo192.png')
   const [name, setName] = useState('examplename')
   const [email, setEmail] = useState('example@gmail.com')
-  const [contact, setContact] = useState('96788**990')
+  const [contact, setContact] = useState('9678835990')
   const [department, setDepartment] = useState('MNC')
   const [designation, setDesignation] = useState('Professor')
   const [areaOfInterest, setAreaOfInterest] = useState(
@@ -31,7 +31,6 @@ const AddProf = ({ history }) => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
   const [uploading, setUploading] = useState(false)
 

@@ -27,7 +27,6 @@ const SignupEmail = () => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
   const history = useHistory()
 

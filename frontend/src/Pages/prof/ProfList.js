@@ -21,7 +21,6 @@ const ProfList = ({ history }) => {
     'CIV',
     'MECH',
     'EI',
-    'PE',
   ]
   const [department, setDepartment] = useState('MNC')
 

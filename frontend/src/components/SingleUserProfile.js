@@ -27,11 +27,11 @@ const SingleUserProfile = ({ match, history }) => {
         `/api/user/followCheck/${match.params.id}`,
         config
       )
-      console.log('$$', data)
+      //console.log('$$', data)
       setShow(data.message)
       setLoading2(false)
     } catch (error) {
-      console.log(error)
+      //console.log(error)
     }
   }, [history, match])
 

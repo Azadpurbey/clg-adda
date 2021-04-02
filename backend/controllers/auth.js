@@ -27,7 +27,7 @@ export const otpController = async (req, res) => {
       integer: true,
     }
     var otpNumber = rn(options)
-    console.log('sending OTP: ' + otpNumber + ' to ' + req.body.email)
+    //console.log('sending OTP: ' + otpNumber + ' to ' + req.body.email)
 
     transport
       .sendMail({
@@ -108,7 +108,7 @@ export const forgotOtp = async (req, res) => {
         integer: true,
       }
       var otpNumber = rn(options)
-      console.log('sending OTP: ' + otpNumber + ' to ' + req.body.email)
+      //console.log('sending OTP: ' + otpNumber + ' to ' + req.body.email)
 
       transport
         .sendMail({
@@ -122,7 +122,7 @@ export const forgotOtp = async (req, res) => {
 
       const otp = new OTP({ otp: otpNumber })
       await otp.save()
-      res.json({ otp })
+      //res.json({ otp })
     } else {
       res.status(422).json({ error: 'email not exist' })
     }
@@ -215,9 +215,8 @@ export const handleFollow = async (req, res) => {
         chkFollowing = true
       }
     })
-    console.log(chkFollowing)
+
     if (chkFollowing) {
-      console.log('checking beero')
       const removeIndex = user.following
         .map((f) => f._id.toString())
         .indexOf(req.params.id.toString())
@@ -250,8 +249,6 @@ export const checkFollow = async (req, res) => {
 }
 
 export const getTipAndLinkById = async (req, res) => {
-  console.log(req.params.id) // login in user id
-  // console.log(req.user._id)
   const user = await User.findById(req.params.id)
   var tip_link_list = []
 
