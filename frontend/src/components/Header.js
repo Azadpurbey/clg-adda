@@ -41,7 +41,7 @@ const Header = () => {
           <LinkContainer to='/alumini/MNC'>
             <Nav.Link>Alumini</Nav.Link>
           </LinkContainer>
-          {userInfo && userInfo.user.isAdmin && (
+          {userInfo?.user?.isAdmin && (
             <NavDropdown title='Admin' id='adminmenu'>
               <LinkContainer to='/admin/addProf'>
                 <NavDropdown.Item>Add Prof Details</NavDropdown.Item>
@@ -52,7 +52,7 @@ const Header = () => {
             </NavDropdown>
           )}
           {userInfo ? (
-            <NavDropdown title={userInfo.user.name} id='username'>
+            <NavDropdown title={userInfo?.user?.name} id='username'>
               <LinkContainer to='/profile'>
                 <NavDropdown.Item>Profile</NavDropdown.Item>
               </LinkContainer>

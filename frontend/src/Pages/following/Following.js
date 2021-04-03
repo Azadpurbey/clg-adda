@@ -16,7 +16,7 @@ const Following = ({ history }) => {
     if (!userInfo) {
       history.push('/signin')
     } else {
-      dispatch(listUserTipLink(userInfo.user._id))
+      dispatch(listUserTipLink(userInfo?.user?._id))
     }
   }, [])
 

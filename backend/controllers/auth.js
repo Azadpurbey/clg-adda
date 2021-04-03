@@ -272,7 +272,7 @@ export const addTipById = async (req, res) => {
     tip: tip,
   }
 
-  if (user) {
+  if (user && user._id == req.params.id) {
     user.tips.push(cur_tip)
     await user.save()
 
@@ -293,7 +293,7 @@ export const addLinkById = async (req, res) => {
     link: link,
   }
 
-  if (user) {
+  if ((user, user._id == req.params.id)) {
     user.impLinks.push(cur_link)
     await user.save()
 

@@ -17,7 +17,7 @@ const AluminiDetailBox = ({ alumini, deleteHandler }) => {
       <img src={alumini.img_path} alt='' className='round-img' />
 
       <div>
-        {userInfo && userInfo.user.isAdmin && (
+        {userInfo?.user?.isAdmin && (
           <Col className='text-right colChange'>
             <LinkContainer to={`/alumini/edit/${alumini._id}`}>
               <i className='fas fa-edit'>Edit</i>

@@ -6,15 +6,19 @@ import Loader from './Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import { addFollowingAction, listUserDetail } from '../actions/auth'
 import { Link } from 'react-router-dom'
+
 const SingleUserProfile = ({ match, history }) => {
   const dispatch = useDispatch()
   const [show, setShow] = useState(false)
   const [loading2, setLoading2] = useState(true)
   const { userInfo } = useSelector((state) => state.userLogin)
   const { loading, error, curUser } = useSelector((state) => state.userDetail)
+  var userId = match.params.id
+
+  userId = userId.substring(1)
 
   useEffect(async () => {
-    dispatch(listUserDetail(match.params.id))
+    dispatch(listUserDetail(userId))
 
     try {
       const config = {
@@ -24,7 +28,7 @@ const SingleUserProfile = ({ match, history }) => {
         },
       }
       const { data } = await axios.get(
-        `/api/user/followCheck/${match.params.id}`,
+        `/api/user/followCheck/${userId}`,
         config
       )
       //console.log('$$', data)
@@ -37,7 +41,7 @@ const SingleUserProfile = ({ match, history }) => {
 
   const followHandler = (e) => {
     e.preventDefault()
-    dispatch(addFollowingAction(match.params.id))
+    dispatch(addFollowingAction(userId))
     setShow(!show)
   }
 

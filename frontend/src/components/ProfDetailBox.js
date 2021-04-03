@@ -10,7 +10,7 @@ const ProfDetailBox = ({ prof, deleteHandler }) => {
     <div className='main_box'>
       <div className='image'>
         <img src={prof.img_path} className='round-img' />
-        {userInfo && userInfo.user.isAdmin && (
+        {userInfo?.user?.isAdmin && (
           <Col className='text-right colChange'>
             <LinkContainer to={`/profDetail/edit/${prof._id}`}>
               <i className='fas fa-edit'>Edit</i>

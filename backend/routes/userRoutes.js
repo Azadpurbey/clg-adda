@@ -30,8 +30,8 @@ router.put('/follow/:id', authToken, handleFollow)
 router.get('/followCheck/:id', authToken, checkFollow)
 router.get('/following/:id', getTipAndLinkById)
 
-router.route('/tip/:id').post(addTipById)
-router.route('/link/:id').post(addLinkById)
+router.route('/tip/:id').post(authToken, addTipById)
+router.route('/link/:id').post(authToken, addLinkById)
 
 router.get('/:id', singleUser)
 
