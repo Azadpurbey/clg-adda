@@ -13,12 +13,9 @@ const SingleUserProfile = ({ match, history }) => {
   const [loading2, setLoading2] = useState(true)
   const { userInfo } = useSelector((state) => state.userLogin)
   const { loading, error, curUser } = useSelector((state) => state.userDetail)
-  var userId = match.params.id
-
-  userId = userId.substring(1)
 
   useEffect(async () => {
-    dispatch(listUserDetail(userId))
+    dispatch(listUserDetail(match.params.id))
 
     try {
       const config = {
@@ -28,7 +25,7 @@ const SingleUserProfile = ({ match, history }) => {
         },
       }
       const { data } = await axios.get(
-        `/api/user/followCheck/${userId}`,
+        `/api/user/followCheck/${match.params.id}`,
         config
       )
       //console.log('$$', data)
@@ -41,7 +38,7 @@ const SingleUserProfile = ({ match, history }) => {
 
   const followHandler = (e) => {
     e.preventDefault()
-    dispatch(addFollowingAction(userId))
+    dispatch(addFollowingAction(match.params.id))
     setShow(!show)
   }
 

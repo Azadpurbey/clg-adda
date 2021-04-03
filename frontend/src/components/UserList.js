@@ -17,8 +17,6 @@ const UserList = ({ history }) => {
       history.push('/signin')
     } else dispatch(userListAction())
   }, [dispatch])
-  var random = Math.floor(Math.random() * 10)
-
   return (
     <>
       <Link className='btn btn-dark my-3' to='/'>
@@ -50,7 +48,7 @@ const UserList = ({ history }) => {
                   <td>{u.branch}</td>
                   <td>{u.admission}</td>
                   <td>
-                    <LinkContainer to={`/user/${random + u._id}`}>
+                    <LinkContainer to={`/user/${u._id}`}>
                       <Button variant='light' className='btn btn-dark'>
                         View
                       </Button>
