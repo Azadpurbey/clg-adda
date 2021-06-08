@@ -12,4 +12,4 @@ page for each user. Facility for sharing experiences and
 tips with juniors. Facility for sharing resources.
 
 
-## Tools used:-​ React, Redux, MongoDB, Express, node modules, aws S3.
+## Tools used:-​ React, Redux, MongoDB, Express, aws S3.
